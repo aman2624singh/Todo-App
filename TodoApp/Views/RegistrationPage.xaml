@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TodoApp.Views.RegistrationPage"
+    Shell.NavBarIsVisible="False"
+    xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
+    xmlns:controls="clr-namespace:TodoApp.Controls"
+    xmlns:converter="clr-namespace:TodoApp.Converters"
+    Title="Login Page">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Content>
+            <Grid>
+                <Image 
+                    Source="{OnIdiom Phone=background,Desktop=background.png}" 
+                    VerticalOptions="FillAndExpand" 
+                    HeightRequest="900"
+                    HorizontalOptions="FillAndExpand" 
+                    Aspect="AspectFill" 
+                    Margin="{OnPlatform Android='0,0,0,0', WinUI='0'}"/>
+                <StackLayout 
+                    IsVisible="{OnIdiom Desktop=false,Phone=true}"
+                    Padding="20"
+                    BackgroundColor="{StaticResource Trasnparent}"
+                    Spacing="15">
+                <!-- App Logo -->
+                <Image 
+                    Source="{OnIdiom Phone=registration,Desktop=checklist.png}" 
+                    HorizontalOptions="Center" 
+                    HeightRequest="120"
+                    Margin="0,20,0,10"/>
+
+                <!-- Registration Title -->
+                <Label 
+                    Text="{x:Static resx:AppstringResources.Account}"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="{StaticResource Black}"/>
+
+                <!-- User Name Entry -->
+                <Border 
+                    Padding="5"
+                    BackgroundColor="{StaticResource White}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Entry 
+                            Text="{Binding UserName}" 
+                            TextColor="{StaticResource Black}"
+                            Placeholder="{x:Static resx:AppstringResources.Username}" 
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Margin="10,0,10,0"
+                            Keyboard="Text"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="username.png"
+                            HeightRequest="30"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                    </Grid>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Email Entry -->
+                <Border 
+                    Padding="5"
+                    BackgroundColor="{StaticResource White}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Entry 
+                            Text="{Binding Email}" 
+                            Placeholder="{x:Static resx:AppstringResources.Email}" 
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Margin="10,0,10,0"
+                            Keyboard="Email"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="email.png"
+                            HeightRequest="30"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                    </Grid>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Password Entry -->
+                <Border 
+                    Padding="5"
+                    BackgroundColor="{StaticResource White}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Entry 
+                            Text="{Binding Password}" 
+                            Placeholder="{x:Static resx:AppstringResources.Password}" 
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Margin="10,0,10,0"
+                            IsPassword="True"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="passwords.png"
+                            HeightRequest="30"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                    </Grid>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Phone Number Entry -->
+                <Border 
+                    Padding="5"
+                    BackgroundColor="{StaticResource White}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Entry 
+                            Text="{Binding PhoneNumber}" 
+                            Placeholder="{x:Static resx:AppstringResources.Phone}" 
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Margin="10,0,10,0"
+                            Keyboard="Telephone"/>
+                        <Image
+                            Grid.Column="1"
+                            Source="phonenumber.png"
+                            HeightRequest="30"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                    </Grid>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="20" />
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- Gender Picker  do it with enum no dark mode required -->
+                    <Border
+                        MaximumWidthRequest="500"
+                        Padding="5"
+                        MinimumWidthRequest="200"
+                        BackgroundColor="{StaticResource White}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <Picker 
+                            ItemsSource="{Binding GenderOptions}"
+                            SelectedItem="{Binding SelectedGender}" 
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Margin="10,0,10,0">
+                            <Picker.ItemDisplayBinding>
+                                <Binding Path="." />
+                            </Picker.ItemDisplayBinding>
+                        </Picker>
+                        <Image
+                            Grid.Column="1"
+                            Source="gender.png"
+                            HeightRequest="30"
+                            WidthRequest="40"
+                            VerticalOptions="Center"
+                            HorizontalOptions="StartAndExpand" />
+                    </Grid>
+                    <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+                    </Border>
+
+                    <!-- Register Button -->
+                <Button 
+                    Text="Register" 
+                    HeightRequest="50"
+                    Margin="10"
+                    Command="{Binding RegisterClickedCommand}"/>
+
+                <Label 
+                    Text="{Binding RegisterMessage}" 
+                    TextColor="{StaticResource HighPriorityColor}"
+                    FontSize="14"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
+
+                <!-- Sign In Link -->
+                <StackLayout 
+                    Margin="5,0,0,0"
+                    VerticalOptions="Start"
+                    Orientation="Horizontal" 
+                    HorizontalOptions="Center">
+                    <Label 
+                        VerticalOptions="Center"
+                        Text="{x:Static resx:AppstringResources.Alreadyaccount} " 
+                        FontSize="14"  />
+                    <Button 
+                        Margin="10,0,0,0"
+                        Text="{x:Static resx:AppstringResources.Signin}" 
+                        BackgroundColor="{StaticResource Trasnparent}" 
+                        Command="{Binding SigninClickedCommand}"/>
+                </StackLayout>
+            </StackLayout>
+                <Grid 
+                    IsVisible="{OnIdiom Desktop=true,Phone=false}">
+                    <!-- Define Column Definitions -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo Image -->
+                    <StackLayout
+                        Grid.Column="0"
+                        Padding="20"
+                        Margin="30,0,0,120"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center">
+                        <Image 
+                            MaximumHeightRequest="350"
+                            Source="accountability.png"                           
+                            HorizontalOptions="End"/>
+                    </StackLayout>
+
+                    <!-- Registration Form -->
+                    <StackLayout
+                        Grid.Column="1"
+                        Padding="20"
+                        Spacing="15"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center">
+                        <!-- Registration Title -->
+                        <Label 
+                            Text="{x:Static resx:AppstringResources.Account}"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Black}"/>
+
+                        <!-- User Name Entry -->
+                    <Border 
+                        MaximumWidthRequest="500"
+                        MinimumWidthRequest="250"
+                        BackgroundColor="{StaticResource White}"
+                        Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Entry 
+                                Grid.Column="0"
+                                Text="{Binding UserName}" 
+                                Placeholder="{x:Static resx:AppstringResources.Username}" 
+                                VerticalOptions="Center"
+                                Margin="0,0,10,0" 
+                                Keyboard="Text"/>
+                                <Image
+                                    Grid.Column="1"
+                                    Source="username.png"
+                                    HeightRequest="30"
+                                    WidthRequest="40"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="StartAndExpand" />
+                        </Grid>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+                    </Border>
+
+
+                    <!-- Email Entry -->
+                        <Border 
+                            MaximumWidthRequest="500"
+                            MinimumWidthRequest="200"
+                            Padding="10"
+                            BackgroundColor="{StaticResource White}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Entry 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                Margin="0,0,10,0"
+                                Text="{Binding Email}" 
+                                Placeholder="{x:Static resx:AppstringResources.Email}" 
+                                Keyboard="Email"/>
+                            <Image
+                                Grid.Column="1"
+                                Source="email.png"
+                                HeightRequest="30"
+                                WidthRequest="40"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand" />
+                        </Grid>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                        </Border>
+
+                        <!-- Password Entry -->
+                        <Border 
+                            MaximumWidthRequest="500"
+                            Padding="10"
+                            MinimumWidthRequest="200"
+                            BackgroundColor="{StaticResource White}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Entry 
+                                Text="{Binding Password}" 
+                                Placeholder="{x:Static resx:AppstringResources.Password}" 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                Margin="0,0,10,0"
+                                IsPassword="True"/>
+                            <Image
+                                Grid.Column="1"
+                                Source="passwords.png"
+                                HeightRequest="30"
+                                WidthRequest="40"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand" />
+                        </Grid>
+                        <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                        </Border>
+
+                        <!-- Phone Number Entry -->
+                        <Border 
+                            MaximumWidthRequest="500"
+                            MinimumWidthRequest="200"
+                            Padding="10"
+                            BackgroundColor="{StaticResource White}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Entry 
+                                Text="{Binding PhoneNumber}" 
+                                Placeholder="{x:Static resx:AppstringResources.Phone}" 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                Margin="0,0,10,0"
+                                Keyboard="Telephone"/>
+                            <Image
+                                Grid.Column="1"
+                                Source="phonenumber.png"
+                                HeightRequest="30"
+                                WidthRequest="40"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand" />
+                        </Grid>
+                        <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                        </Border>
+
+                        <!-- Gender Picker -->
+                        <Border 
+                            Padding="10"
+                            MaximumWidthRequest="500"
+                            MinimumWidthRequest="200"
+                            BackgroundColor="{StaticResource White}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Picker 
+                                ItemsSource="{Binding GenderOptions}"
+                                SelectedItem="{Binding SelectedGender}" 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                Margin="0,0,10,0">
+                                <Picker.ItemDisplayBinding>
+                                    <Binding Path="." />
+                                </Picker.ItemDisplayBinding>
+                            </Picker>
+                            <Image
+                                Grid.Column="1"
+                                Source="gender.png"
+                                HeightRequest="30"
+                                WidthRequest="40"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand" />
+                        </Grid>
+                        <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                        </Border>
+
+                        <!-- Register Button -->
+                        <Button 
+                            Text="{x:Static resx:AppstringResources.Register}" 
+                            MaximumWidthRequest="500"
+                            MinimumWidthRequest="200"
+                            HeightRequest="50"
+                            Margin="5"
+                            Command="{Binding RegisterClickedCommand}"/>
+
+                        <Label 
+                    Text="{Binding RegisterMessage}" 
+                    TextColor="{StaticResource HighPriorityColor}"
+                    FontSize="14"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
+
+                        <!-- Sign In Link -->
+                        <StackLayout 
+                    Orientation="Horizontal" 
+                    HorizontalOptions="Center">
+                            <Label 
+                        Text="{x:Static resx:AppstringResources.Alreadyaccount} " 
+                        FontSize="14" 
+                        VerticalOptions="Center" />
+                            <Button 
+                                Margin="10,0,0,0"
+                        Text="{x:Static resx:AppstringResources.Signin}" 
+                        BackgroundColor="{StaticResource Trasnparent}" 
+                        Command="{Binding SigninClickedCommand}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+    </ContentPage.Content>
+</ContentPage>
