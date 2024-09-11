@@ -57,6 +57,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Handlers\**" />
+	  <Compile Remove="Handlers\**" />
+	  <EmbeddedResource Remove="Handlers\**" />
+	  <MauiCss Remove="Handlers\**" />
+	  <MauiXaml Remove="Handlers\**" />
+	  <None Remove="Handlers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Montserrat-Medium.ttf" />
 	  <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
@@ -72,6 +81,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Mopups" Version="1.3.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
@@ -80,6 +91,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="PopupPages\Priority.xaml.cs">
+	    <DependentUpon>Priority.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="PopupPages\RemainderPopup.xaml.cs">
+	    <DependentUpon>RemainderPopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="PopupPages\EventPopup.xaml.cs">
+	    <DependentUpon>EventPopup.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Strings\AppstringResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -110,6 +130,15 @@
 	  <MauiXaml Update="Controls\CustomPasswordEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopupPages\Priority.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopupPages\RemainderPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PopupPages\EventPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PopupPages\ErrorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -134,8 +163,10 @@
 	  <None Update="Resources\AppIcon\todo.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Handlers\" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+	  <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx">
+	    <Version>1.8.3</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

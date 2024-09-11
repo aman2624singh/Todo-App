@@ -47,5 +47,10 @@ namespace TodoApp.Services
                 .Where(t => t.Id == taskId)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<TaskItem> GetTaskByIdAsync(int id)
+        {
+            return await _database.Table<TaskItem>().Where(t => t.Id == id).FirstOrDefaultAsync();
+        }
     }
 }

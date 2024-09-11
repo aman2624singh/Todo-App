@@ -13,12 +13,14 @@ namespace TodoApp.ViewModels
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
         private readonly IUserSessionService _userSessionService;
+ 
 
         public LoginViewModel(IUserService userService, INavigationService navigationService, IUserSessionService userSessionService)
         {
             _userService = userService;
             _navigationService = navigationService;
             _userSessionService = userSessionService;
+
         }
 
         public string Username
@@ -84,6 +86,7 @@ namespace TodoApp.ViewModels
             try
             {
                 IsLoginErrorVisible = false;
+           
 
                 if (!HasValidInput())
                 {
@@ -95,6 +98,7 @@ namespace TodoApp.ViewModels
                 if (user != null)
                 {
                     _userSessionService.SetUserId(user.Id);
+                    _userSessionService.SetUserName(user.UserName);
                     await Shell.Current.GoToAsync("//DashboardPage", true);
                 }
                 else
@@ -110,6 +114,7 @@ namespace TodoApp.ViewModels
             }
             finally
             {
+                
             }
         }
 

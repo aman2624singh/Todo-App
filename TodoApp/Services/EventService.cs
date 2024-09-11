@@ -18,31 +18,31 @@ namespace TodoApp.Services
             _database = DatabaseService.Database;
         }
 
-        public async Task<int> AddEventAsync(Event eventItem)
+        public async Task<int> AddEventAsync(TaskEvent eventItem)
         {
             return await _database.InsertAsync(eventItem);
         }
 
-        public async Task<int> UpdateEventAsync(Event eventItem)
+        public async Task<int> UpdateEventAsync(TaskEvent eventItem)
         {
             return await _database.UpdateAsync(eventItem);
         }
 
-        public async Task<int> DeleteEventAsync(Event eventItem)
+        public async Task<int> DeleteEventAsync(TaskEvent eventItem)
         {
             return await _database.DeleteAsync(eventItem);
         }
 
-        public async Task<List<Event>> GetEventsByTaskAsync(int taskId)
+        public async Task<List<TaskEvent>> GetEventsByTaskAsync(int taskId)
         {
-            return await _database.Table<Event>()
+            return await _database.Table<TaskEvent>()
                 .Where(e => e.TaskItemId == taskId)
                 .ToListAsync();
         }
 
-        public async Task<Event> GetEventAsync(int eventId)
+        public async Task<TaskEvent> GetEventAsync(int eventId)
         {
-            return await _database.Table<Event>()
+            return await _database.Table<TaskEvent>()
                 .Where(e => e.Id == eventId)
                 .FirstOrDefaultAsync();
         }

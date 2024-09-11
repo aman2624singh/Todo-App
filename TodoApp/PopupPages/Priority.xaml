@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups"
+             BackgroundColor="{StaticResource popupbackground}"   
+             x:Class="TodoApp.PopupPages.Priority ">
+    <mopups:PopupPage.Animation>
+        <mopupsanim:ScaleAnimation
+                    PositionIn="Bottom"  
+                    PositionOut="Bottom"  
+                    ScaleIn="1.2"  
+                    ScaleOut="0.8"  
+                    DurationIn="100"  
+                    DurationOut="100"  
+                    EasingIn="SinOut"  
+                    EasingOut="SinIn"  
+    HasBackgroundAnimation="True"/>
+    </mopups:PopupPage.Animation>
+    <Grid
+        VerticalOptions="CenterAndExpand" 
+        WidthRequest="300"
+        HeightRequest="400"
+          HorizontalOptions="CenterAndExpand">
+        <Frame BackgroundColor="White"
+           CornerRadius="10"
+           HasShadow="True"
+           Margin="0,20,0,0">
+
+            <StackLayout>
+                <Label Text="Priority List"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,10"/>
+
+                <CollectionView
+                ItemsSource="{Binding PinnedItems}"
+                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10"
+                               BackgroundColor="{StaticResource Gray100}"
+                               CornerRadius="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Title}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                    <Label Text="{Binding DueDate, StringFormat='{0:MMM dd}'}"
+                                       FontSize="14"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button Text="Close"
+                    Command="{Binding ClosePopupCommand}"
+                    Margin="0,20"/>
+            </StackLayout>
+
+        </Frame>
+    </Grid>
+
+</mopups:PopupPage>

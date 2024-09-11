@@ -13,5 +13,7 @@ namespace TodoApp.Services
         Task<int> DeletePhotoAsync(Photo photo);
         Task<List<Photo>> GetPhotosByTaskAsync(int taskId);
         Task<Photo> GetPhotoAsync(int photoId);
+
+        Task<List<Photo>> GetPhotosByTaskIdAsync(int taskId);
     }
 }

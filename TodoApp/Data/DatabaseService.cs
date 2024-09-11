@@ -43,7 +43,7 @@ namespace TodoApp.Data
                     // Create tables
                     _database.CreateTableAsync<User>().Wait();
                     _database.CreateTableAsync<TaskItem>().Wait();
-                    _database.CreateTableAsync<Event>().Wait();
+                    _database.CreateTableAsync<TaskEvent>().Wait();
                     _database.CreateTableAsync<Photo>().Wait();
                 }
                 return _database;

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                   xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
+                  BackgroundColor="{StaticResource popupbackground}"
+             xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups" 
+             x:Class="TodoApp.PopupPages.EventPopup ">
+    <mopups:PopupPage.Animation>
+        <mopupsanim:ScaleAnimation
+                    PositionIn="Bottom"  
+                    PositionOut="Bottom"  
+                    ScaleIn="1.2"  
+                    ScaleOut="0.8"  
+                    DurationIn="100"  
+                    DurationOut="100"  
+                    EasingIn="SinOut"  
+                    EasingOut="SinIn"  
+    HasBackgroundAnimation="True"/>
+    </mopups:PopupPage.Animation>
+    <ScrollView
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        VerticalScrollBarVisibility="Never">
+    <Grid VerticalOptions="Center" 
+          HorizontalOptions="CenterAndExpand">
+        <Frame 
+            BackgroundColor="White" 
+            Padding="20" 
+            CornerRadius="15" 
+            HasShadow="True">
+
+            <VerticalStackLayout 
+                Padding="10" 
+                Spacing="15">
+
+                <Label 
+                    Text="{x:Static resx:AppstringResources.Details}" 
+                    FontAttributes="Bold" 
+                    FontSize="20" 
+                    HorizontalOptions="Center" />
+                <Label 
+                    Text="{x:Static resx:AppstringResources.Eventname}" 
+                    FontAttributes="Bold"/>
+                <Entry 
+                    Placeholder="{x:Static resx:AppstringResources.EnterEventname}"
+                    Text="{Binding EventName}"
+                    MaxLength="50" />
+
+                <!-- Event Date Picker -->
+                    <Label Text="{x:Static resx:AppstringResources.DateEvent}" 
+                       FontAttributes="Bold" />
+                <DatePicker 
+                    x:Name="eventDatePicker" 
+                    Date="{Binding SelectedDate}" />
+
+                <!-- Event Description Input -->
+                <Label 
+                    Text="{x:Static resx:AppstringResources.EventDescription}" 
+                    FontAttributes="Bold" />
+                <Editor 
+                    Placeholder="{x:Static resx:AppstringResources.EntereventDescription}"
+                    Text="{Binding EventDescription}" 
+                    MaxLength="250"
+                    HeightRequest="100"/>
+
+                <HorizontalStackLayout 
+                    HorizontalOptions="FillAndExpand">
+                    <Button 
+                        Text="{x:Static resx:AppstringResources.Saveevent}"
+                        Command="{Binding SaveEventCommand}" />
+                    <Button 
+                        Text="{x:Static resx:AppstringResources.Cancel}"
+                        Margin="10,0,0,0"
+                        Command="{Binding ClosePopupCommand}" />
+                </HorizontalStackLayout>
+
+                    <HorizontalStackLayout
+                        Margin="0,20,0,0" 
+                        HorizontalOptions="FillAndExpand" 
+                        Spacing="10" 
+                        VerticalOptions="Center">
+                        <!-- Events List Label -->
+                        <Label 
+                            Text="{x:Static resx:AppstringResources.Eventlist}" 
+                            FontAttributes="Bold" 
+                            VerticalOptions="Center" />
+ 
+                        <!-- Buttons -->
+                        <HorizontalStackLayout
+                            HorizontalOptions="EndAndExpand">
+                            <ImageButton
+                                HeightRequest="30"
+                                WidthRequest="30"
+                                Source="pencil.png"
+                                Command="{Binding EditEventCommand}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End" />
+
+                            <ImageButton
+                                HeightRequest="30"
+                                WidthRequest="30"
+                                Margin="10,0,0,0"
+                                Source="dustbin.png"
+                                Command="{Binding DeleteEventCommand}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End" />
+
+                            <ImageButton
+                                HeightRequest="30"
+                                WidthRequest="30"
+                                Margin="10,0,0,0"
+                                Source="bell.png"
+                                Command="{Binding SetReminderCommand}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End" />
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                    <ListView ItemsSource="{Binding TaskEvents}" 
+                              RowHeight="50"
+                              SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid ColumnDefinitions="*, auto, auto, auto, auto"
+                                          RowDefinitions="Auto">
+
+                                        <!-- Event Name Label -->
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding Eventname}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start" />
+
+                                        <!-- Event Date Label -->
+                                        <Label
+                                            Grid.Column="1"
+                                            Margin="10,0,0,0"
+                                            Text="{Binding EventDate, StringFormat='{0:MMM dd}'}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Start" />
+
+                                        <CheckBox
+                                            Grid.Column="2"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="End"
+                                            IsChecked="{Binding IsSelected}" />
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.CheckBoxCheckedCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                </VerticalStackLayout>
+        </Frame>
+    </Grid>
+    </ScrollView>
+
+</mopups:PopupPage>

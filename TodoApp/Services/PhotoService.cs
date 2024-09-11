@@ -41,5 +41,10 @@ namespace TodoApp.Services
                 .Where(p => p.Id == photoId)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Photo>> GetPhotosByTaskIdAsync(int taskId)
+        {
+            return await _database.Table<Photo>().Where(p => p.TaskItemId == taskId).ToListAsync();
+        }
     }
 }
