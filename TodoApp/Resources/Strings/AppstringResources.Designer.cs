@@ -70,6 +70,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Attachment.
+        /// </summary>
+        internal static string AddAttachment {
+            get {
+                return ResourceManager.GetString("AddAttachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already have an Account?.
         /// </summary>
         internal static string Alreadyaccount {
@@ -124,7 +133,16 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Delete Task.
+        /// </summary>
+        internal static string Deletetask {
+            get {
+                return ResourceManager.GetString("Deletetask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
         /// </summary>
         internal static string Description {
             get {
@@ -322,6 +340,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to save photo.
+        /// </summary>
+        internal static string Photopath {
+            get {
+                return ResourceManager.GetString("Photopath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pin For Priority.
         /// </summary>
         internal static string PinPriority {
@@ -358,11 +385,29 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select an image.
+        /// </summary>
+        internal static string SelectImage {
+            get {
+                return ResourceManager.GetString("SelectImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
         internal static string Signin {
             get {
                 return ResourceManager.GetString("Signin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an image.
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
@@ -403,6 +448,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task Creation.
+        /// </summary>
+        internal static string TaskCreation {
+            get {
+                return ResourceManager.GetString("TaskCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TaskDescription.
         /// </summary>
         internal static string TaskDescription {
@@ -421,11 +475,29 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Title and Description are required..
         /// </summary>
         internal static string TitleandDescriptionerror {
             get {
                 return ResourceManager.GetString("TitleandDescriptionerror", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Attachment.
+        /// </summary>
+        internal static string UploadAttachmnet {
+            get {
+                return ResourceManager.GetString("UploadAttachmnet", resourceCulture);
             }
         }
         

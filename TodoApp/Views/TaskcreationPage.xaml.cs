@@ -14,7 +14,8 @@ public partial class TaskcreationPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        
+        _viewModel.Initialize();
+
     }
 
     protected override void OnDisappearing()

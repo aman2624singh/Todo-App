@@ -1,4 +1,6 @@
-﻿namespace TodoApp
+﻿using TodoApp.Views;
+
+namespace TodoApp
 {
     public partial class AppShell : Shell
     {

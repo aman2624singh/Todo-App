@@ -113,7 +113,8 @@ namespace TodoApp.ViewModels
             _userSessionService = userSessionService;
             _eventService = eventService;
             _reminderService= reminderService;
-            Username = userSessionService.GetUserName();
+            string name= userSessionService.GetUserName();
+            Username = $"Hi!! {name}";
         }
 
         public async void Initialize()
@@ -194,7 +195,6 @@ namespace TodoApp.ViewModels
         {
             if (task is null) return;
 
-            var attachmentsJson = JsonConvert.SerializeObject(task.Attachment); 
             await Shell.Current.GoToAsync($"TaskcreationPage", new Dictionary<string, object>
     {
         { "TaskId", task.Id.ToString() },
@@ -202,8 +202,7 @@ namespace TodoApp.ViewModels
         { "Priority", task.IsPriority },
         { "Done", task.Done },
         { "TaskDescription", task.Notes },
-        { "DueDate", task.DueDate.ToString("o") }, 
-        { "Attachments", attachmentsJson } 
+        { "DueDate", task.DueDate.ToString("o") }
     });
         }
 

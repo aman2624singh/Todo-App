@@ -4,21 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TodoApp.Views.TaskcreationPage"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:TodoApp.Converters"
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.NavBarIsVisible="True"
-    Shell.BackgroundColor="{StaticResource White}"
+    Shell.BackgroundColor="{StaticResource Allbackground}"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:converter="clr-namespace:TodoApp.Converters">
-
 
     <Shell.TitleView>
         <Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{OnIdiom Phone=165, Desktop=*}" />
+                    <ColumnDefinition Width="{OnIdiom Phone=2*, Desktop=*}" />
                     <ColumnDefinition Width="{OnIdiom Phone=*, Desktop=6*}" />
-                    <ColumnDefinition Width="{OnIdiom Phone=*, Desktop=Auto}" />
+                    <ColumnDefinition Width="{OnIdiom Phone=1.3*, Desktop=Auto}" />
                 </Grid.ColumnDefinitions>
 
                 <HorizontalStackLayout
@@ -28,40 +28,28 @@
                     IsVisible="{OnIdiom Phone=False, Desktop=True}">
 
                     <ImageButton
-                        Source="saveitem.png"
-                        Command="{Binding SavedClickedCommand}"
-                        HeightRequest="25"
-                        WidthRequest="25" />
-
-                    <ImageButton
-                        Source="windowgallery.png"
-                        Command="{Binding GalleryClickedCommand}"
-                        HeightRequest="45"
-                        WidthRequest="29" />
-
-                    <ImageButton
                         Source="bell.png"
                         Command="{Binding OpenMenuCommand}"
                         HeightRequest="25"
                         WidthRequest="25" />
                 </HorizontalStackLayout>
-
-                <ImageButton
-                    Grid.Column="1"
-                    HorizontalOptions="Center"
-                    Source="saved.png"
-                    Command="{Binding SavedClickedCommand}"
-                    HeightRequest="25"
-                    IsVisible="{OnIdiom Phone=True, Desktop=False}" />
-
+                <Label
+                    FontSize="20"
+                    VerticalOptions="CenterAndExpand"
+                    FontAttributes="Bold"
+                    FontFamily="bold "
+                    Text="{x:Static resx:AppstringResources.TaskCreation}"
+                    Grid.Column="0">
+                    
+                </Label>
                 <ImageButton
                     Grid.Column="2"
+                    Source="download.png" 
+                    Margin="0,0,20,0"
                     HorizontalOptions="Start"
-                    Source="gallery.png"
-                    Command="{Binding GalleryClickedCommand}"
-                    WidthRequest="29"
-                    HeightRequest="39"
-                    IsVisible="{OnIdiom Phone=True, Desktop=False}" />
+                    Command="{Binding SavedClickedCommand}"
+                    HeightRequest="29"
+                    WidthRequest="29" />
 
                 <ImageButton
                     Grid.Column="3"
@@ -75,390 +63,245 @@
 
         </Grid>
     </Shell.TitleView>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <local:FilePathToImageSourceConverter x:Key="FilePathToImageSourceConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <ContentPage.Content>
         <ScrollView 
-            VerticalScrollBarVisibility="Always">
-            <Grid>
-                <Image 
-                    Source="{OnIdiom Desktop=.png}" 
-                    VerticalOptions="FillAndExpand" 
-                    HeightRequest="{OnIdiom Desktop=800,Phone=830}"
-                    HorizontalOptions="FillAndExpand" 
-                    Aspect="AspectFill" 
-                    Margin="{OnPlatform Android='0,0,0,0', WinUI='0'}"/>
-                <Grid 
-                    ColumnDefinitions="{OnIdiom Desktop='1*,*', Phone='*'}"
-                    Margin="8">
-                    <StackLayout
-                        IsVisible="{OnIdiom Desktop=True,Phone=False}"
-                        Grid.Column="0">
-                        <ScrollView
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            VerticalScrollBarVisibility="Never">
-                            <Grid
-                                VerticalOptions="FillAndExpand"
-                                HorizontalOptions="FillAndExpand">
-                                <Frame BackgroundColor="White" 
-                                       BorderColor="{StaticResource Trasnparent}"
-                                       Padding="20" 
-                                       CornerRadius="15" 
-                                       HasShadow="True">
-
-                                    <StackLayout 
-                                        Padding="10" 
-                                        Spacing="15">
-
-                                        <Label 
-                                            Text="Add Event Details" 
-                                            FontAttributes="Bold" 
-                                            FontSize="20" 
-                                            HorizontalOptions="Center" />
-
-                                        <!-- Event Name Input -->
-                                        <Label 
-                                            Text="Event Name" 
-                                            FontAttributes="Bold"/>
-                                        <Entry 
-                                            Placeholder="Enter Event Name"
-                                            Text="{Binding EventName}"
-                                            MaxLength="50" />
-
-                                        <!-- Event Date Picker -->
-                                        <Label 
-                                            Text="Select Date for the Event" 
-                                            FontAttributes="Bold" />
-                                        <DatePicker 
-                                            Date="{Binding SelectedDate}" />
-
-                                        <!-- Event Description Input -->
-                                        <Label 
-                                            Text="Event Description" 
-                                            FontAttributes="Bold" />
-                                        <Editor 
-                                            Placeholder="Enter Event Description (Max 250 words)"
-                                            Text="{Binding EventDescription}" 
-                                            MaxLength="250"
-                                            HeightRequest="100"/>
-
-                                        <HorizontalStackLayout 
-                                            HorizontalOptions="FillAndExpand">
-                                            <Button 
-                                                Text="Save Event"
-                                                Command="{Binding SaveEventCommand}" />
-                                            <Button 
-                                                Text="Cancel"
-                                                Margin="10,0,0,0"
-                                                Command="{Binding ClosePopupCommand}" />
-                                        </HorizontalStackLayout>
-
-                                        <HorizontalStackLayout
-                                            Margin="0,20,0,0" 
-                                            HorizontalOptions="FillAndExpand" 
-                                            Spacing="10" 
-                                            VerticalOptions="Center">
-                                            <!-- Events List Label -->
-                                            <Label 
-                                                Text="Events List" 
-                                                FontAttributes="Bold" 
-                                                VerticalOptions="Center" />
-
-                                            <!-- Buttons -->
-                                            <HorizontalStackLayout HorizontalOptions="EndAndExpand">
-                                                <ImageButton
-                                                    HeightRequest="30"
-                                                    WidthRequest="30"
-                                                    Source="pencil.png"
-                                                    Command="{Binding EditEventCommand}"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="End" />
-
-                                                <ImageButton
-                                                    HeightRequest="30"
-                                                    WidthRequest="30"
-                                                    Margin="10,0,0,0"
-                                                    Source="dustbin.png"
-                                                    Command="{Binding DeleteEventCommand}"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="End" />
-
-                                                <ImageButton
-                                                    HeightRequest="30"
-                                                    WidthRequest="30"
-                                                    Margin="10,0,0,0"
-                                                    Source="bell.png"
-                                                    Command="{Binding SetReminderCommand}"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="End" />
-                                            </HorizontalStackLayout>
-                                        </HorizontalStackLayout>
-                                        <ListView ItemsSource="{Binding TaskEvents}" 
-                                                  RowHeight="50"
-                                                  SeparatorVisibility="None">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <ViewCell>
-                                                        <Grid ColumnDefinitions="*, auto, auto, auto, auto"
-                                                              RowDefinitions="Auto">
-
-                                                            <!-- Event Name Label -->
-                                                            <Label
-                                                                Grid.Column="0"
-                                                                Text="{Binding Eventname}"
-                                                                VerticalOptions="Center"
-                                                                HorizontalOptions="Start" />
-
-                                                            <!-- Event Date Label -->
-                                                            <Label
-                                                                Grid.Column="1"
-                                                                Margin="10,0,0,0"
-                                                                Text="{Binding EventDate, StringFormat='{0:MMM dd}'}"
-                                                                VerticalOptions="Center"
-                                                                HorizontalOptions="Start" />
-
-                                                            <CheckBox
-                                                                Grid.Column="2"
-                                                                VerticalOptions="Center"
-                                                                HorizontalOptions="End"
-                                                                IsChecked="{Binding IsSelected}" />
-                                                            <Grid.GestureRecognizers>
-                                                                <TapGestureRecognizer
-                                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.CheckBoxCheckedCommand}"
-                                                                    CommandParameter="{Binding .}" />
-                                                            </Grid.GestureRecognizers>
-                                                        </Grid>
-                                                    </ViewCell>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </StackLayout>
-                                </Frame>
-                            </Grid>
-                        </ScrollView>
-
-
-                    </StackLayout>
-                    <StackLayout 
-                         Grid.Column="1" 
-                         Margin="{OnIdiom Desktop='10,0,5,0'}" 
-                         Spacing="20"
-                         VerticalOptions="StartAndExpand">
-
+            BackgroundColor="{StaticResource Allbackground}"
+            VerticalOptions="Fill"
+            VerticalScrollBarVisibility="Never">
+            <Grid
+                ColumnDefinitions="{OnIdiom Desktop='1*,*', Phone='*'}"
+                Margin="10">
+                <StackLayout 
+                     Grid.Column="1" 
+                     Margin="{OnIdiom Desktop='10,0,5,0'}" 
+                     Spacing="20"
+                      VerticalOptions="StartAndExpand">
+                    <StackLayout>
                         <StackLayout>
-                            <StackLayout>
-                                <HorizontalStackLayout Spacing="10">
-                                    <Image 
-                                        Margin="10,0,0,0" 
-                                        Source="todo.png" 
-                                        Aspect="AspectFit"
-                                        HeightRequest="20"/>
-                                    <Label 
-                                        FontSize="20" 
-                                        Text="Task" 
-                                        FontAttributes="Bold" 
-                                        FontFamily="Inter-SemiBold" />
-                                </HorizontalStackLayout>
-
-                                <Frame 
-                                    BorderColor="{StaticResource Black}"
-                                    BackgroundColor="{StaticResource White}"
-                                    Style="{DynamicResource ToDoItemFrame}"
-                                    Padding="7" 
-                                    Margin="0,10,0,0" 
-                                    HorizontalOptions="FillAndExpand" 
-                                    CornerRadius="20">
-                                    <StackLayout>
-                                        <Entry 
-                                            Margin="5"                                           
-                                            Placeholder="{x:Static resx:AppstringResources.Task}" 
-                                            Text="{Binding Title}" 
-                                            FontFamily="Inter-Regular"
-                                            PlaceholderColor="{StaticResource Gray400}" 
-                                            ReturnType="Next"/>
-                                    </StackLayout>
-                                </Frame>
-                            </StackLayout>
-                        </StackLayout>
-                        <StackLayout>
-                            <HorizontalStackLayout
+                            <HorizontalStackLayout 
                                 Spacing="10">
                                 <Image 
-                                    Margin="10,0,0,0"
-                                    Source="description.png" 
-                                    Aspect="AspectFit" 
-                                    HeightRequest="25" />
+                                    Margin="10,0,0,0" 
+                                    Source="todo.png" 
+                                    Aspect="AspectFit"
+                                    HeightRequest="20"/>
                                 <Label 
                                     FontSize="20" 
-                                    Text="{x:Static resx:AppstringResources.Description}"
+                                    Text="{x:Static resx:AppstringResources.Title}" 
                                     FontAttributes="Bold" 
                                     FontFamily="Inter-SemiBold" />
                             </HorizontalStackLayout>
 
                             <Frame 
-                                BorderColor="{StaticResource Black}"
                                 BackgroundColor="{StaticResource White}"
-                                Style="{DynamicResource ToDoItemFrame}" 
-                                Padding="10" 
-                                Margin="0,10,0,0"
-                                HasShadow="True"
-                                HorizontalOptions="FillAndExpand"
-                                CornerRadius="20">
-                                <Editor 
-                                    x:Name="DescField" 
-                                    FontFamily="Inter-Regular"
-                                    Placeholder="{x:Static resx:AppstringResources.TaskDescription}" 
-                                    Text="{Binding Notes}"
-                                    HeightRequest="100" 
-                                    Margin="5"
-                                    HorizontalTextAlignment="Start" 
-                                    VerticalTextAlignment="Start"
-                                    PlaceholderColor="Grey" />
-                            </Frame>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <HorizontalStackLayout
-                                Spacing="10">
-                                <Image 
-                                    Margin="10,0,0,0" 
-                                    Source="priority.png"
-                                    Aspect="AspectFit"
-                                    HeightRequest="25"/>
-                                <Label 
-                                    FontSize="20" 
-                                    Text="{x:Static resx:AppstringResources.Date}" 
-                                    FontAttributes="Bold" 
-                                    FontFamily="Inter-SemiBold"/>
-                            </HorizontalStackLayout>
-
-                            <Frame 
-                                BorderColor="{StaticResource Black}"
-                                Style="{DynamicResource ToDoItemFrame}" 
-                                Padding="10" 
-                                BackgroundColor="{StaticResource White}"
+                                Padding="7" 
                                 Margin="0,10,0,0" 
-                                CornerRadius="20">
-                                <DatePicker 
-                                    Margin="10,0,0,0"
-                                    Date="{Binding DueDate , StringFormat='{0:MM/dd/yyyy}'}"
-                                    MinimumDate="{x:Static sys:DateTime.Today}" 
-                                    Format="D"  
-                                    TextColor="{DynamicResource PrimaryTextColor}"/>
+                                HorizontalOptions="FillAndExpand" 
+                                CornerRadius="10">
+                                <StackLayout>
+                                    <Entry 
+                                        Margin="5"                                           
+                                        Placeholder="{x:Static resx:AppstringResources.Task}" 
+                                        Text="{Binding Title}" 
+                                        FontFamily="Inter-Regular"
+                                        PlaceholderColor="{StaticResource Black}" 
+                                        ReturnType="Next"/>
+                                </StackLayout>
                             </Frame>
                         </StackLayout>
-
-
-                        <StackLayout>
-                            <StackLayout>
-                                <HorizontalStackLayout 
-                                    Spacing="15">
-                                    <Image 
-                                        Margin="12,0,0,0" 
-                                        Source="{AppThemeBinding Dark=attachment.png, Light=attachmentblack.png}"
-                                        Aspect="AspectFit"
-                                        HeightRequest="20" />
-                                    <Label 
-                                        FontSize="20" 
-                                        Text="{x:Static resx:AppstringResources.Attachment}" 
-                                        FontAttributes="Bold"
-                                        FontFamily="Inter-SemiBold" />
-                                </HorizontalStackLayout>
-                                <Frame 
-                                    BorderColor="{StaticResource Black}"
-                                    Style="{DynamicResource ToDoItemFrame}"
-                                    Padding="7" 
-                                    Margin="0,10,0,0" 
-                                    BackgroundColor="{StaticResource White}"
-                                    HorizontalOptions="FillAndExpand"
-                                    CornerRadius="20">
-                                    <StackLayout>
-                                        <Label 
-                                            Text="{Binding AttachmentSize}" 
-                                            FontFamily="Inter-Regular" 
-                                            FontSize="15" 
-                                            TextColor="{AppThemeBinding Light=DarkGray}"
-                                            HorizontalTextAlignment="Center" 
-                                            Margin="15,10,15,10"/>
-                                        <Image
-                                            Source="{Binding Attachment, Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
-                                        <Label 
-                                            Text="{x:Static resx:AppstringResources.Notfound}"
-                                            FontFamily="Inter-Regular"
-                                            FontSize="15" 
-                                            TextColor="{AppThemeBinding Dark=Gray, Light=DarkGray}"
-                                            HorizontalTextAlignment="Center" 
-                                            Margin="15,0,15,0"/>
-                                        <Button 
-                                            Text="{x:Static resx:AppstringResources.Delete}" 
-                                            Command="{Binding DeletePhotoCommand}"
-                                            FontFamily="Inter-Regular"
-                                            BackgroundColor="{StaticResource HighPriorityColor}" 
-                                            TextColor="{StaticResource White}"
-                                            MaximumWidthRequest="{OnPlatform Android=200}"
-                                            HorizontalOptions="Center" Margin="0,15,0,10" />
-                                    </StackLayout>
-                                </Frame>
-                            </StackLayout>
-                        </StackLayout>
-
+                    </StackLayout>
+                    <StackLayout>
+                        <HorizontalStackLayout
+                                Spacing="10">
+                            <Image 
+                                Margin="10,0,0,0"
+                                Source="description.png" 
+                                Aspect="AspectFit" 
+                                HeightRequest="25" />
+                            <Label 
+                                FontSize="20" 
+                                Text="{x:Static resx:AppstringResources.Description}"
+                                FontAttributes="Bold" 
+                                FontFamily="Inter-SemiBold" />
+                        </HorizontalStackLayout>
 
                         <Frame 
-                            BorderColor="{StaticResource Black}"
-                            HorizontalOptions="FillAndExpand" 
-                            BackgroundColor="{StaticResource White}">
-                            <Grid
-                                RowDefinitions="*,*,*" 
-                                ColumnDefinitions="*,*"
-                                RowSpacing="5">
-
-                                <Label 
-                                    Grid.Column="0"
-                                    Grid.Row="0" 
-                                    Margin="10,0,10,0"
-                                    HorizontalOptions="Start" 
-                                    VerticalOptions="Center" 
-                                    FontAttributes="Bold" 
-                                    FontFamily="Inter-SemiBold" 
-                                    Text="{x:Static resx:AppstringResources.Mark}" />
-
-                                <Switch 
-                                    Grid.Column="1" 
-                                    Grid.Row="0"
-                                    HorizontalOptions="EndAndExpand" 
-                                    IsToggled="{Binding Done}" />
-
-                                <BoxView 
-                                    Grid.Row="1" 
-                                    Grid.ColumnSpan="3"
-                                    HeightRequest="1" 
-                                    Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}"/>
-
-                                <Label 
-                                    Grid.Row="2"
-                                    Grid.Column="0" 
-                                    Text="{x:Static resx:AppstringResources.PinPriority}" 
-                                    HorizontalOptions="Start" 
-                                    VerticalOptions="Center" 
-                                    FontAttributes="Bold" 
-                                    FontFamily="Inter-SemiBold" 
-                                    Margin="10,0,10,0"/>
-
-                                <Switch 
-                                    Grid.Column="1" 
-                                    Grid.Row="2" 
-                                    HorizontalOptions="EndAndExpand" 
-                                    IsToggled="{Binding IsPriority}"/>
-                            </Grid>
+                            BackgroundColor="{StaticResource White}"
+                            Padding="10" 
+                            Margin="0,10,0,0"
+                            HorizontalOptions="FillAndExpand"
+                            CornerRadius="10">
+                            <Editor 
+                                FontFamily="Inter-Regular"
+                                Placeholder="{x:Static resx:AppstringResources.TaskDescription}" 
+                                Text="{Binding Notes}"
+                                HeightRequest="100" 
+                                Margin="5"
+                                HorizontalTextAlignment="Start" 
+                                VerticalTextAlignment="Start"
+                                PlaceholderColor="{StaticResource Black}" />
                         </Frame>
                     </StackLayout>
-                </Grid>
+                    <StackLayout>
+                        <HorizontalStackLayout
+                                Spacing="10">
+                            <Image 
+                                Margin="10,0,0,0" 
+                                Source="duedate.png"
+                                Aspect="AspectFit"
+                                HeightRequest="25"/>
+                            <Label 
+                                FontSize="20" 
+                                Text="{x:Static resx:AppstringResources.Date}" 
+                                FontAttributes="Bold" 
+                                FontFamily="Inter-SemiBold"/>
+                        </HorizontalStackLayout>
+
+                        <Frame 
+                            Padding="10" 
+                            BackgroundColor="{StaticResource White}"
+                            Margin="0,10,0,0" 
+                            CornerRadius="10">
+                            <DatePicker 
+                                Margin="10,0,0,0"
+                                Date="{Binding DueDate , StringFormat='{0:MM/dd/yyyy}'}"
+                                MinimumDate="{x:Static sys:DateTime.Today}" 
+                                Format="D"  
+                                TextColor="{DynamicResource PrimaryTextColor}"/>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout>
+                        <HorizontalStackLayout 
+                                    Spacing="15">
+                                <Image
+                                    Margin="12,0,0,0" 
+                                    Source="attach.png"
+                                    Aspect="AspectFit"
+                                    HeightRequest="20" />
+                                <Label 
+                                    FontSize="20" 
+                                    Text="{x:Static resx:AppstringResources.Attachment}" 
+                                    FontAttributes="Bold"
+                                    FontFamily="Inter-SemiBold" />
+                            </HorizontalStackLayout>
+                        <Frame 
+                            CornerRadius="10"
+                            Padding="10"
+                            Margin="0,10,0,0"
+                            BackgroundColor="{StaticResource White}">
+                            <StackLayout>
+                                <CollectionView
+                                    ItemsSource="{Binding AttachedPhotos}" 
+                                     Margin="10,0,10,10"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="FillAndExpand">
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid 
+                                                ColumnDefinitions="60,*, *" 
+                                                RowDefinitions="Auto" 
+                                                Padding="5">
+                                                <Image 
+                                                    Source="{Binding FilePath, Converter={StaticResource FilePathToImageSourceConverter}}"
+                                                    Aspect="AspectFill"
+                                                    HeightRequest="50"
+                                                    WidthRequest="50"
+                                                    Grid.Column="0"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer 
+                                                                Command="{Binding BindingContext.ViewPhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                                CommandParameter="{Binding .}" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                                <Label
+                                                    Grid.Column="1"
+                                                    FontSize="14"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding FileName}">
+                                                </Label>
+                                                <ImageButton 
+                                                    Source="cross.png"
+                                                    Command="{Binding BindingContext.DeletePhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                    CommandParameter="{Binding .}"
+                                                    HeightRequest="30"   
+                                                    WidthRequest="30"                                                       
+                                                    Grid.Column="2"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Center"
+                                                    Margin="5"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                                <Button 
+                                    BorderColor="{StaticResource  Trasnparent}"
+                                    FontAttributes="Bold"
+                                    FontFamily=" Bold"
+                                    Text="{x:Static resx:AppstringResources.AddAttachment}" 
+                                    Command="{Binding GalleryClickedCommand}"
+                                    HorizontalOptions="Fill"
+                                    Margin="0,0,0,0" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <Frame 
+                        HorizontalOptions="FillAndExpand" 
+                        BackgroundColor="{StaticResource White}">
+                        <Grid
+                            RowDefinitions="*,*,*" 
+                            ColumnDefinitions="*,*"
+                             RowSpacing="5">
+
+                            <Label 
+                                Grid.Column="0"
+                                Grid.Row="0" 
+                                Margin="10,0,10,0"
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center" 
+                                FontAttributes="Bold" 
+                                FontFamily="Inter-SemiBold" 
+                                Text="{x:Static resx:AppstringResources.Mark}" />
+
+                            <Switch
+                                Grid.Column="1" 
+                                Grid.Row="0"
+                                HorizontalOptions="EndAndExpand" 
+                                IsToggled="{Binding Done}" />
+
+                            <BoxView 
+                                Grid.Row="1" 
+                                Grid.ColumnSpan="3"
+                                HeightRequest="1" 
+                                Color="{StaticResource Black}"/>
+
+                            <Label 
+                                Grid.Row="2"
+                                Grid.Column="0" 
+                                Text="{x:Static resx:AppstringResources.PinPriority}" 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center" 
+                                FontAttributes="Bold" 
+                                FontFamily="Inter-SemiBold" 
+                                Margin="10,0,10,0"/>
+                            <Switch 
+                                Grid.Column="1" 
+                                Grid.Row="2" 
+                                HorizontalOptions="EndAndExpand" 
+                                IsToggled="{Binding IsPriority}"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

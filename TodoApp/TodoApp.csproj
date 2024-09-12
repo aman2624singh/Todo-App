@@ -169,4 +169,6 @@
 	  </PackageReference>
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionTodoAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>

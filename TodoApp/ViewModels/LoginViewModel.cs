@@ -109,6 +109,7 @@ namespace TodoApp.ViewModels
             }
             catch (Exception ex)
             {
+                await Application.Current.MainPage.DisplayAlert("Login Error", ex.Message, "OK");
                 LoginErrorMessage = AppstringResources.Error_login;
                 IsLoginErrorVisible = true;
             }
@@ -157,7 +158,7 @@ namespace TodoApp.ViewModels
             PasswordVisibilityIcon = IsPassword ? Icons.EyeHideIcon : Icons.EyeIcon;
         }
 
-        private string _username= "aman123";
+        private string _username="Xyz123";
         private string _password="test@123" ;
     }
 }

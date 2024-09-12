@@ -17,7 +17,6 @@ namespace TodoApp.Models
         public DateTime DueDate { get; set; }
         public bool Done { get; set; }
         public string Notes { get; set; }
-        public Byte[] Attachment { get; set; }
         public bool HasAttachment { get; set; }
         public bool IsSelected
         {

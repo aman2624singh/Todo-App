@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using TodoApp.Models;
 using TodoApp.Resources.Strings;
 using TodoApp.Services;
@@ -13,7 +15,6 @@ namespace TodoApp.ViewModels
     public partial class TaskCreationViewModel:ObservableObject, IQueryAttributable
     {
        
-
         [ObservableProperty]
         private bool isRunning;
 
@@ -45,7 +46,8 @@ namespace TodoApp.ViewModels
         public ObservableCollection<TaskItem> UserTasks { get; set; } = new ObservableCollection<TaskItem>();
         private ObservableCollection<string> PhotoFilePaths { get; set; } = new ObservableCollection<string>();
 
-        public ObservableCollection<Photo> AttachedPhotos { get; set; } = new ObservableCollection<Photo>();
+        [ObservableProperty]
+        private ObservableCollection<Photo> attachedPhotos = new ObservableCollection<Photo>();
 
         public TaskCreationViewModel(IUserService userService, INavigationService navigationService, IPhotoService photoService, ITaskService taskService, IUserSessionService userSessionService)
         {
@@ -55,8 +57,31 @@ namespace TodoApp.ViewModels
             _userSessionService = userSessionService;
             _photoService = photoService;
             CurrentuserId = _userSessionService.GetUserId();
+            
         }
 
+        public void Initialize()
+        {
+            LoadTaskAndPhotos(currentTaskItemId);
+        }
+
+        private async Task LoadTaskAndPhotos(int taskId)
+        {
+            var existingTask = await _taskService.GetTaskByIdAsync(taskId);
+            if (existingTask != null)
+            {
+                await LoadPhotosFromDatabase(taskId);
+            }
+        }
+        private async Task LoadPhotosFromDatabase(int taskId)
+        {
+            var photos = await _photoService.GetPhotosByTaskIdAsync(taskId);
+            AttachedPhotos.Clear();
+            foreach (var photo in photos)
+            {
+                AttachedPhotos.Add(photo);
+            }
+        }
 
         [RelayCommand]
         private async Task SavedClicked()
@@ -76,7 +101,6 @@ namespace TodoApp.ViewModels
                     Done = this.Done,
                     IsPriority = this.IsPriority,
                     Notes = this.Notes,
-                    Attachment = this.Attachment,
                     UserId = CurrentuserId,
                     HasAttachment = this.Attachment != null && this.Attachment.Length > 0
                 };
@@ -85,7 +109,7 @@ namespace TodoApp.ViewModels
                 CurrentTaskItemId = taskId;
                 await SavePhotosToDatabase(taskId);
 
-                await Application.Current.MainPage.DisplayAlert(AppstringResources.Success, AppstringResources.Taskcreated, AppstringResources.OK);
+                await Toast.Make(AppstringResources.Taskcreated).Show();
             }
             else 
             {
@@ -97,13 +121,12 @@ namespace TodoApp.ViewModels
                     existingTask.Done = this.Done;
                     existingTask.IsPriority = this.IsPriority;
                     existingTask.Notes = this.Notes;
-                    existingTask.Attachment = this.Attachment;
                     existingTask.HasAttachment = this.Attachment != null && this.Attachment.Length > 0;
 
                     await _taskService.UpdateTaskAsync(existingTask);
                     await SavePhotosToDatabase(CurrentTaskItemId);
 
-                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Success, AppstringResources.Taskupdated, AppstringResources.OK);
+                    await Toast.Make(AppstringResources.Taskupdated).Show();
                 }
             }
 
@@ -117,6 +140,7 @@ namespace TodoApp.ViewModels
                 var photo = new Photo
                 {
                     FilePath = filePath,
+                    FileName= Path.GetFileName(filePath),
                     TaskItemId = taskId 
                 };
 
@@ -126,13 +150,13 @@ namespace TodoApp.ViewModels
         }
 
         [RelayCommand]
-        private async Task OnGalleryClicked()
+        private async Task GalleryClicked()
         {
             string takePhotoOption = AppstringResources.TakePhoto;
-            string uploadPhotoOption = Uploadattachmnet;
+            string uploadPhotoOption = AppstringResources.UploadAttachmnet;
             var action = await Application.Current.MainPage.DisplayActionSheet(
                 null,
-                "Cancel",//add to string resource
+                "Cancel",
                 null,
                 takePhotoOption,
                 uploadPhotoOption
@@ -159,7 +183,31 @@ namespace TodoApp.ViewModels
                 if (photo is not null)
                 {
                     var filePath = await SaveFile(photo);
-                    PhotoFilePaths.Add(filePath); 
+
+                    if (string.IsNullOrEmpty(filePath))
+                    {
+                        await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath, AppstringResources.OK);
+                        return;
+                    }
+
+                    if (PhotoFilePaths is null)
+                    {
+                        PhotoFilePaths = new ObservableCollection<string>();
+                    }
+
+                    PhotoFilePaths.Add(filePath);
+
+                    if (AttachedPhotos is null)
+                    {
+                        AttachedPhotos = new ObservableCollection<Photo>();
+                    }
+
+                    AttachedPhotos.Add(new Photo
+                    {
+                        FilePath = filePath,
+                        FileName = photo.FileName,
+                        TaskItemId = CurrentTaskItemId
+                    });
                 }
             }
             catch (Exception ex)
@@ -175,13 +223,36 @@ namespace TodoApp.ViewModels
                 var result = await FilePicker.PickAsync(new PickOptions
                 {
                     FileTypes = FilePickerFileType.Images,
-                    PickerTitle = Selectimage
+                    PickerTitle = AppstringResources.SelectImage
                 });
 
                 if (result is not null)
                 {
                     var filePath = result.FullPath;
-                    PhotoFilePaths.Add(filePath); 
+
+                    if (string.IsNullOrEmpty(filePath))
+                    {
+                        await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath , AppstringResources.OK );
+                        return;
+                    }
+
+                    if (PhotoFilePaths is null)
+                    {
+                        PhotoFilePaths = new ObservableCollection<string>();
+                    }
+                    PhotoFilePaths.Add(filePath);
+
+                    if (AttachedPhotos is null)
+                    {
+                        AttachedPhotos = new ObservableCollection<Photo>();
+                    }
+
+                    AttachedPhotos.Add(new Photo
+                    {
+                        FilePath = filePath,
+                        FileName=result.FileName,
+                        TaskItemId = CurrentTaskItemId
+                    });
                 }
             }
             catch (Exception ex)
@@ -201,21 +272,27 @@ namespace TodoApp.ViewModels
             return newFilePath;
         }
 
+
         [RelayCommand]
         private async Task DeletePhoto(Photo photo)
         {
-            try
+            bool isConfirmed = await App.Current.MainPage.DisplayAlert(
+              AppstringResources.Deletetask,
+              $"Are you sure you want to delete the task: {photo.FileName}?",
+              AppstringResources.Yes,
+              AppstringResources.No
+          );
+            if (isConfirmed)
             {
-                await _photoService.DeletePhotoAsync(photo);
-                AttachedPhotos.Remove(photo);
-                if (File.Exists(photo.FilePath))
+                try
                 {
-                    File.Delete(photo.FilePath);
+                    await _photoService.DeletePhotoAsync(photo);
+                    AttachedPhotos.Remove(photo);
                 }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.Message, AppstringResources.OK);
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, $"Failed to delete photo: {ex.Message}", AppstringResources.OK);
+                }
             }
         }
 
@@ -257,16 +334,33 @@ namespace TodoApp.ViewModels
                 IsPriority = bool.Parse(query["Priority"].ToString());
             }
 
-            if (query.ContainsKey("Attachments"))
-            {
-                var attachmentsJson = query["Attachments"]?.ToString();
-                if (!string.IsNullOrEmpty(attachmentsJson))
-                {
-                    AttachedPhotos = JsonConvert.DeserializeObject<ObservableCollection<Photo>>(attachmentsJson);
-                }
-            }
+        }
 
-             
+        [RelayCommand]
+        private async Task ViewPhoto(Photo photo)
+        {
+            if (photo == null)
+                return;
+            try
+            {
+                if (!File.Exists(photo.FilePath))
+                {
+                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath, AppstringResources.OK);
+                    return;
+                }
+                var fileUri = new Uri(photo.FilePath, UriKind.Absolute);
+                await Launcher.OpenAsync(fileUri);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.Message, AppstringResources.OK);
+            }
+        }
+
+        [RelayCommand]
+        private async Task GoBack()
+        {
+            await _navigationService.NavigateWithoutRootAsync(nameof(Dashboard));
         }
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
@@ -274,7 +368,5 @@ namespace TodoApp.ViewModels
         private readonly IUserSessionService _userSessionService;
         private readonly IPhotoService _photoService;
 
-        private string Uploadattachmnet = "Upload Attachment";
-        private string Selectimage = "Select an image";//put this is appstring resources(both of them)
     }
 }
