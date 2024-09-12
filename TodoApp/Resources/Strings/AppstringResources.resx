@@ -120,11 +120,47 @@
   <data name="Account" xml:space="preserve">
     <value>Create an Account</value>
   </data>
+  <data name="AddAttachment" xml:space="preserve">
+    <value>Add Attachment</value>
+  </data>
   <data name="Alreadyaccount" xml:space="preserve">
     <value>Already have an Account?</value>
   </data>
+  <data name="Attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="DateEvent" xml:space="preserve">
+    <value>Enter Date For Event</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete Attachment</value>
+  </data>
+  <data name="Deletetask" xml:space="preserve">
+    <value>Delete Task</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Add Event Details</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EntereventDescription" xml:space="preserve">
+    <value>Enter Event Description (Max 250 words)</value>
+  </data>
+  <data name="EnterEventname" xml:space="preserve">
+    <value>Enter Event Name</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="Error_login" xml:space="preserve">
     <value>Incorrect Username or Password.Please try again.</value>
@@ -135,14 +171,38 @@
   <data name="Error_Username" xml:space="preserve">
     <value>Enter Correct Username</value>
   </data>
+  <data name="EventDescription" xml:space="preserve">
+    <value>Event Description</value>
+  </data>
+  <data name="Eventlist" xml:space="preserve">
+    <value>Event List</value>
+  </data>
+  <data name="Eventname" xml:space="preserve">
+    <value>Event Name</value>
+  </data>
   <data name="Label_Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="Mark" xml:space="preserve">
+    <value>Mark as Done</value>
+  </data>
   <data name="New_User" xml:space="preserve">
     <value>New User</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Notfound" xml:space="preserve">
+    <value>No Attachment found. If attachment is already added, click save.</value>
+  </data>
+  <data name="Nothingtoshow" xml:space="preserve">
+    <value>Nothing to show yet, Create an item by tapping on +</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -150,13 +210,64 @@
   <data name="Phone" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="Photopath" xml:space="preserve">
+    <value>Failed to save photo</value>
+  </data>
+  <data name="PinPriority" xml:space="preserve">
+    <value>Pin For Priority</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Saveevent" xml:space="preserve">
+    <value>Save Event</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Select an image</value>
   </data>
   <data name="Signin" xml:space="preserve">
     <value>Sign in</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value>Select an image</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>Take Photo</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Task name or ID</value>
+  </data>
+  <data name="Taskcreated" xml:space="preserve">
+    <value>Task created!</value>
+  </data>
+  <data name="TaskCreation" xml:space="preserve">
+    <value>Task Creation</value>
+  </data>
+  <data name="TaskDescription" xml:space="preserve">
+    <value>TaskDescription</value>
+  </data>
+  <data name="Taskupdated" xml:space="preserve">
+    <value>Task updated!</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TitleandDescriptionerror" xml:space="preserve">
+    <value>Task Title and Description are required.</value>
+  </data>
+  <data name="UploadAttachmnet" xml:space="preserve">
+    <value>Upload Attachment</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

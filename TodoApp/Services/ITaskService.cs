@@ -14,5 +14,7 @@ namespace TodoApp.Services
         Task<int> DeleteTaskAsync(TaskItem task);
         Task<List<TaskItem>> GetUserTasksAsync(int userId);
         Task<TaskItem> GetTaskAsync(int taskId);
+
+        Task<TaskItem> GetTaskByIdAsync(int id);
     }
 }

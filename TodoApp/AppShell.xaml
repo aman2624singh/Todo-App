@@ -7,6 +7,13 @@
     Shell.NavBarIsVisible="True"
     Shell.FlyoutBehavior="Disabled"
     Title="TodoApp">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <!-- Define colors and styles -->
+            <Color x:Key="BackButtonColor">#FF0000</Color>
+            <!-- Example color -->
+        </ResourceDictionary>
+    </Shell.Resources>
 
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"

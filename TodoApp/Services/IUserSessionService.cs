@@ -9,7 +9,10 @@ namespace TodoApp.Services
     public interface IUserSessionService
     {
         int GetUserId();      
+        string GetUserName();
         void SetUserId(int userId);  
+
+        void SetUserName(string userName);
         void ClearSession();  
     }
 }

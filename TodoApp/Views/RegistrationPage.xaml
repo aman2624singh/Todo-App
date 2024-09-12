@@ -13,11 +13,13 @@
     </Shell.BackButtonBehavior>
 
     <ContentPage.Content>
+        <ScrollView
+            VerticalOptions="Fill"
+            VerticalScrollBarVisibility="Never">
             <Grid>
                 <Image 
                     Source="{OnIdiom Phone=background,Desktop=background.png}" 
                     VerticalOptions="FillAndExpand" 
-                    HeightRequest="900"
                     HorizontalOptions="FillAndExpand" 
                     Aspect="AspectFill" 
                     Margin="{OnPlatform Android='0,0,0,0', WinUI='0'}"/>
@@ -451,5 +453,6 @@
                     </StackLayout>
                 </Grid>
             </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

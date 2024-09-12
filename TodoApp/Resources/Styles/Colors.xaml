@@ -14,7 +14,7 @@
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="Trasnparent">#00FFFFFF</Color>
     <Color x:Key="TextColor">#007AFF</Color>
-    <Color x:Key="popupbackground">#99272727</Color>
+    
     <Color x:Key="LowPriorityColor">LightGreen</Color>
     <Color x:Key="MediumPriorityColor">Yellow</Color>
     <Color x:Key="HighPriorityColor">Red</Color>
@@ -25,6 +25,8 @@
     <Color x:Key="Magenta">#D600AA</Color>
     <Color x:Key="MidnightBlue">#190649</Color>
     <Color x:Key="OffBlack">#1f1f1f</Color>
+    <Color x:Key="popupbackground">#99272727</Color>
+    <Color x:Key="Allbackground">#ADD8E6</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>

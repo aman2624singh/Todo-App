@@ -11,10 +11,7 @@
         <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView
-            VerticalOptions="FillAndExpand">
-            <Grid 
-                x:Name="Maingrid"               
+            <Grid               
                 HorizontalOptions="FillAndExpand"
                 BackgroundColor="{StaticResource White}">
 
@@ -24,7 +21,7 @@
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Aspect="AspectFill" 
-                    HeightRequest="{OnIdiom Desktop=800,Phone=700}"
+
                     Margin="{OnPlatform Android='0,0,0,110', WinUI='0'}"/>
 
                 <Grid
@@ -56,7 +53,6 @@
                         <Frame 
                             BackgroundColor="{StaticResource White}"
                             Margin="20,20,20,0"    
-                            WidthRequest="{OnIdiom Phone=350}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
                             CornerRadius="{OnPlatform Android='20'}">
@@ -113,6 +109,9 @@
                     </StackLayout>
                 </Grid>
                 <Grid IsVisible="{OnIdiom Phone=false,Desktop=true}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -120,6 +119,7 @@
 
                     <!-- Logo Image -->
                     <StackLayout 
+                        Grid.Row="0"
                          Grid.Column="0"
                          HorizontalOptions="End"
                          VerticalOptions="CenterAndExpand"
@@ -138,6 +138,7 @@
 
                     <!-- Login Form -->
                     <StackLayout 
+                        Grid.Row="0"
                         Grid.Column="1"
                         Margin="10"
                         MaximumWidthRequest="380"
@@ -221,6 +222,5 @@
                     </StackLayout>
                 </Grid>
             </Grid>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

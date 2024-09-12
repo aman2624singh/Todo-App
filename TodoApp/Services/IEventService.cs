@@ -9,10 +9,10 @@ namespace TodoApp.Services
 {
     public interface IEventService
     {
-        Task<int> AddEventAsync(Event eventItem);
-        Task<int> UpdateEventAsync(Event eventItem);
-        Task<int> DeleteEventAsync(Event eventItem);
-        Task<List<Event>> GetEventsByTaskAsync(int taskId);
-        Task<Event> GetEventAsync(int eventId);
+        Task<int> AddEventAsync(TaskEvent eventItem);
+        Task<int> UpdateEventAsync(TaskEvent eventItem);
+        Task<int> DeleteEventAsync(TaskEvent eventItem);
+        Task<List<TaskEvent>> GetEventsByTaskAsync(int taskId);
+        Task<TaskEvent> GetEventAsync(int eventId);
     }
 }
