@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.Views.SortSheet"
+                   xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
+             xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+                   xmlns:local="clr-namespace:TodoApp.Models"
+                   xmlns:converter="clr-namespace:TodoApp.Converters"
+             x:Name="bottomsheet"
+             IsCancelable="True"
+             HasBackdrop="True">
+    <the49:BottomSheet.Resources>
+        <converter:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+    </the49:BottomSheet.Resources>
+    <StackLayout
+        Margin="10"
+       BackgroundColor="{StaticResource White}">
+
+        <RadioButton 
+            Margin="5"
+            GroupName="Sort"
+            IsChecked="{Binding SelectedSortOption, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:SortOption.Priority}}" 
+            Content="Priority" />
+        <RadioButton 
+            Margin="5"
+            GroupName="Sort" 
+            IsChecked="{Binding SelectedSortOption, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:SortOption.Date}}" 
+            Content="Due Date" />
+        <RadioButton 
+            Margin="5"
+            GroupName="Sort" 
+            IsChecked="{Binding SelectedSortOption, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:SortOption.Done}}" 
+            Content="Done" />
+        <RadioButton 
+            Margin="5"
+            GroupName="Sort" 
+            IsChecked="{Binding SelectedSortOption, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:SortOption.None}}" 
+            Content="Cancel" />
+        <Grid
+            ColumnDefinitions="*, 2.5*">
+            <Button
+                Grid.Column="1"
+                Text="{x:Static resx:AppstringResources.Button_Apply}"
+                Margin="10"
+                HeightRequest="50"
+                FontSize="14"
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding ApplySortCommand}"
+                CommandParameter="{Binding Source={x:Reference bottomsheet}}">
+            </Button>
+        </Grid>
+    </StackLayout>
+</the49:BottomSheet>

@@ -20,8 +20,10 @@ namespace TodoApp.Models
                 .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
 
             RuleFor(user => user.UserName)
-               .NotEmpty().WithMessage("Username is required.")
-               .MinimumLength(6).WithMessage("Username must be Unique.");
+             .NotEmpty().WithMessage("Username is required.")
+              .MinimumLength(6).WithMessage("Username must be at least 6 characters long.")
+             .Matches(@"^\S*$").WithMessage("Username should not contain spaces.");
+
 
             RuleFor(user => user.Gender)
             .NotEmpty().WithMessage("Gender is required.")
@@ -29,8 +31,8 @@ namespace TodoApp.Models
             .WithMessage("Invalid gender.");
 
             RuleFor(user => user.PhoneNumber)
-                .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Invalid phone number format.");
+            .NotEmpty().WithMessage("Phone number is required.")
+            .Matches(@"^\+?[1-9]\d{9,14}$").WithMessage("Phone number must be at least 10 digits long and in a valid format.");
 
         }
     }

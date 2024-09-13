@@ -97,6 +97,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        internal static string Button_Apply {
+            get {
+                return ResourceManager.GetString("Button_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -259,6 +268,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sort Task.
+        /// </summary>
+        internal static string Label_Sort {
+            get {
+                return ResourceManager.GetString("Label_Sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         internal static string Login {
@@ -358,6 +376,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to update task pin status:.
+        /// </summary>
+        internal static string Pinstatus {
+            get {
+                return ResourceManager.GetString("Pinstatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         internal static string Register {
@@ -390,6 +417,15 @@ namespace TodoApp.Resources.Strings {
         internal static string SelectImage {
             get {
                 return ResourceManager.GetString("SelectImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a task for the reminder..
+        /// </summary>
+        internal static string Selecttask {
+            get {
+                return ResourceManager.GetString("Selecttask", resourceCulture);
             }
         }
         
@@ -462,6 +498,15 @@ namespace TodoApp.Resources.Strings {
         internal static string TaskDescription {
             get {
                 return ResourceManager.GetString("TaskDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Task Selected.
+        /// </summary>
+        internal static string Tasknotselected {
+            get {
+                return ResourceManager.GetString("Tasknotselected", resourceCulture);
             }
         }
         

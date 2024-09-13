@@ -7,10 +7,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using The49.Maui.BottomSheet;
 using TodoApp.Models;
 using TodoApp.PopupPages;
 using TodoApp.Resources.Strings;
@@ -43,15 +45,35 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private void ToggleSidePanel()
         {
-            // Toggle the visibility of the side panel
             IsSidePanelVisible = !IsSidePanelVisible;
         }
+
+        [ObservableProperty]
+        private bool isPriority;
+
+        [ObservableProperty]
+        private bool isDate;
+
+        [ObservableProperty]
+        private bool isDone;
+
+        [ObservableProperty]
+        private bool isCancel;
+
+        [ObservableProperty]
+        private ObservableCollection<TaskItem> originalItems;
+
+        [ObservableProperty]
+        private SortOption selectedSortOption;
 
         [ObservableProperty]
         private ObservableCollection<TaskItem> items;
 
         [ObservableProperty]
         private ObservableCollection<TaskItem> pinnedItems;
+
+        [ObservableProperty]
+        private bool isempty;
 
         [ObservableProperty]
         private bool isListEmpty;
@@ -72,34 +94,9 @@ namespace TodoApp.ViewModels
             }
         }
 
-        [ObservableProperty]
-        private bool isRefreshing;
-
-        [ObservableProperty]
-        private bool isempty;
 
         [ObservableProperty]
         private string username;
-
-
-        [ObservableProperty]
-        private bool isPriority;
-
-        [ObservableProperty]
-        private bool isPickerVisible;
-
-        private SortOption _selectedSortOption;
-        public SortOption SelectedSortOption
-        {
-            get => _selectedSortOption;
-            set
-            {
-                if (SetProperty(ref _selectedSortOption, value))
-                {
-                    SortTask();
-                }
-            }
-        }
 
 
         public List<SortOption> SortOptions { get; } = Enum.GetValues(typeof(SortOption)).Cast<SortOption>().ToList();
@@ -120,7 +117,6 @@ namespace TodoApp.ViewModels
         public async void Initialize()
         {
            await LoadItems();
-            IsPickerVisible = false;
         }
 
         [RelayCommand]
@@ -182,8 +178,8 @@ namespace TodoApp.ViewModels
                 Items.Clear();
                 PinnedItems.Clear();
 
-                foreach (var task in filteredItems) Items.Add(task);
-                foreach (var task in filteredPinnedItems) PinnedItems.Add(task);//can use linq query here 
+                filteredItems.ToList().ForEach(task => Items.Add(task));
+                filteredPinnedItems.ToList().ForEach(task => PinnedItems.Add(task)); 
 
                 IsListEmpty = !Items.Any();
                 IsPinnedListEmpty = !PinnedItems.Any();
@@ -208,76 +204,37 @@ namespace TodoApp.ViewModels
 
 
         [RelayCommand]
-        private void ShowPicker()
+        private async Task ReminderTask(TaskItem task)
         {
-            IsPickerVisible = !IsPickerVisible;
-        }
-        private void SortTask()
-        {
-            if (Items == null || !Items.Any()) return;
-
-            IEnumerable<TaskItem> sortedTasks = Items;
-
-            switch (SelectedSortOption)
-            {
-                case SortOption.Recent:
-                    sortedTasks = Items.OrderByDescending(task => task.DueDate);
-                    break;
-
-                case SortOption.Done:
-                    sortedTasks = Items.OrderBy(task => task.Done);
-                    break;
-
-                case SortOption.Pinned:
-                    sortedTasks = Items.OrderByDescending(task => task.IsPriority);
-                    break;
-            }
-
-            Items.Clear();
-            foreach (var task in sortedTasks)
-            {
-                Items.Add(task);
-            }
-        }
-
-
-        [RelayCommand]
-        private async Task RefreshTasksAsync()
-        {
-            IsRefreshing = true;
-            await LoadItems();
-            IsRefreshing = false;
-        }
-
-        [RelayCommand]
-        private async Task Reminder()
-        {
-            var selectedTasks = Items.Where(task => task.IsSelected).ToList();
-            if (!selectedTasks.Any())
-            {
-                await App.Current.MainPage.DisplayAlert("No Task Selected", "Please select a task for the reminder.", "OK");
+            if (task is null)
                 return;
-            }
 
-            foreach (var task in selectedTasks)
-            {
                 var reminderPopupViewModel = new ReminderPopupViewModel(_reminderService)
                 {
                     CurrentTaskId = task.Id,
                     CurrentTaskName = task.Title
                 };
                 _reminderService.ShowReminderPopup(reminderPopupViewModel);
+        }
+
+
+        [RelayCommand]
+        private async Task ShowEventPopup( TaskItem task)
+        {
+            try
+            {
+                var eventViewModel = new EventBottomSheetViewModel(_eventService);
+                var bottomSheet = new EventBottomSheet(eventViewModel);
+                await eventViewModel.LoadEventsAsync(task.Id);
+                await bottomSheet.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+
+               
             }
         }
 
-        [RelayCommand]
-        private async void ShowEventPopup( TaskItem task)
-        {
-            var eventPopupViewModel = new EventPopupViewModel(_eventService);
-            var eventPopup = new EventPopup(eventPopupViewModel, task.Id);
-
-            await MopupService.Instance.PushAsync(eventPopup);
-        }
 
         [RelayCommand]
         private async Task DeleteTask(TaskItem task)
@@ -286,7 +243,7 @@ namespace TodoApp.ViewModels
                 return;
 
             bool userConfirmed = await App.Current.MainPage.DisplayAlert(
-                "Delete Task",
+                AppstringResources.Deletetask,
                 $"Are you sure you want to delete the task: {task.Title}?",
                 AppstringResources.Yes,
                 AppstringResources.No
@@ -339,28 +296,50 @@ namespace TodoApp.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "Failed to update task pin status: " + ex.Message, "OK");
+               // await App.Current.MainPage.DisplayAlert(AppstringResources.Error, "Failed to update task pin status: " + ex.Message, AppstringResources.OK);
             }
 
             IsPriority = PinnedItems.Any();
         }
 
         [RelayCommand]
-        private async Task PriorityList()
+        private void ApplySort(BottomSheet bottomsheet)
         {
-            var priorityViewModel = new PriorityVIewModel();
-            var priorityPopup = new Priority(priorityViewModel);
-
-            await MopupService.Instance.PushAsync(priorityPopup);
+            if (OriginalItems == null)
+            {
+                OriginalItems = new ObservableCollection<TaskItem>(Items);
+            }
+            switch (SelectedSortOption)
+                {
+                    case SortOption.Priority:
+                        Items = new ObservableCollection<TaskItem>(items.OrderByDescending(item => item.IsPriority));
+                        break;
+                    case SortOption.Done:
+                        Items = new ObservableCollection<TaskItem>(items.Where(item => item.Done).OrderByDescending(item => item.Done));
+                        break;
+                    case SortOption.Date:
+                        Items = new ObservableCollection<TaskItem>(items.OrderBy(item => item.DueDate));
+                        break;
+                    case SortOption.None:
+                        Items = new ObservableCollection<TaskItem>(originalItems);
+                        break;
+                default:
+                        break;
+                }
+            bottomsheet.DismissAsync();
         }
 
-        private string Pinstatus = "Failed to update task pin status: ";
-        private string Deleteall = "Delete All Tasks";
-        private string Areusure = "Are you sure you want to delete ALL tasks?";
-        private string AlltaskDeleted = "All Task(s) Deleted 🗑";
-        private string SelectedTask = "Delete Selected Tasks";
-        private string Allselctedtask = "Are you sure you want to delete the selected tasks?";
-        private string Selectedtaskdeleted = "Selected Task(s) Deleted 🗑";
+        [RelayCommand]
+        private async Task Showsortevent()
+        {
+            var bottomSheet = new SortSheet
+            {
+                BindingContext = this 
+            };
+
+            await bottomSheet.ShowAsync();
+        }
+
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
         private readonly ITaskService _taskService;

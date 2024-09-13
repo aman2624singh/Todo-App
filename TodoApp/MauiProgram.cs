@@ -3,6 +3,8 @@ using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
+using Plugin.LocalNotification;
+using The49.Maui.BottomSheet;
 using TodoApp.Controls;
 using TodoApp.Models;
 using TodoApp.PopupPages;
@@ -19,6 +21,8 @@ namespace TodoApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseBottomSheet()
+                .UseLocalNotification()
                 .ConfigureMopups()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
@@ -48,7 +52,6 @@ namespace TodoApp
             builder.Services.AddTransient<Useraccount>();
             builder.Services.AddTransient<Dashboard>();
             builder.Services.AddTransient<TaskcreationPage>();
-            builder.Services.AddTransient<EventPopup>();
             builder.Services.AddTransient<RemainderPopup>();
             builder.Services.AddTransient<Priority>();
 
@@ -59,9 +62,9 @@ namespace TodoApp
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<DashboardViewModel>();
             builder.Services.AddTransient<TaskCreationViewModel>();
-            builder.Services.AddTransient<EventPopupViewModel>();
             builder.Services.AddTransient<ReminderPopupViewModel>();
             builder.Services.AddTransient<PriorityVIewModel>();
+            builder.Services.AddTransient<EventBottomSheetViewModel>();
 
             return builder.Build();
         }

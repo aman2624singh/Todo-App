@@ -129,6 +129,9 @@
   <data name="Attachment" xml:space="preserve">
     <value>Attachment</value>
   </data>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="Label_Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Label_Sort" xml:space="preserve">
+    <value>Sort Task</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -216,6 +222,9 @@
   <data name="PinPriority" xml:space="preserve">
     <value>Pin For Priority</value>
   </data>
+  <data name="Pinstatus" xml:space="preserve">
+    <value>Failed to update task pin status:</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
@@ -227,6 +236,9 @@
   </data>
   <data name="SelectImage" xml:space="preserve">
     <value>Select an image</value>
+  </data>
+  <data name="Selecttask" xml:space="preserve">
+    <value>Please select a task for the reminder.</value>
   </data>
   <data name="Signin" xml:space="preserve">
     <value>Sign in</value>
@@ -251,6 +263,9 @@
   </data>
   <data name="TaskDescription" xml:space="preserve">
     <value>TaskDescription</value>
+  </data>
+  <data name="Tasknotselected" xml:space="preserve">
+    <value>No Task Selected</value>
   </data>
   <data name="Taskupdated" xml:space="preserve">
     <value>Task updated!</value>

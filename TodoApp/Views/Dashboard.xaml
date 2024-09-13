@@ -6,7 +6,7 @@
     HideSoftInputOnTapped="True"
      xmlns:local="clr-namespace:TodoApp.Views"
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
-    Shell.BackgroundColor="{StaticResource Allbackground}" 
+    Shell.BackgroundColor="{StaticResource Gray100}" 
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:views="clr-namespace:TodoApp.Views"
     xmlns:converter="clr-namespace:TodoApp.Converters">
@@ -74,10 +74,15 @@
         </Grid>
     </Shell.TitleView>
     <Grid>
+        <Image
+            Aspect="AspectFill"
+            Source="back2">
+            
+        </Image>
         <Grid
-            BackgroundColor="{StaticResource Allbackground}">
+            BackgroundColor="{StaticResource Trasnparent}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height=".8*" />
                 <RowDefinition Height="8*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -96,7 +101,6 @@
 
             <Frame
                Grid.Row="0" 
-               HeightRequest="50" 
                BackgroundColor="{StaticResource White}"
                Margin="10" 
                Padding="5" 
@@ -106,9 +110,8 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{OnIdiom Phone=250,Desktop=auto}"/>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="{OnIdiom Phone=3.7*,Desktop=auto}"/>
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <SearchBar 
                        Grid.Row="0" 
@@ -118,10 +121,13 @@
                     <ImageButton 
                         Grid.Row="0" 
                         Grid.Column="1" 
-                        HorizontalOptions="End"
-                        Source="sort.png" 
-                        BackgroundColor="{StaticResource Trasnparent}" 
-                        Command="{Binding ShowPickerCommand}" />
+                        WidthRequest="30"
+                        HeightRequest="30"
+                        Padding="0"
+                        HorizontalOptions="StartAndExpand"
+                        Command="{Binding ShowsorteventCommand}"
+                        Source="ascending.png">
+                    </ImageButton>
 
                 </Grid>
             </Frame>
@@ -140,7 +146,7 @@
                     FontFamily="Inter-Regular"
                     Margin="0,0,0,20"
                     FontAttributes="Bold"
-                    FontSize="15"/>
+                    FontSize="14"/>
             </VerticalStackLayout>
 
             <ListView 
@@ -148,7 +154,7 @@
                 Grid.Column="{OnIdiom Desktop=1}"
                 Margin="5,0,10,0" 
                 ItemsSource="{Binding Items}" 
-                RowHeight="115" 
+                RowHeight="110" 
                 SeparatorVisibility="None" 
                 VerticalScrollBarVisibility="Never"
                 CachingStrategy="RecycleElement">
@@ -172,16 +178,17 @@
                                     ColumnSpacing="0" 
                                     Margin="-5">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="35" />
-                                        <RowDefinition Height="{OnIdiom Phone=40,Desktop=45}" />
-                                        <RowDefinition Height="{OnPlatform Android=30,WinUI=40}" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="{OnIdiom Phone=*,Desktop=45}" />
+                                        <RowDefinition Height="{OnPlatform Android=*,WinUI=40}" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="{OnPlatform Android=70,WinUI=*}" />
-                                        <ColumnDefinition Width="{OnIdiom Phone=50,Desktop=*}" />
-                                        <ColumnDefinition Width="{OnIdiom Phone=Auto,Desktop=50}" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="{OnPlatform Android=1.5*,WinUI=*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=*}"  />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=50}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=50}" />
                                     </Grid.ColumnDefinitions>
                                     <Image
                                          Grid.Row="0"
@@ -197,7 +204,7 @@
                                     <HorizontalStackLayout 
                                         Grid.Row="0" 
                                         Grid.Column="1" 
-                                        Grid.ColumnSpan="5"
+                                        Grid.ColumnSpan="4"
                                         Spacing="5">
                                         <Label 
                                             Grid.Row="0" 
@@ -212,67 +219,57 @@
                                             MaximumWidthRequest="120"
                                             FontFamily="Inter-Bold" />
 
-                                        <Frame 
-                                            Grid.Row="0" 
-                                            IsEnabled="{OnIdiom Phone=true,Desktop=false}"
-                                            Grid.Column="2"
-                                            WidthRequest="30" 
-                                            VerticalOptions="{OnIdiom Phone=End ,Desktop=Start}" 
-                                            HorizontalOptions="Start"
-                                            HeightRequest="30" 
-                                            BorderColor="{StaticResource Trasnparent}"
-                                            Padding="0"
-                                            BackgroundColor="{StaticResource Trasnparent}"
-                                            IsVisible="{Binding IsPriority}">
                                             <ImageButton 
                                                 Source="pin.png" 
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                IsVisible="{Binding IsPriority}"
+                                                Margin="5,5,0,0"
                                                 VerticalOptions="Center"
                                                 Aspect="AspectFit" 
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.TogglePinStatusCommand}"
                                                 CommandParameter="{Binding .}"
                                                 HeightRequest="{OnIdiom Phone=50,Desktop=40}" 
                                                 WidthRequest="20"/>
-                                        </Frame>
+
+                                        <ImageButton 
+                                            Grid.Row="0"
+                                            IsEnabled="{OnIdiom Phone=true,Desktop=false}"
+                                            IsVisible="{OnIdiom Phone=true,Desktop=false}"
+                                            Grid.Column="3"
+                                            Source="dustbin.png"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.DeleteTaskCommand}"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="20"
+                                            Margin="7,5,0,0"
+                                            HeightRequest="20" />
 
                                         <ImageButton 
                                             Grid.Row="0"
                                             IsEnabled="{OnIdiom Phone=true,Desktop=false}"
                                             IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                             Grid.Column="4"
-                                            Source="dustbin.png"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.DeleteTaskCommand}"
-                                            CommandParameter="{Binding .}"
-                                            WidthRequest="20"
-                                            Margin="0,5,0,0"
-                                            HeightRequest="20" />
-
-                                        <ImageButton 
-                                            Grid.Row="0"
-                                             IsEnabled="{OnIdiom Phone=true,Desktop=false}"
-                                            IsVisible="{OnIdiom Phone=true,Desktop=false}"
-                                            Grid.Column="4"
                                             Margin="9,5,0,0"                          
                                             HeightRequest="20"
                                             Source="bell.png"
-                                            Command="{Binding ReminderTaskCommand}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.ReminderTaskCommand}"
                                             CommandParameter="{Binding .}"
                                             WidthRequest="20" />
-
                                     </HorizontalStackLayout>
 
-                                    <ImageButton
+                                    <ImageButton                                       
                                         IsEnabled="{OnIdiom Phone=true,Desktop=false}"
-                                        Source="{OnIdiom Desktop=plus.png,Phone=add}"
+                                        Source="{OnIdiom Desktop=plus.png,Phone=plus}"
                                         Grid.Row="1"
                                         IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                         Grid.Column="{OnIdiom Phone=4}"
                                         Margin="{OnIdiom Desktop='0,0,0,10',Phone='0,0,0,6'}"
-                                        HorizontalOptions="{OnIdiom Phone=End ,Desktop=Start}"
+                                        HorizontalOptions="{OnIdiom Phone=Center ,Desktop=Start}"
                                         VerticalOptions="{OnIdiom Phone=Center,Desktop=Start}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.ShowEventPopupCommand}"
                                         CommandParameter="{Binding .}"
-                                        HeightRequest="{OnIdiom Phone=28}"
-                                        WidthRequest="{OnIdiom Phone=28}" />
+                                        HeightRequest="{OnIdiom Phone=50}"
+                                        WidthRequest="{OnIdiom Phone=50}" />
                                     <ImageButton
                                         Source="{OnIdiom Desktop=plus.png,Phone=add}"
                                         IsVisible="{OnIdiom Phone=false,Desktop=true}"

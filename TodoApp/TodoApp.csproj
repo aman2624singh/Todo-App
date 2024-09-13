@@ -84,6 +84,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -97,9 +98,6 @@
 	  <Compile Update="PopupPages\RemainderPopup.xaml.cs">
 	    <DependentUpon>RemainderPopup.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="PopupPages\EventPopup.xaml.cs">
-	    <DependentUpon>EventPopup.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Resources\Strings\AppstringResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -107,6 +105,12 @@
 	  </Compile>
 	  <Compile Update="Views\Dashboard.xaml.cs">
 	    <DependentUpon>Dashboard.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\SortSheet.xaml.cs">
+	    <DependentUpon>SortSheet.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EventBottomSheet.xaml.cs">
+	    <DependentUpon>EventBottomSheet.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\TaskcreationPage.xaml.cs">
 	    <DependentUpon>TaskcreationPage.xaml</DependentUpon>
@@ -136,13 +140,16 @@
 	  <MauiXaml Update="PopupPages\RemainderPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="PopupPages\EventPopup.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="PopupPages\ErrorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SortSheet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\EventBottomSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TaskcreationPage.xaml">

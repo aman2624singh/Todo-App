@@ -12,16 +12,16 @@ namespace TodoApp.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Eventname { get; set; }
+        public string EventName { get; set; }
         public DateTime EventDate { get; set; }
-        public int TaskItemId { get; set; } 
+        public int TaskItemId { get; set; }
 
-        public string EventDescription { get; set; }
-        public bool IsSelected
+        private bool _isDone;
+        public bool IsDone
         {
-            get => _isSelected;
-            set => SetProperty(ref _isSelected, value);
+            get => _isDone;
+            set => SetProperty(ref _isDone, value);
         }
-        private bool _isSelected;
+
     }
 }

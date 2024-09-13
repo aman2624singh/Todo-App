@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,8 +44,7 @@ namespace TodoApp.ViewModels
         {
             SelectedDate = DateTime.Today;
             SelectedTime = DateTime.Now.TimeOfDay;
-            IsDailyReminderEnabled = false;
-            IsReminderEnabled = true;
+
 
         }
 
@@ -53,14 +53,24 @@ namespace TodoApp.ViewModels
         {
             if (IsReminderEnabled)
             {
-                _reminderService.SetReminder(new Reminder
+                var reminderDate = SelectedDate.Add(SelectedTime);
+
+                if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                {
+                    reminderDate = DateTime.Now;
+                }
+
+                var reminder = new Reminder
                 {
                     TaskId = CurrentTaskId,
-                    TaskName= CurrentTaskName,
-                    ReminderDate = SelectedDate.Add(SelectedTime),
+                    TaskName = CurrentTaskName,
+                    ReminderDate = reminderDate,
                     IsDailyReminder = IsDailyReminderEnabled
-                });
+                };
+
+                _reminderService.SetReminder(reminder);
             }
+
             ClosePopup();
         }
 
@@ -73,8 +83,10 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private void ClosePopup()
         {
-            // Logic to close the popup
-            // This can be a service that hides the popup
+            if (MopupService.Instance.PopupStack.Count > 0)
+            {
+                MopupService.Instance.PopAsync();
+            }
         }
     }
 }

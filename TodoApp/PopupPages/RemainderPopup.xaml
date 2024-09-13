@@ -17,33 +17,70 @@
                     EasingOut="SinIn"  
     HasBackgroundAnimation="True"/>
     </mopups:PopupPage.Animation>
-    <Grid>
-        <StackLayout Padding="20" BackgroundColor="White" Spacing="15">
-            <!-- Title -->
-            <Label Text="Set Reminder" FontSize="24" HorizontalOptions="Center" />
+    <Grid 
+        MaximumHeightRequest="400"
+        MaximumWidthRequest="300"
+        VerticalOptions="FillAndExpand" 
+        HorizontalOptions="FillAndExpand">
+        <StackLayout 
+            Padding="20" 
+            BackgroundColor="White" 
+            Spacing="15">
+            <Label 
+                Text="Set Reminder" 
+                FontSize="24" 
+                HorizontalOptions="Center" />
 
-            <!-- Date Picker -->
-            <Label Text="Select Date:" />
-            <DatePicker Date="{Binding SelectedDate}" />
+            <Grid 
+                ColumnDefinitions="*,Auto" 
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                <Label 
+                    Text="Select Date:" 
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    VerticalOptions="Center" />
+                <DatePicker
+                    Date="{Binding SelectedDate}" 
+                    Grid.Row="0" 
+                    Grid.Column="1" />
 
-            <!-- Time Picker -->
-            <Label Text="Select Time:" />
-            <TimePicker Time="{Binding SelectedTime}" />
+                <Label 
+                    Text="Select Time:"
+                    Grid.Row="1" 
+                    Grid.Column="0" 
+                    VerticalOptions="Center" />
+                <TimePicker 
+                    Time="{Binding SelectedTime}"
+                    Grid.Row="1"
+                    Grid.Column="1" />
 
-            <!-- Daily Reminder -->
-            <Label Text="Repeat Every Day Until Due:" />
-            <Switch IsToggled="{Binding IsDailyReminderEnabled}" />
+                <Label 
+                    Text="Repeat Every Day Until Due:" 
+                    Grid.Row="2" 
+                    Grid.Column="0" 
+                    VerticalOptions="Center" />
+                <Switch 
+                    IsToggled="{Binding IsDailyReminderEnabled}"
+                    Grid.Row="2" 
+                    Grid.Column="1" />
 
-            <!-- Enable/Disable Reminder -->
-            <Label Text="Enable Reminder:" />
-            <Switch IsToggled="{Binding IsReminderEnabled}" />
+                <Label 
+                    Text="Enable Reminder:"
+                    Grid.Row="3" 
+                    Grid.Column="0" 
+                    VerticalOptions="Center" />
+                <Switch 
+                    IsToggled="{Binding IsReminderEnabled}" 
+                    Grid.Row="3" 
+                    Grid.Column="1" />
+            </Grid>
 
-            <!-- Buttons -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
                 <Button Text="Save" Command="{Binding SaveReminderCommand}" />
                 <Button Text="Cancel" Command="{Binding CancelReminderCommand}" />
             </StackLayout>
         </StackLayout>
     </Grid>
+
 
 </mopups:PopupPage>

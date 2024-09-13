@@ -15,7 +15,7 @@ namespace TodoApp.Services
     {
         public void SetReminder(Reminder reminder)
     {
-        // Schedule the notification
+        
         var notification = new NotificationRequest
         {
             NotificationId = reminder.TaskId, // Unique ID for each reminder
@@ -27,24 +27,24 @@ namespace TodoApp.Services
                 RepeatType = reminder.IsDailyReminder ? NotificationRepeat.Daily : NotificationRepeat.No
             }
         };
-
-        // Show the local notification
         LocalNotificationCenter.Current.Show(notification);
     }
 
         public void ShowReminderPopup(ReminderPopupViewModel viewModel)
         {
-            // Create an instance of RemainderPopup and pass the ViewModel via the constructor
+            
             var popup = new RemainderPopup(viewModel);
 
-            // Show the popup using MopupService
+            
             MopupService.Instance.PushAsync(popup);
         }
 
         public void CancelReminder(int taskId)
     {
-        // Cancel the notification
+       
         LocalNotificationCenter.Current.Cancel(taskId);
     }
-}
+
+    }
+
 }
