@@ -13,7 +13,11 @@ namespace TodoApp.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Title { get; set; }
+        public string Title
+        {
+            get => title;
+            set => SetProperty(ref title, value);
+        }
         public DateTime DueDate { get; set; }
         public bool Done { get; set; }
         public string Notes { get; set; }
@@ -33,5 +37,6 @@ namespace TodoApp.Models
 
         private bool _isSelected;
         private bool _isPriority;
+        private string title;
     }
 }

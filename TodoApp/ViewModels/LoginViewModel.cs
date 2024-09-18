@@ -91,7 +91,7 @@ namespace TodoApp.ViewModels
                 if (!HasValidInput())
                 {
                     return;
-                }
+                }                
 
                 var user = await _userService.AuthenticateUserAsync(Username, Password);
 
@@ -160,5 +160,7 @@ namespace TodoApp.ViewModels
 
         private string _username="Xyz123";
         private string _password="test@123" ;
+        private readonly string _adminUsername = "admin"; 
+        private readonly string _adminPassword = "password";
     }
 }

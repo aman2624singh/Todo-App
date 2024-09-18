@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -18,6 +19,7 @@ using TodoApp.PopupPages;
 using TodoApp.Resources.Strings;
 using TodoApp.Services;
 using TodoApp.Views;
+
 
 
 namespace TodoApp.ViewModels
@@ -42,14 +44,62 @@ namespace TodoApp.ViewModels
             set => SetProperty(ref _sidePanelWidth, value);
         }
 
-        [RelayCommand]
-        private void ToggleSidePanel()
-        {
-            IsSidePanelVisible = !IsSidePanelVisible;
-        }
+        [ObservableProperty]
+        private DateTime selectedDate;
+
+        [ObservableProperty]
+        private TimeSpan selectedTime;
+
+        [ObservableProperty]
+        private bool isDailyReminderEnabled;
+
+        [ObservableProperty]
+        private bool isReminderEnabled;
+
+        [ObservableProperty]
+        private DateTime eventDate = DateTime.Now;
+
+        [ObservableProperty]
+        private bool hasAttachments;
+
+        [ObservableProperty]
+        private int currentuserId;
+
+        [ObservableProperty]
+        private DateTime dueDate = DateTime.Today;
+
+        [ObservableProperty]
+        private bool done;
 
         [ObservableProperty]
         private bool isPriority;
+
+        [ObservableProperty]
+        private string notes;
+
+        [ObservableProperty]
+        private bool hasEvents;
+
+        [ObservableProperty]
+        private byte[] attachment;
+
+        [ObservableProperty]
+        private string currentTaskName;
+
+        [ObservableProperty]
+        private string taskTitle;
+
+        [ObservableProperty]
+        private bool onsidepandelVisible=true;
+
+        [ObservableProperty]
+        private bool isUserOptionsVisible;
+
+        [ObservableProperty]
+        private string eventName;
+
+        [ObservableProperty]
+        public int currentTaskItemId;
 
         [ObservableProperty]
         private bool isDate;
@@ -98,11 +148,15 @@ namespace TodoApp.ViewModels
         [ObservableProperty]
         private string username;
 
+        public ObservableCollection<TaskEvent> Events { get; } = new ObservableCollection<TaskEvent>();
 
-        public List<SortOption> SortOptions { get; } = Enum.GetValues(typeof(SortOption)).Cast<SortOption>().ToList();
+        private ObservableCollection<string> PhotoFilePaths { get; set; } = new ObservableCollection<string>();
+
+        [ObservableProperty]
+        private ObservableCollection<Photo> attachedPhotos = new ObservableCollection<Photo>();
 
 
-        public DashboardViewModel(IUserService userService, INavigationService navigationService,IReminderService reminderService, IEventService eventService, ITaskService taskService, IUserSessionService userSessionService)
+        public DashboardViewModel(IUserService userService, IPhotoService photoService, INavigationService navigationService,IReminderService reminderService, IEventService eventService, ITaskService taskService, IUserSessionService userSessionService)
         {
             _userService = userService;
             _navigationService = navigationService;
@@ -110,6 +164,7 @@ namespace TodoApp.ViewModels
             _userSessionService = userSessionService;
             _eventService = eventService;
             _reminderService= reminderService;
+            _photoService = photoService;
             string name= userSessionService.GetUserName();
             Username = $"Hi!! {name}";
         }
@@ -117,6 +172,7 @@ namespace TodoApp.ViewModels
         public async void Initialize()
         {
            await LoadItems();
+            CurrentuserId = _userSessionService.GetUserId();
         }
 
         [RelayCommand]
@@ -190,8 +246,9 @@ namespace TodoApp.ViewModels
         private async Task TaskTapped(TaskItem task)
         {
             if (task is null) return;
-
-            await Shell.Current.GoToAsync($"TaskcreationPage", new Dictionary<string, object>
+            if(DeviceInfo.Current.Platform == DevicePlatform.Android)
+            {
+                await Shell.Current.GoToAsync($"TaskcreationPage", new Dictionary<string, object>
     {
         { "TaskId", task.Id.ToString() },
         { "TaskName", task.Title },
@@ -200,8 +257,15 @@ namespace TodoApp.ViewModels
         { "TaskDescription", task.Notes },
         { "DueDate", task.DueDate.ToString("o") }
     });
-        }
+            }
+            else if(DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+            {
+                ToggleSidePanel(task);
+                CurrentTaskItemId = task.Id;
 
+
+            }                  
+        }
 
         [RelayCommand]
         private async Task ReminderTask(TaskItem task)
@@ -209,12 +273,14 @@ namespace TodoApp.ViewModels
             if (task is null)
                 return;
 
-                var reminderPopupViewModel = new ReminderPopupViewModel(_reminderService)
-                {
-                    CurrentTaskId = task.Id,
-                    CurrentTaskName = task.Title
-                };
-                _reminderService.ShowReminderPopup(reminderPopupViewModel);
+            var reminderPopupViewModel = new ReminderPopupViewModel(_reminderService)
+            {
+                CurrentTaskId = task.Id,
+                CurrentTaskName = task.Title
+            };
+            reminderPopupViewModel.LoadReminder();
+
+            _reminderService.ShowReminderPopup(reminderPopupViewModel);
         }
 
 
@@ -239,38 +305,74 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private async Task DeleteTask(TaskItem task)
         {
-            if (task is null)
-                return;
-
-            bool userConfirmed = await App.Current.MainPage.DisplayAlert(
-                AppstringResources.Deletetask,
-                $"Are you sure you want to delete the task: {task.Title}?",
-                AppstringResources.Yes,
-                AppstringResources.No
-            );
-
-            if (userConfirmed)
+            if (DeviceInfo.Current.Platform == DevicePlatform.Android)
             {
-                try
+                if (task is null)
+                    return;
+
+                bool userConfirmed = await App.Current.MainPage.DisplayAlert(
+                    AppstringResources.Deletetask,
+                    $"Are you sure you want to delete the task: {task.Title}?",
+                    AppstringResources.Yes,
+                    AppstringResources.No
+                );
+
+                if (userConfirmed)
                 {
-                    await _taskService.DeleteTaskAsync(task);
-                    Items.Remove(task);
+                    try
+                    {
+                        await _taskService.DeleteTaskAsync(task);
+                        Items.Remove(task);
 
-                    if (task.IsPriority)
-                        PinnedItems.Remove(task);
+                        if (task.IsPriority)
+                            PinnedItems.Remove(task);
 
-                    IsPriority = PinnedItems.Any();
-                    Isempty = !Items.Any();
+                        IsPriority = PinnedItems.Any();
+                        Isempty = !Items.Any();
 
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-                    var toast = Toast.Make($"{task.Title} Deleted 🗑", ToastDuration.Short, 16);
-                    await toast.Show(cancellationTokenSource.Token);
-                }
-                catch (Exception ex)
-                {
-                    await App.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.ToString(), AppstringResources.OK);
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                        var toast = Toast.Make($"{task.Title} Deleted 🗑", ToastDuration.Short, 16);
+                        await toast.Show(cancellationTokenSource.Token);
+                    }
+                    catch (Exception ex)
+                    {
+                        await App.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.ToString(), AppstringResources.OK);
+                    }
                 }
             }
+
+            else if(DeviceInfo.Current.Platform==DevicePlatform.WinUI)
+            {
+                bool userConfirmed = await App.Current.MainPage.DisplayAlert(
+                   AppstringResources.Deletetask,
+                   $"Are you sure you want to delete the task: {currentTaskName}?",
+                   AppstringResources.Yes,
+                   AppstringResources.No
+               );
+
+                if (userConfirmed)
+                {
+                    try
+                    {
+                        var tasked = await _taskService.GetTaskByIdAsync(CurrentTaskItemId);
+                        await _taskService.DeleteTaskAsync(tasked);
+                        Items.Remove(tasked);
+                        Items=new ObservableCollection<TaskItem>(Items);
+                        await LoadItems();
+                        IsSidePanelVisible = false;
+
+                        System.Threading.CancellationTokenSource cancellationTokenSource = new System.Threading.CancellationTokenSource();
+                        var toast = Toast.Make($"{currentTaskName} Deleted 🗑", ToastDuration.Short, 16);
+                        await toast.Show(cancellationTokenSource.Token);
+                    }
+                    catch (Exception ex)
+                    {
+                        await App.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.ToString(), AppstringResources.OK);
+                    }
+                }
+
+            }
+                
         }
 
         [RelayCommand]
@@ -312,7 +414,7 @@ namespace TodoApp.ViewModels
             switch (SelectedSortOption)
                 {
                     case SortOption.Priority:
-                        Items = new ObservableCollection<TaskItem>(items.OrderByDescending(item => item.IsPriority));
+                    Items = new ObservableCollection<TaskItem>(items.Where(item => item.IsPriority).OrderByDescending(item => item.IsPriority));
                         break;
                     case SortOption.Done:
                         Items = new ObservableCollection<TaskItem>(items.Where(item => item.Done).OrderByDescending(item => item.Done));
@@ -329,6 +431,32 @@ namespace TodoApp.ViewModels
             bottomsheet.DismissAsync();
         }
 
+        public void ApplySortwindows(SortOption selectedSortOption)
+        {
+            if (OriginalItems is null)
+            {
+                OriginalItems = new ObservableCollection<TaskItem>(Items);
+            }
+
+            switch (selectedSortOption)
+            {
+                case SortOption.Priority:
+                    Items = new ObservableCollection<TaskItem>(items.Where(item => item.IsPriority).OrderByDescending(item => item.IsPriority));
+                    break;
+                case SortOption.Done:
+                    Items = new ObservableCollection<TaskItem>(items.Where(item => item.Done).OrderByDescending(item => item.Done));
+                    break;
+                case SortOption.Date:
+                    Items = new ObservableCollection<TaskItem>(items.OrderBy(item => item.DueDate));
+                    break;
+                case SortOption.None:
+                    Items = new ObservableCollection<TaskItem>(originalItems);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         [RelayCommand]
         private async Task Showsortevent()
         {
@@ -340,11 +468,428 @@ namespace TodoApp.ViewModels
             await bottomSheet.ShowAsync();
         }
 
+        [RelayCommand]
+        private void ShowUserOptions()
+        {
+            IsUserOptionsVisible = !IsUserOptionsVisible;
+        }
+
+        [RelayCommand]
+        private async Task DesktopTask()
+        {
+            var userId = _userSessionService.GetUserId();
+            if (string.IsNullOrWhiteSpace(this.TaskTitle))
+            {
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.TitleandDescriptionerror, AppstringResources.OK);
+                return;
+            }
+            var newTask = new TaskItem
+                {
+                    Title = this.TaskTitle,
+                    UserId= userId
+
+                };
+
+                await _taskService.AddTaskAsync(newTask);
+                 Items.Add(newTask);
+                 TaskTitle = string.Empty;
+                await Toast.Make(AppstringResources.Taskcreated).Show();
+        }
+
+        [RelayCommand]
+        private async Task Savetaskclicked()
+        {
+            if (string.IsNullOrWhiteSpace(this.CurrentTaskName) || string.IsNullOrWhiteSpace(this.Notes))
+            {
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.TitleandDescriptionerror, AppstringResources.OK);
+                return;
+            }
+
+            if (CurrentTaskItemId == 0)
+            {
+                var newTask = new TaskItem
+                {
+                    Title = this.CurrentTaskName,
+                    DueDate = this.DueDate,
+                    Done = this.Done,
+                    IsPriority = this.IsPriority,
+                    Notes = this.Notes,
+                    UserId = CurrentuserId,
+                    HasAttachment = this.Attachment != null && this.Attachment.Length > 0
+                };
+
+                int taskId = await _taskService.AddTaskAsync(newTask);
+                CurrentTaskItemId = taskId;
+                await SavePhotosToDatabase(taskId);
+                if (IsReminderEnabled)
+                {
+                    var reminderDate = SelectedDate.Date + SelectedTime;
+                    if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                    {
+                        reminderDate = DateTime.Now;
+                    }
+
+                    var reminder = new Reminder
+                    {
+                        TaskId = CurrentTaskItemId,
+                        TaskName = CurrentTaskName,
+                        ReminderDate = reminderDate,
+                        IsDailyReminder = IsDailyReminderEnabled
+                    };
+
+                    _reminderService.SetReminder(reminder);
+                }
+                else
+                {
+                    _reminderService.CancelReminder(CurrentTaskItemId);
+                    _reminderService.DeleteReminderDetails(CurrentTaskItemId);
+                }
+
+                await Toast.Make(AppstringResources.Taskcreated).Show();
+            }
+            else
+            {
+                var existingTask = await _taskService.GetTaskByIdAsync(CurrentTaskItemId);
+                if (existingTask != null)
+                {
+                    existingTask.Title = this.CurrentTaskName;
+                    existingTask.DueDate = this.DueDate;
+                    existingTask.Done = this.IsDone;
+                    existingTask.IsPriority = this.IsPriority;
+                    existingTask.Notes = this.Notes;
+                    existingTask.HasAttachment = this.Attachment != null && this.Attachment.Length > 0;
+
+                    await _taskService.UpdateTaskAsync(existingTask);
+                    await SavePhotosToDatabase(CurrentTaskItemId);
+
+                    if (IsReminderEnabled)
+                    {
+                        var reminderDate = SelectedDate.Date + SelectedTime;
+                        if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                        {
+                            reminderDate = DateTime.Now;
+                        }
+                        var reminder = new Reminder
+                        {
+                            TaskId = CurrentTaskItemId,
+                            TaskName = CurrentTaskName,
+                            ReminderDate = reminderDate,
+                            IsDailyReminder = IsDailyReminderEnabled
+                        };
+
+                        _reminderService.SetReminder(reminder);
+                    }
+                    else
+                    {
+                        _reminderService.CancelReminder(CurrentTaskItemId);
+                        _reminderService.DeleteReminderDetails(CurrentTaskItemId);
+                    }
+
+                    await Toast.Make(AppstringResources.Taskupdated).Show();
+                }
+
+            }
+            Items = new ObservableCollection<TaskItem>(Items);
+            await  LoadItems();
+            IsSidePanelVisible = false;
+        }
+
+        [RelayCommand]
+        private async Task AddEvent()
+        {
+            if (!string.IsNullOrWhiteSpace(EventName))
+            {
+                var newEvent = new TaskEvent
+                {
+                    EventName = EventName,
+                    IsDone = false,
+                    TaskItemId = CurrentTaskItemId,
+                };
+
+                await _eventService.AddEventAsync(newEvent);
+
+                Events.Add(newEvent);
+
+                EventName = string.Empty;
+                EventDate = DateTime.Now;
+                HasEvents = Events.Count > 0;
+
+            }
+        }
+
+        public async Task LoadEventsAsync(int taskId)
+        {
+            CurrentTaskItemId = taskId;
+            var events = await _eventService.GetEventsByTaskAsync(taskId);
+
+            Events.Clear();
+            foreach (var ev in events)
+            {
+                Events.Add(ev);
+            }
+            HasEvents = Events.Any();
+        }
+
+        [RelayCommand]
+        private async Task ToggleSidePanel(TaskItem task)
+        {
+            IsSidePanelVisible = !IsSidePanelVisible;
+            OnsidepandelVisible = !IsSidePanelVisible;
+
+           await LoadTaskDetails(task.Id);
+           await LoadEventsAsync(task.Id);
+           await  LoadTaskAndPhotos(task.Id);
+            LoadReminder();
+        }
+
+        private async Task LoadTaskDetails(int taskId)
+        {
+            var task = await _taskService.GetTaskByIdAsync(taskId);
+            if (task != null)
+            {
+                CurrentTaskName = task.Title;
+                DueDate = task.DueDate;
+                IsDone = task.Done;
+                IsPriority = task.IsPriority;
+                Notes = task.Notes;
+                HasAttachments = task.HasAttachment;
+            }
+        }
+
+        private async Task SavePhotosToDatabase(int taskId)
+        {
+            foreach (var filePath in PhotoFilePaths)
+            {
+                var photo = new Photo
+                {
+                    FilePath = filePath,
+                    FileName = Path.GetFileName(filePath),
+                    TaskItemId = taskId
+                };
+
+                await _photoService.AddPhotoAsync(photo);
+            }
+            PhotoFilePaths.Clear();
+        }
+
+        [RelayCommand]
+        private async Task GalleryClicked()
+        {
+            string takePhotoOption = AppstringResources.TakePhoto;
+            string uploadPhotoOption = AppstringResources.UploadAttachmnet;
+            var action = await Application.Current.MainPage.DisplayActionSheet(
+                null,
+                "Cancel",
+                null,
+                takePhotoOption,
+                uploadPhotoOption
+            );
+
+            if (!string.IsNullOrWhiteSpace(action))
+            {
+                if (action == takePhotoOption)
+                {
+                    await TakePhoto();
+                }
+                else if (action == uploadPhotoOption)
+                {
+                    await UploadPhoto();
+                }
+            }
+        }
+
+        private async Task TakePhoto()
+        {
+            try
+            {
+                var photo = await MediaPicker.CapturePhotoAsync();
+                if (photo is not null)
+                {
+                    var filePath = await SaveFile(photo);
+
+                    if (string.IsNullOrEmpty(filePath))
+                    {
+                        await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath, AppstringResources.OK);
+                        return;
+                    }
+
+                    if (PhotoFilePaths is null)
+                    {
+                        PhotoFilePaths = new ObservableCollection<string>();
+                    }
+
+                    PhotoFilePaths.Add(filePath);
+
+                    if (AttachedPhotos is null)
+                    {
+                        AttachedPhotos = new ObservableCollection<Photo>();
+                    }
+
+                    AttachedPhotos.Add(new Photo
+                    {
+                        FilePath = filePath,
+                        FileName = photo.FileName,
+                        TaskItemId = CurrentTaskItemId
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.Message, AppstringResources.OK);
+            }
+        }
+
+        private async Task UploadPhoto()
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    FileTypes = FilePickerFileType.Images,
+                    PickerTitle = AppstringResources.SelectImage
+                });
+
+                if (result is not null)
+                {
+                    var filePath = result.FullPath;
+
+                    if (string.IsNullOrEmpty(filePath))
+                    {
+                        await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath, AppstringResources.OK);
+                        return;
+                    }
+
+                    if (PhotoFilePaths is null)
+                    {
+                        PhotoFilePaths = new ObservableCollection<string>();
+                    }
+                    PhotoFilePaths.Add(filePath);
+
+                    if (AttachedPhotos is null)
+                    {
+                        AttachedPhotos = new ObservableCollection<Photo>();
+                    }
+
+                    AttachedPhotos.Add(new Photo
+                    {
+                        FilePath = filePath,
+                        FileName = result.FileName,
+                        TaskItemId = CurrentTaskItemId
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.Message, AppstringResources.OK);
+            }
+        }
+
+        private async Task<string> SaveFile(FileResult photo)
+        {
+            var newFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+            using (var stream = await photo.OpenReadAsync())
+            using (var newStream = File.OpenWrite(newFilePath))
+            {
+                await stream.CopyToAsync(newStream);
+            }
+            return newFilePath;
+        }
+
+
+        [RelayCommand]
+        private async Task DeletePhoto(Photo photo)
+        {
+            bool isConfirmed = await App.Current.MainPage.DisplayAlert(
+              AppstringResources.Deletetask,
+              $"Are you sure you want to delete the task: {photo.FileName}?",
+              AppstringResources.Yes,
+              AppstringResources.No
+          );
+            if (isConfirmed)
+            {
+                try
+                {
+                    await _photoService.DeletePhotoAsync(photo);
+                    AttachedPhotos.Remove(photo);
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, $"Failed to delete photo: {ex.Message}", AppstringResources.OK);
+                }
+            }
+        }
+
+        private async Task LoadTaskAndPhotos(int taskId)
+        {
+            var existingTask = await _taskService.GetTaskByIdAsync(taskId);
+            if (existingTask != null)
+            {
+                await LoadPhotosFromDatabase(taskId);
+            }
+        }
+        private async Task LoadPhotosFromDatabase(int taskId)
+        {
+            var photos = await _photoService.GetPhotosByTaskIdAsync(taskId);
+            AttachedPhotos.Clear();
+            foreach (var photo in photos)
+            {
+                AttachedPhotos.Add(photo);
+            }
+        }
+
+        public void LoadReminder()
+        {
+            var existingReminder = _reminderService.GetReminderByTaskId(CurrentTaskItemId);
+
+            if (existingReminder != null)
+            {
+                SelectedDate = existingReminder.ReminderDate.Date;
+                SelectedTime = existingReminder.ReminderDate.TimeOfDay;
+                IsDailyReminderEnabled = existingReminder.IsDailyReminder;
+                IsReminderEnabled = true;
+            }
+            else
+            {
+                SelectedDate = DateTime.Today;
+                SelectedTime = DateTime.Now.TimeOfDay;
+                IsDailyReminderEnabled = false;
+                IsReminderEnabled = false;
+            }
+
+        }
+
+        [RelayCommand]
+        public async Task DoneEventAsync(TaskEvent eventItem)
+        {
+            if (eventItem != null)
+            {
+                eventItem.IsDone = !eventItem.IsDone;
+
+                await _eventService.UpdateEventAsync(eventItem);
+
+                var statusMessage = eventItem.IsDone ? "Marked as done!" : "Marked as not done!";
+                await Toast.Make(statusMessage, ToastDuration.Short).Show();
+            }
+        }
+
+        [RelayCommand]
+        public async Task DeleteEventAsync(TaskEvent eventItem)
+        {
+            if (eventItem != null)
+            {
+                await _eventService.DeleteEventAsync(eventItem);
+                Events.Remove(eventItem);
+            }
+        }
+
+
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
         private readonly ITaskService _taskService;
         private readonly IUserSessionService _userSessionService;
         private readonly IEventService _eventService;
         private readonly IReminderService _reminderService;
+        private readonly IPhotoService _photoService;
+
     }
 }

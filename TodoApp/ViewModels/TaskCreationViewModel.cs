@@ -43,7 +43,6 @@ namespace TodoApp.ViewModels
         [ObservableProperty]
         public int currentTaskItemId;
 
-        public ObservableCollection<TaskItem> UserTasks { get; set; } = new ObservableCollection<TaskItem>();
         private ObservableCollection<string> PhotoFilePaths { get; set; } = new ObservableCollection<string>();
 
         [ObservableProperty]

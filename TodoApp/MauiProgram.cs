@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
 using Plugin.LocalNotification;
+using Microsoft.Maui.LifecycleEvents;
 using The49.Maui.BottomSheet;
 using TodoApp.Controls;
 using TodoApp.Models;
@@ -23,6 +24,7 @@ namespace TodoApp
                 .UseMauiApp<App>()
                 .UseBottomSheet()
                 .UseLocalNotification()
+                .UseMauiCommunityToolkit()
                 .ConfigureMopups()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
@@ -34,6 +36,8 @@ namespace TodoApp
                 {
 
                 }).UseMauiCompatibility();
+
+
 
 #if DEBUG
     		builder.Logging.AddDebug();
@@ -65,6 +69,9 @@ namespace TodoApp
             builder.Services.AddTransient<ReminderPopupViewModel>();
             builder.Services.AddTransient<PriorityVIewModel>();
             builder.Services.AddTransient<EventBottomSheetViewModel>();
+                 builder.Services.AddTransient<AppShellViewModel>();
+
+
 
             return builder.Build();
         }

@@ -12,6 +12,7 @@ namespace TodoApp.Services
     public class UserService : IUserService
     {
         private readonly SQLiteAsyncConnection _database;
+        private User _currentUser;
 
         public UserService()
         {
@@ -43,10 +44,23 @@ namespace TodoApp.Services
         public async Task<User> AuthenticateUserAsync(string username, string password)
         {
             var user = await _database.Table<User>()
-                            .Where(u => u.UserName == username && u.Password == password)
-                            .FirstOrDefaultAsync();
+                .Where(u => u.UserName == username && u.Password == password)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                _currentUser = user;
+            }
 
             return user;
         }
+
+        public void Logout()
+        {
+            _currentUser = null;
+
+        }
+
+        public bool IsUserAuthenticated => _currentUser != null;
     }
 }

@@ -8,6 +8,7 @@
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.NavBarIsVisible="True"
+    Shell.FlyoutBehavior="Disabled"
     Shell.BackgroundColor="LightGrey"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:converter="clr-namespace:TodoApp.Converters">
@@ -21,18 +22,6 @@
                     <ColumnDefinition Width="{OnIdiom Phone=1.3*, Desktop=Auto}" />
                 </Grid.ColumnDefinitions>
 
-                <HorizontalStackLayout
-                    Grid.Column="2"
-                    HorizontalOptions="End"
-                    Spacing="20"  
-                    IsVisible="{OnIdiom Phone=False, Desktop=True}">
-
-                    <ImageButton
-                        Source="bell.png"
-                        Command="{Binding OpenMenuCommand}"
-                        HeightRequest="25"
-                        WidthRequest="25" />
-                </HorizontalStackLayout>
                 <Label
                     FontSize="20"
                     VerticalOptions="CenterAndExpand"
@@ -43,22 +32,13 @@
                     
                 </Label>
                 <ImageButton
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Source="download.png" 
                     Margin="0,0,20,0"
-                    HorizontalOptions="Start"
+                    HorizontalOptions="End"
                     Command="{Binding SavedClickedCommand}"
                     HeightRequest="29"
                     WidthRequest="29" />
-
-                <ImageButton
-                    Grid.Column="3"
-                    HorizontalOptions="End"
-                    Margin="20,0,0,0"
-                    Source="bell.png"
-                    Command="{Binding ReminderCommand}"
-                    HeightRequest="25"
-                    IsVisible="{OnIdiom Phone=True, Desktop=False}" />
             </Grid>
 
         </Grid>
@@ -70,7 +50,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView 
+        <ScrollView           
             BackgroundColor="{StaticResource Gray100}"
             VerticalOptions="Fill"
             VerticalScrollBarVisibility="Never">

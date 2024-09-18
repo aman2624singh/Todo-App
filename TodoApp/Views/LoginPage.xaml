@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TodoApp.Views.LoginPage"
     Shell.NavBarIsVisible="False"
+    Shell.FlyoutBehavior="Disabled"
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:converter="clr-namespace:TodoApp.Converters">

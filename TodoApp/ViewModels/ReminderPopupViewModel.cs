@@ -40,11 +40,24 @@ namespace TodoApp.ViewModels
             
         }
 
-        public void Initialize()
+        public void LoadReminder()
         {
-            SelectedDate = DateTime.Today;
-            SelectedTime = DateTime.Now.TimeOfDay;
+            var existingReminder = _reminderService.GetReminderByTaskId(CurrentTaskId);
 
+            if (existingReminder != null)
+            {
+                SelectedDate = existingReminder.ReminderDate.Date;
+                SelectedTime = existingReminder.ReminderDate.TimeOfDay;
+                IsDailyReminderEnabled = existingReminder.IsDailyReminder;
+                IsReminderEnabled = true;
+            }
+            else
+            {
+                SelectedDate = DateTime.Today;
+                SelectedTime = DateTime.Now.TimeOfDay;
+                IsDailyReminderEnabled = false;
+                IsReminderEnabled = false;
+            }
 
         }
 
@@ -53,13 +66,11 @@ namespace TodoApp.ViewModels
         {
             if (IsReminderEnabled)
             {
-                var reminderDate = SelectedDate.Add(SelectedTime);
-
+                var reminderDate = SelectedDate.Date + SelectedTime;
                 if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
                 {
                     reminderDate = DateTime.Now;
                 }
-
                 var reminder = new Reminder
                 {
                     TaskId = CurrentTaskId,
@@ -69,6 +80,11 @@ namespace TodoApp.ViewModels
                 };
 
                 _reminderService.SetReminder(reminder);
+            }
+            else
+            {
+                _reminderService.CancelReminder(CurrentTaskId);
+                _reminderService.DeleteReminderDetails(CurrentTaskId);
             }
 
             ClosePopup();

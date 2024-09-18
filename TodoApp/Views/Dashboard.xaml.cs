@@ -1,4 +1,5 @@
 
+using TodoApp.Models;
 using TodoApp.ViewModels;
 
 
@@ -23,6 +24,31 @@ public partial class Dashboard : ContentPage
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
+
+    }
+
+    private async void OnMarkAsDoneClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuFlyoutItem menuItem && menuItem.CommandParameter is TaskEvent eventItem)
+        {
+          await  _viewModel.DoneEventAsync(eventItem);
+        }
+    }
+
+    private async void OnDeleteClicked(object sender, EventArgs e)
+    {
+        if (sender is MenuFlyoutItem menuItem && menuItem.CommandParameter is TaskEvent eventItem)
+        {
+            await _viewModel.DeleteEventAsync(eventItem);
+        }
+    }
+
+    private void OnSortOptionSelected(object sender, EventArgs e)
+    {
+        if (sender is MenuFlyoutItem menuItem && menuItem.CommandParameter is SortOption sortOption)
+        {
+            _viewModel.ApplySortwindows(sortOption);
+        }
     }
     protected override bool OnBackButtonPressed()
     {

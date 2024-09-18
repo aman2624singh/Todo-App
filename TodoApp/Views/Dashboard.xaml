@@ -4,12 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="TodoApp.Views.Dashboard"
     HideSoftInputOnTapped="True"
-     xmlns:local="clr-namespace:TodoApp.Views"
+    xmlns:local="clr-namespace:TodoApp.Views"
+    xmlns:model="clr-namespace:TodoApp.Models"
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
     Shell.BackgroundColor="{StaticResource Gray100}" 
+    Shell.FlyoutBehavior="Flyout"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:views="clr-namespace:TodoApp.Views"
     xmlns:converter="clr-namespace:TodoApp.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:PlatformVisibilityConverter x:Key="PlatformVisibilityConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -20,27 +28,22 @@
                IsVisible="{OnIdiom Desktop=false,Phone=true}"
                ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image                   
-                    Grid.Column="0"
-                    HeightRequest="40"
+
+                <Label               
+                    Grid.Column="0" 
                     HorizontalOptions="Start"
-                    Source="user.png">
-                </Image>
-            <Label               
-                Grid.Column="1" 
-                HorizontalOptions="Start"
-                Text="{Binding Username}"
-                TextColor="{StaticResource Black}" 
-                FontFamily="Inter-Regular" 
-                FontAttributes="Bold"
-                VerticalTextAlignment="Center" 
-                FontSize="16"
-                VerticalOptions="Center"/>
-        </Grid>
+                    Text="{Binding Username}"
+                    TextColor="{StaticResource Black}" 
+                    FontFamily="Inter-Regular" 
+                    FontAttributes="Bold"
+                    VerticalTextAlignment="Center" 
+                    FontSize="16"
+                    VerticalOptions="Center"/>
+            </Grid>
             <Grid 
                 ColumnSpacing="10"
                 IsVisible="{OnIdiom Desktop=True,Phone=false}">
@@ -53,11 +56,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <Image                   
-                    Grid.Column="0"
-                    HorizontalOptions="Center"
-                    Source="user.png">
-                </Image>
+
                 <Label               
                     Grid.Column="1" 
                     HorizontalOptions="Start"
@@ -80,18 +79,19 @@
             
         </Image>
         <Grid
-            BackgroundColor="{StaticResource Trasnparent}">
+            BackgroundColor="{ OnIdiom Phone=Transparent,Desktop=lightblue}">
             <Grid.RowDefinitions>
                 <RowDefinition Height=".8*" />
                 <RowDefinition Height="8*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="{OnIdiom Phone=*,Desktop=1.1*}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{OnIdiom Phone=*, Desktop=.6*}" />
+                <ColumnDefinition Width="{OnIdiom Phone=*, Desktop=.7*}"  />
                 <ColumnDefinition Width="{OnIdiom Phone=0, Desktop=2*}" x:Name="ListViewColumn" />
                 <ColumnDefinition Width="{Binding SidePanelWidth}" x:Name="SidePanelColumn"/>
             </Grid.ColumnDefinitions>
             <Image
+                IsVisible="{OnIdiom Desktop=true,Phone=true}"
                 HorizontalOptions="{OnIdiom Phone=FillAndExpand,Desktop=StartAndExpand}" 
                 Aspect="{OnIdiom Phone=AspectFill,Desktop=Fill}" 
                 Grid.RowSpan="{OnIdiom Phone=3,Desktop=3}"
@@ -102,7 +102,7 @@
             <Frame
                Grid.Row="0" 
                BackgroundColor="{StaticResource White}"
-               Margin="10" 
+               Margin="5" 
                Padding="5" 
                CornerRadius="15" >
                 <Grid>
@@ -110,23 +110,42 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{OnIdiom Phone=3.7*,Desktop=auto}"/>
+                        <ColumnDefinition Width="{OnIdiom Phone=3.7*,Desktop=3*}"/>
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <SearchBar 
                        Grid.Row="0" 
-                       Grid.Column="{OnIdiom Phone=0}" 
+                       Grid.Column="{OnIdiom Phone=0,Desktop=0}" 
                        Placeholder="{x:Static resx:AppstringResources.Search}" 
                        Text="{Binding SearchText, Mode=TwoWay}" />
                     <ImageButton 
+                        IsVisible="{OnIdiom Phone=true,Desktop=false}"
                         Grid.Row="0" 
                         Grid.Column="1" 
                         WidthRequest="30"
                         HeightRequest="30"
                         Padding="0"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="{OnIdiom Phone=StartAndExpand,Desktop=End}"
                         Command="{Binding ShowsorteventCommand}"
                         Source="ascending.png">
+                    </ImageButton>
+                    <ImageButton 
+                        IsVisible="{OnIdiom Desktop=true,Phone=false}"
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Padding="0"
+                        HorizontalOptions="{OnIdiom Phone=StartAndExpand,Desktop=End}"
+                        Source="ascending.png">
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Sort by"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="Priority" Clicked="OnSortOptionSelected" CommandParameter="{x:Static model:SortOption.Priority}" />
+                                <MenuFlyoutItem Text="Done" Clicked="OnSortOptionSelected" CommandParameter="{x:Static model:SortOption.Done}" />
+                                <MenuFlyoutItem Text="Date" Clicked="OnSortOptionSelected" CommandParameter="{x:Static model:SortOption.Date}" />
+                                <MenuFlyoutItem Text="None" Clicked="OnSortOptionSelected" CommandParameter="{x:Static model:SortOption.None}" />
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
                     </ImageButton>
 
                 </Grid>
@@ -154,7 +173,7 @@
                 Grid.Column="{OnIdiom Desktop=1}"
                 Margin="5,0,10,0" 
                 ItemsSource="{Binding Items}" 
-                RowHeight="110" 
+                RowHeight="{OnIdiom Phone=110,Desktop=80}" 
                 SeparatorVisibility="None" 
                 VerticalScrollBarVisibility="Never"
                 CachingStrategy="RecycleElement">
@@ -162,7 +181,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <Border 
-                                BackgroundColor="{StaticResource White}"
+                                BackgroundColor="{OnIdiom Phone=white,Desktop=white}"
                                 Padding="5,0,0,0" 
                                 Margin="5">
                                 <Border.GestureRecognizers>
@@ -171,7 +190,7 @@
                                         CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
                                 <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="20" />
+                                    <RoundRectangle CornerRadius="{OnIdiom Phone=20,Desktop=0}" />
                                 </Border.StrokeShape>
                                 <Grid
                                     RowSpacing="0"
@@ -179,16 +198,16 @@
                                     Margin="-5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
-                                        <RowDefinition Height="{OnIdiom Phone=*,Desktop=45}" />
-                                        <RowDefinition Height="{OnPlatform Android=*,WinUI=40}" />
+                                        <RowDefinition Height="{OnIdiom Phone=*,Desktop=*}" />
+                                        <RowDefinition Height="{OnPlatform Android=*,WinUI=.8*}" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.3*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=2*,Desktop=1*}" />
                                         <ColumnDefinition Width="{OnPlatform Android=1.5*,WinUI=*}" />
                                         <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=*}"  />
-                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=50}" />
-                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=50}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.5*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.5*}" />
                                     </Grid.ColumnDefinitions>
                                     <Image
                                          Grid.Row="0"
@@ -203,6 +222,7 @@
 
                                     <HorizontalStackLayout 
                                         Grid.Row="0" 
+                                        Grid.RowSpan="{OnIdiom Desktop=2}"
                                         Grid.Column="1" 
                                         Grid.ColumnSpan="4"
                                         Spacing="5">
@@ -222,8 +242,9 @@
                                             <ImageButton 
                                                 Source="pin.png" 
                                                 Grid.Row="0"
+                                                IsEnabled="{OnIdiom Phone=true,Desktop=false}"                                                
                                                 Grid.Column="2"
-                                                IsVisible="{Binding IsPriority}"
+                                                IsVisible="{Binding IsPriority, Converter={StaticResource PlatformVisibilityConverter}}"
                                                 Margin="5,5,0,0"
                                                 VerticalOptions="Center"
                                                 Aspect="AspectFit" 
@@ -270,22 +291,11 @@
                                         CommandParameter="{Binding .}"
                                         HeightRequest="{OnIdiom Phone=50}"
                                         WidthRequest="{OnIdiom Phone=50}" />
-                                    <ImageButton
-                                        Source="{OnIdiom Desktop=plus.png,Phone=add}"
-                                        IsVisible="{OnIdiom Phone=false,Desktop=true}"
-                                        Grid.Row="1"
-                                        Command="{Binding OpenFormCommand}"
-                                        BackgroundColor="{OnIdiom Desktop=Transparent}"
-                                        Grid.Column="{OnIdiom Desktop=4}"
-                                        Margin="{OnIdiom Desktop='0,0,0,10'}"
-                                        HorizontalOptions="{OnIdiom Phone=Center ,Desktop=Start}"
-                                        VerticalOptions="{OnIdiom Phone=Center,Desktop=Start}"
-                                        HeightRequest="{OnIdiom Phone=28}"
-                                        WidthRequest="{OnIdiom Phone=28}" />
 
                                     <Label
                                         Grid.ColumnSpan="2" 
                                         Grid.Row="1" 
+                                        IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                         Grid.Column="1"
                                         HorizontalOptions="StartAndExpand" 
                                         LineBreakMode="TailTruncation"
@@ -296,11 +306,11 @@
                                         FontFamily="Inter-Regular" />
 
                                     <Frame 
-                                        Grid.Row="2" 
-                                        Grid.Column="1" 
+                                        Grid.Row="{OnIdiom Phone=2,Desktop=1}" 
+                                        Grid.Column="{OnIdiom Phone=1,Desktop=2}" 
                                         WidthRequest="{OnIdiom Phone=130,Desktop=150}" 
                                         Padding="0,0,0,0" 
-                                        Margin="20,10,15,10" 
+                                        Margin="{OnIdiom Phone='20,10,15,10',Desktop='20,10,15,0'}" 
                                         HorizontalOptions="Start"
                                         HeightRequest="25"
                                         BackgroundColor="{StaticResource Trasnparent}" 
@@ -308,7 +318,7 @@
                                         <HorizontalStackLayout>
                                             <Image 
                                                 Source="calendar.png" 
-                                                Aspect="AspectFit" 
+                                                Aspect="AspectFit"                                                 
                                                 MaximumWidthRequest="{OnIdiom Phone=15,Desktop=29}"
                                                 Margin="{OnIdiom Phone='0,0,4,0',Desktop='10,0,4,10'}"/>
                                             <Label 
@@ -330,12 +340,12 @@
                                     </Frame>
 
                                     <Frame 
-                                        Grid.Row="2" 
-                                        Grid.Column="{OnPlatform Android=2,WinUI=2}" 
+                                        Grid.Row="{OnIdiom Phone=2,Desktop=1}" 
+                                        Grid.Column="{OnPlatform Android=2,WinUI=3}" 
                                         Grid.ColumnSpan="2" 
                                         HorizontalOptions="{OnPlatform Android=Start,WinUI=Start}" 
-                                        HeightRequest="25" 
-                                        Margin="0,10,0,10"
+                                        HeightRequest="28" 
+                                        Margin="{OnIdiom Phone='0,10,0,10',Desktop='0,10,0,0'}"
                                         Padding="{OnPlatform Android=3,WinUI=3}"
                                         BorderColor="{StaticResource Trasnparent}"
                                         BackgroundColor="{StaticResource Trasnparent}">
@@ -360,7 +370,7 @@
                                         <HorizontalStackLayout>
                                             <Image 
                                                 Margin="{OnIdiom Desktop='0,0,0,10'}"
-                                                HeightRequest="20" 
+                                                HeightRequest="22" 
                                                 Aspect="AspectFit">
                                                 <Image.Triggers>
                                                     <DataTrigger 
@@ -386,7 +396,7 @@
                                                 FontAutoScalingEnabled="False"
                                                 FontFamily="Inter-Bold" 
                                                 TextColor="{AppThemeBinding Dark=White, Light=Black}"
-                                                Margin="{OnPlatform Android='4,0,0,0',WinUI='0,0,0,10'}">
+                                                Margin="{OnPlatform Android='4,0,0,0',WinUI='0,0,0,7'}">
                                                 <Label.Triggers>
                                                     <DataTrigger TargetType="Label" Binding="{Binding Done}" Value="True">
                                                         <Setter Property="Text" Value="Done" />
@@ -404,10 +414,311 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Grid.Column="2" BackgroundColor="LightGray" IsVisible="{Binding IsSidePanelVisible}">
-                <Label Text="Side Panel" FontSize="Large" />
+            <Frame
+                Margin="50,10,200,10"
+                HasShadow="True"
+                IsVisible="{OnIdiom Desktop=true,Phone=false}"
+                Grid.Column="1"
+                Grid.Row="2"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand" 
+                Padding="0">
 
+                <StackLayout
+                    Orientation="Horizontal"
+                    Margin="5"
+                    BackgroundColor="{StaticResource Trasnparent}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
+                    <Entry
+                        Placeholder="Enter task title"
+                        VerticalTextAlignment="Center"
+                        Text="{Binding TaskTitle, Mode=TwoWay}"
+                        PlaceholderColor="{StaticResource Gray300}"
+                        TextColor="{StaticResource Black}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <ImageButton
+                        Source="add.png"
+                        MaximumHeightRequest="30"  
+                        MaximumWidthRequest="30"                       
+                        Command="{Binding DesktopTaskCommand}"
+                        Aspect="AspectFit"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+
+            <StackLayout  
+                Grid.Column="2"
+                Grid.RowSpan="3"
+                BackgroundColor="White"
+                IsVisible="{Binding IsSidePanelVisible}" 
+                Padding="5">
+
+                <!-- Task Title -->
+                <Entry 
+                    HeightRequest="30"
+                    Text="{Binding CurrentTaskName}" 
+                    FontSize="15" 
+                    Margin="3"
+                    FontAttributes="Bold" 
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center" />
+
+                <!-- Event Entry with Add Button -->
+                <StackLayout 
+                    Orientation="Horizontal"
+                    Spacing="5" 
+                    HeightRequest="45"
+                    VerticalOptions="Center" 
+                    Margin="3,5,3,0">
+                    <Entry 
+                        Placeholder="Add Event" 
+                        Text="{Binding EventName}" 
+                        HorizontalOptions="FillAndExpand" />
+                    <ImageButton 
+                        Source="plus.png" 
+                        Command="{Binding AddEventCommand}"
+                        CommandParameter="{Binding SelectedTask}"
+                        HeightRequest="25" 
+                        WidthRequest="29"
+                        BackgroundColor="Transparent" />
+                </StackLayout>
+
+                <StackLayout 
+                    MaximumHeightRequest="100"
+                    Margin="3,5,3,0"
+                    IsVisible="{Binding HasEvents}">
+                    <ListView 
+                        x:Name="EventListView" 
+                        RowHeight="40"
+                        ItemsSource="{Binding Events}" 
+                        HeightRequest="90">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout 
+                                        Orientation="Horizontal" 
+                                        Spacing="5">
+                                        <Label 
+                                            Text="{Binding EventName}" 
+                                            VerticalOptions="Center" 
+                                            HorizontalOptions="StartAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            Margin="10,0,0,0"
+                                            MaxLines="1" 
+                                            FontSize="14" >
+                                            <FlyoutBase.ContextFlyout>
+                                                <MenuFlyout BindingContext="{Binding .}">
+                                                    <MenuFlyoutItem
+                                                        Text="Mark as Done"
+                                                        Clicked="OnMarkAsDoneClicked"
+                                                        CommandParameter="{Binding .}" />
+                                                    <MenuFlyoutItem
+                                                        Text="Delete"
+                                                        Clicked="OnDeleteClicked"
+                                                        CommandParameter="{Binding .}" />
+                                                </MenuFlyout>
+                                            </FlyoutBase.ContextFlyout>
+                                        </Label>
+                                        <Label 
+                                            Grid.Column="0"
+                                            Text="Completed"
+                                            TextColor="Green"
+                                            FontSize="12"
+                                            VerticalOptions="Center"
+                                            IsVisible="{Binding IsDone}" 
+                                            Margin="0,10,5,0"
+                                            HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <StackLayout Margin="3,5,3,0">
+                    <Editor 
+                        Placeholder="Notes" 
+                        Text="{Binding Notes}" 
+                        HeightRequest="70" />
+                    <DatePicker 
+                        Margin="0,3,0,0"
+                        Date="{Binding DueDate}" />
+                </StackLayout>
+                
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    Spacing="5"
+                    VerticalOptions="Center" 
+                    Margin="3,5,3,0">
+                    <Label Text="Done" VerticalOptions="Center" FontSize="15"/>
+                    <Switch 
+                        IsToggled="{Binding IsDone}" 
+                        VerticalOptions="Center" />
+                    <Label 
+                        Text="Priority"
+                        VerticalOptions="Center" 
+                        FontSize="15" 
+                        Margin="0,0,0,0"/>
+                    <Switch 
+                        IsToggled="{Binding IsPriority}" 
+                        VerticalOptions="Center" />
+                </StackLayout>
+
+                <StackLayout
+                    Margin="0,10,0,0">
+                    <HorizontalStackLayout 
+                 Spacing="5">
+                        <Image
+                            Margin="12,0,0,0" 
+                            Source="attach.png"
+                            Aspect="AspectFit"
+                            HeightRequest="20" />
+                        <Label 
+                            FontSize="15" 
+                            Text="{x:Static resx:AppstringResources.Attachment}" 
+                            FontFamily="Inter-SemiBold" />
+                    </HorizontalStackLayout>
+                    <Frame 
+                        CornerRadius="10"
+                        Padding="0"
+                        VerticalOptions="Start" 
+                        MaximumHeightRequest="120"
+                        Margin="0,10,0,0"
+                        BackgroundColor="{StaticResource White}">
+
+                            <StackLayout>
+                            <CollectionView
+                                ItemsSource="{Binding AttachedPhotos}" 
+                                Margin="10,0,10,0"                                   
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid 
+                                            RowSpacing="0"
+                                            ColumnDefinitions="60,*, .4*" 
+                                            RowDefinitions=".5*" 
+                                            Padding="5">
+                                            <Image 
+                                                Grid.Row="0"
+                                                Source="{Binding FilePath, Converter={StaticResource FilePathToImageSourceConverter}}"
+                                                Aspect="AspectFit"
+                                                Grid.Column="0"
+                                                HorizontalOptions="StartAndExpand"
+                                                VerticalOptions="Center">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        Command="{Binding BindingContext.ViewPhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                        CommandParameter="{Binding .}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                FontSize="12"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="StartAndExpand"
+                                                FontAttributes="Bold"
+                                                Text="{Binding FileName}">
+                                            </Label>
+                                            <ImageButton 
+                                                Grid.Row="0"
+                                                Source="cross.png"
+                                                Command="{Binding BindingContext.DeletePhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                 CommandParameter="{Binding .}"
+                                                HeightRequest="20"                                                
+                                                Grid.Column="2"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Center"
+                                                Margin="5"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <Button 
+                                BorderColor="{StaticResource  Trasnparent}"
+                                FontAttributes="Bold"
+                                FontFamily=" Bold"
+                                CornerRadius="10"
+                                Text="{x:Static resx:AppstringResources.AddAttachment}" 
+                                Command="{Binding GalleryClickedCommand}"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="End"
+                                Margin="0,0,0,0" />
+                            </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Reminder Section -->
+                <StackLayout Margin="5,10,3,0">
+                    <!-- Set Reminder Label -->
+                    <Label 
+                        Text="Set Reminder" 
+                        FontSize="15" />
+
+                    <!-- DatePicker with Enable Reminder Switch -->
+                    <Grid ColumnDefinitions=".8*, *" Margin="5">
+                        <DatePicker 
+                            Grid.Column="0"
+                            Date="{Binding SelectedDate}" />
+                        <StackLayout 
+                            Grid.Column="1" 
+                            Orientation="Horizontal" 
+                            VerticalOptions="Center">
+                            <Label 
+                                Text=" Reminder" 
+                                VerticalOptions="Center" />
+                            <Switch 
+                                Margin="10,0,0,0"
+                                IsToggled="{Binding IsReminderEnabled}" 
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*" Margin="5">
+                        <TimePicker 
+                            Grid.Column="0"
+                            Time="{Binding SelectedTime}" />
+                        <StackLayout 
+                            Grid.Column="1" 
+                            Orientation="Horizontal"
+                            VerticalOptions="Center">
+
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout 
+                    HeightRequest="50"
+                    Orientation="Horizontal" 
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="FillAndExpand" 
+                    Padding="5">
+                    <ImageButton 
+                        
+                        Source="download.png" 
+                        HorizontalOptions="Start"
+                        WidthRequest="20" 
+                        HeightRequest="20" 
+                        Command="{Binding SavetaskclickedCommand}"/>
+                    <ImageButton 
+                        HorizontalOptions="EndAndExpand"
+                        Source="dustbin.png" 
+                        Command="{Binding DeleteTaskCommand}"
+                        WidthRequest="20" 
+                        HeightRequest="20" 
+                        BackgroundColor="Transparent" />
+                </StackLayout>
             </StackLayout>
+
+
         </Grid>
         <Frame 
             HorizontalOptions="EndAndExpand"
@@ -424,7 +735,9 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Padding="10">
+
                 <ImageButton
+                    IsVisible="{OnIdiom Desktop=false,Phone=true}"
                     Source="add.png"
                     Command="{Binding TaskAddedCommand}"
                     WidthRequest="50"

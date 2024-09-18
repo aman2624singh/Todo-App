@@ -15,5 +15,8 @@ namespace TodoApp.Services
         Task<int> DeleteUserAsync(User user);
 
         Task<User> AuthenticateUserAsync(string username, string password);
+
+        void Logout();
+        bool IsUserAuthenticated { get; }
     }
 }
