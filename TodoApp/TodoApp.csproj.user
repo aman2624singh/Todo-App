@@ -20,19 +20,19 @@
     <MauiXaml Update="PopupPages\RemainderPopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="PopupPages\EventPopup.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="PopupPages\ErrorPopup.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\Dashboard.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\TaskcreationPage.xaml">
+    <MauiXaml Update="Views\SortSheet.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\Useraccount.xaml">
+    <MauiXaml Update="Views\EventBottomSheet.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\TaskcreationPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\RegistrationPage.xaml">

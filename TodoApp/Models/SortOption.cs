@@ -8,8 +8,9 @@ namespace TodoApp.Models
 {
     public enum SortOption
     {
-        Recent,
+        None,
+        Priority,
         Done,
-        Pinned
+        Date
     }
 }

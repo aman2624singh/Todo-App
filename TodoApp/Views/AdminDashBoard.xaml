@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TodoApp.Views.AdminDashBoard"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutItemIsVisible="True"
+    xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
+    Shell.NavBarIsVisible="True"
+    Shell.BackgroundColor="{StaticResource Gray100}" 
+    xmlns:controls="clr-namespace:TodoApp.Controls"
+    xmlns:converter="clr-namespace:TodoApp.Converters">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:PlatformVisibilityConverter x:Key="PlatformVisibilityConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <Shell.TitleView>
+
+        <Grid>
+            <Grid 
+               IsVisible="{OnIdiom Desktop=false,Phone=true}"
+               ColumnSpacing="10">  
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Label               
+                    Grid.Column="0" 
+                    HorizontalOptions="Start"
+                    Text="{Binding Username}"
+                    TextColor="{StaticResource Black}" 
+                    FontFamily="Inter-Regular" 
+                    FontAttributes="Bold"
+                    VerticalTextAlignment="Center" 
+                    FontSize="16"
+                    VerticalOptions="Center"/>
+            </Grid>
+            <Grid 
+                ColumnSpacing="10"
+                IsVisible="{OnIdiom Desktop=True,Phone=false}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label     
+                    Grid.Column="1" 
+                    HorizontalOptions="Start"
+                    Text="{Binding Username}"
+                    TextColor="{StaticResource Black}" 
+                    FontFamily="Inter-Regular" 
+                    FontAttributes="Bold"
+                    VerticalTextAlignment="Center" 
+                    FontSize="16"
+                    Margin="0,0,0,0" 
+                    VerticalOptions="Center"/>      
+            </Grid>
+        </Grid>
+    </Shell.TitleView>
+    <Grid>
+        <Image
+            Aspect="AspectFill"
+            Source="back2">
+        </Image>
+        <Grid
+            BackgroundColor="{ OnIdiom Phone=Transparent,Desktop=lightblue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".8*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="{OnIdiom Phone=*,Desktop=1.1*}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnIdiom Phone=*, Desktop=.7*}"  />
+            </Grid.ColumnDefinitions>
+            <Image
+                IsVisible="{OnIdiom Desktop=true,Phone=true}"
+                HorizontalOptions="{OnIdiom Phone=FillAndExpand,Desktop=StartAndExpand}" 
+                Aspect="{OnIdiom Phone=AspectFill,Desktop=Fill}" 
+                Grid.RowSpan="{OnIdiom Phone=3,Desktop=3}"
+                Grid.Column="{OnIdiom Desktop=0}"
+                Source="{OnIdiom Phone=.png,Desktop=.png}">
+            </Image>
+
+            <Frame
+                Grid.Row="0" 
+                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="{StaticResource White}"
+                Margin="5" 
+                Padding="5" 
+                CornerRadius="15" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=3*}"/>
+                    </Grid.ColumnDefinitions>
+                    <SearchBar 
+                       Grid.Row="0" 
+                       HorizontalOptions="FillAndExpand"
+                       Grid.Column="{OnIdiom Phone=0,Desktop=0}" 
+                       Placeholder="{x:Static resx:AppstringResources.Search}" 
+                       Text="{Binding SearchText, Mode=TwoWay}" />
+                </Grid>
+            </Frame>
+            <ListView 
+                Grid.Row="1" 
+                Grid.Column="{OnIdiom Desktop=1}"
+                Margin="5,0,10,0" 
+                ItemsSource="{Binding Users}" 
+                RowHeight="{OnIdiom Phone=110,Desktop=80}" 
+                SeparatorVisibility="None" 
+                VerticalScrollBarVisibility="Never"
+                CachingStrategy="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Border 
+                                BackgroundColor="{OnIdiom Phone=white,Desktop=white}"
+                                Padding="5,0,0,0" 
+                                Margin="5">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.TaskTappedCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="{OnIdiom Phone=20,Desktop=0}" />
+                                </Border.StrokeShape>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout BindingContext="{Binding .}">
+                                        <MenuFlyoutItem
+                                             Text="Edit"
+                                             Clicked="OnEditClicked"
+                                             CommandParameter="{Binding .}" />
+                                        <MenuFlyoutItem
+                                             Text="Delete"
+                                             Clicked="OnDeleteClicked"
+                                             CommandParameter="{Binding .}" />              
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                <Grid
+                                    RowSpacing="0"
+                                    ColumnSpacing="0" 
+                                    Margin="-5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="{OnIdiom Phone=*,Desktop=*}" />
+                                        <RowDefinition Height="{OnPlatform Android=*,WinUI=.8*}" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.3*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=2*,Desktop=1*}" />
+                                        <ColumnDefinition Width="{OnPlatform Android=1.5*,WinUI=*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=*}"  />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.5*}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=*,Desktop=.5*}" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                         Grid.Row="0"
+                                         Grid.Column="0"
+                                         Grid.RowSpan="3"
+                                         Source="computer.png" 
+                                         Aspect="AspectFit"
+                                         HeightRequest="50"
+                                         WidthRequest="50"
+                                         VerticalOptions="Center" 
+                                         HorizontalOptions="Start"/>
+
+                                    <HorizontalStackLayout 
+                                        Grid.Row="1" 
+                                        Grid.RowSpan="{OnIdiom Desktop=2}"
+                                        Grid.Column="1" 
+                                        VerticalOptions="StartAndExpand"
+                                        Grid.ColumnSpan="4"
+                                        Spacing="5">
+                                        <Label 
+                                            Grid.Row="1" 
+                                            Grid.Column="1" 
+                                            Grid.ColumnSpan="1" 
+                                            Margin="15,10,0,0" 
+                                            HorizontalOptions="StartAndExpand" 
+                                            VerticalOptions="Start"
+                                            Text="{Binding UserName}"
+                                            LineBreakMode="TailTruncation" 
+                                            FontSize="20" 
+                                            MaximumWidthRequest="120"
+                                            FontFamily="Inter-Bold" />
+                                        
+                                        <ImageButton 
+                                            Grid.Row="1"
+                                            IsEnabled="{OnIdiom Phone=true,Desktop=false}"
+                                            IsVisible="{OnIdiom Phone=true,Desktop=false}"
+                                            Grid.Column="3"
+                                            Source="dustbin.png"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.DeleteUserCommand}"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="20"
+                                            Margin="7,5,0,0"
+                                            HeightRequest="20" />
+                                        <ImageButton 
+                                            Grid.Row="1"
+                                            IsEnabled="{OnIdiom Phone=true,Desktop=false}"
+                                            IsVisible="{OnIdiom Phone=true,Desktop=false}"
+                                            Grid.Column="3"
+                                            Margin="9,5,0,0"                          
+                                            HeightRequest="20"
+                                            Source="pencil.png"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.EditUserCommand}"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="20" />
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Border>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</ContentPage>

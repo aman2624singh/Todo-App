@@ -11,8 +11,10 @@ namespace TodoApp.Services
         int GetUserId();      
         string GetUserName();
         void SetUserId(int userId);  
-
         void SetUserName(string userName);
-        void ClearSession();  
+        void ClearSession();
+
+        void SetIsAdmin(bool isAdmin);
+        bool IsAdmin();
     }
 }

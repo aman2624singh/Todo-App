@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<the49:BottomSheet xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoApp.Views.EventBottomSheet"
+             xmlns:the49="https://schemas.the49.com/dotnet/2023/maui"
+             x:Name="bottomsheet"
+             IsCancelable="True"
+             HasBackdrop="True"
+             CornerRadius="30">
+    <ScrollView>
+    <Frame
+        CornerRadius="5">
+    <StackLayout Padding="20"
+             BackgroundColor="{AppThemeBinding Light={DynamicResource White}, Dark={DynamicResource Gray900}}"
+             Spacing="20">
+
+        <Frame 
+            Padding="10"
+            BackgroundColor="{DynamicResource Gray100 }"
+            CornerRadius="10"
+            BorderColor="{DynamicResource Gray200}">
+
+                    <Grid 
+                        Padding="0"
+                        ColumnDefinitions="*, Auto"
+                        VerticalOptions="CenterAndExpand">
+
+                        <Entry 
+                            x:Name="EventNameEntry"
+                            Placeholder="Add event "
+                            Text="{Binding EventName}"
+                            PlaceholderColor="{StaticResource Black}"
+                            BackgroundColor="{StaticResource Trasnparent}"
+                            Margin="0, 0, 10, 0"
+                            HeightRequest="40"
+                            HorizontalOptions="FillAndExpand" />
+
+
+                        <ImageButton 
+                            Grid.Column="1"
+                            Source="plus.png"  
+                            Command="{Binding AddEventCommand}"
+                            CommandParameter="{Binding Source={x:Reference bottomsheet}}"
+                            BackgroundColor="{StaticResource Trasnparent}"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </Frame>
+
+        <!-- Collection of Events -->
+        <CollectionView ItemsSource="{Binding Events}"
+                    Margin="0,20,0,0"
+                    BackgroundColor="Transparent"
+                    SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10"
+                       BackgroundColor="{DynamicResource White}"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       BorderColor="{DynamicResource Gray200}">
+
+                        <Grid ColumnDefinitions="*, Auto, Auto, Auto"
+                          Padding="5">
+                            <!-- Event Name -->
+                            <Label 
+                                Grid.Column="0"
+                                Text="{Binding EventName}"
+                                FontSize="Medium"
+                                VerticalOptions="Center"
+                                TextColor="{DynamicResource Black}" />
+
+                                    <Label 
+                                        Grid.Column="0"
+                                        Text="Completed"
+                                        TextColor="Green"
+                                        FontSize="12"
+                                        IsVisible="{Binding IsDone}" 
+                                        Margin="0,8,10,0"
+                                        HorizontalOptions="End"/>
+                            <ImageButton 
+                                Grid.Column="1"
+                                ToolTipProperties.Text="Tap to Mark Done Undone"
+                                Source="check.png"
+                                Command="{Binding BindingContext.DoneEventCommand, Source={RelativeSource AncestorType={x:Type the49:BottomSheet}}}"
+                                CommandParameter="{Binding}"
+                                Aspect="AspectFit"
+                                HeightRequest="25"
+                                Margin="5,0,0,5"
+                                WidthRequest="25"
+                                BackgroundColor="Transparent" />
+
+                            <!-- Delete Button -->
+                            <ImageButton 
+                                Grid.Column="2"
+                                Source="dustbin.png"
+                                Margin="5,0,0,5"
+                                Command="{Binding BindingContext.DeleteEventCommand, Source={RelativeSource AncestorType={x:Type the49:BottomSheet}}}"
+                                CommandParameter="{Binding}"
+                                HeightRequest="25"
+                                WidthRequest="25"
+                                BackgroundColor="Transparent" />
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+    </Frame>
+
+    </ScrollView>
+</the49:BottomSheet>

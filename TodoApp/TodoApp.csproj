@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -80,10 +80,16 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.90" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
 		<PackageReference Include="Mopups" Version="1.3.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
+		<PackageReference Include="Serilog" Version="4.0.1" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="The49.Maui.BottomSheet" Version="8.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -97,9 +103,6 @@
 	  <Compile Update="PopupPages\RemainderPopup.xaml.cs">
 	    <DependentUpon>RemainderPopup.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="PopupPages\EventPopup.xaml.cs">
-	    <DependentUpon>EventPopup.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Resources\Strings\AppstringResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -108,11 +111,14 @@
 	  <Compile Update="Views\Dashboard.xaml.cs">
 	    <DependentUpon>Dashboard.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\SortSheet.xaml.cs">
+	    <DependentUpon>SortSheet.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EventBottomSheet.xaml.cs">
+	    <DependentUpon>EventBottomSheet.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\TaskcreationPage.xaml.cs">
 	    <DependentUpon>TaskcreationPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Useraccount.xaml.cs">
-	    <DependentUpon>Useraccount.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\RegistrationPage.xaml.cs">
 	    <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -136,19 +142,19 @@
 	  <MauiXaml Update="PopupPages\RemainderPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="PopupPages\EventPopup.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="PopupPages\ErrorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Dashboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TaskcreationPage.xaml">
+	  <MauiXaml Update="Views\SortSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Useraccount.xaml">
+	  <MauiXaml Update="Views\EventBottomSheet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\TaskcreationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegistrationPage.xaml">

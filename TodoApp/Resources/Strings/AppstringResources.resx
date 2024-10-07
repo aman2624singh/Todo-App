@@ -123,14 +123,26 @@
   <data name="AddAttachment" xml:space="preserve">
     <value>Add Attachment</value>
   </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Add Event</value>
+  </data>
+  <data name="admin" xml:space="preserve">
+    <value>Hi!! admin</value>
+  </data>
   <data name="Alreadyaccount" xml:space="preserve">
     <value>Already have an Account?</value>
   </data>
   <data name="Attachment" xml:space="preserve">
     <value>Attachment</value>
   </data>
+  <data name="Button_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Due Date</value>
@@ -150,8 +162,14 @@
   <data name="Details" xml:space="preserve">
     <value>Add Event Details</value>
   </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EnableReminder" xml:space="preserve">
+    <value>Enable Reminder:</value>
   </data>
   <data name="EntereventDescription" xml:space="preserve">
     <value>Enter Event Description (Max 250 words)</value>
@@ -161,6 +179,9 @@
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
+  </data>
+  <data name="ErrorOccured" xml:space="preserve">
+    <value>An error occurred. Please try again.</value>
   </data>
   <data name="Error_login" xml:space="preserve">
     <value>Incorrect Username or Password.Please try again.</value>
@@ -183,17 +204,29 @@
   <data name="Label_Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Label_Sort" xml:space="preserve">
+    <value>Sort Task</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="Mark" xml:space="preserve">
     <value>Mark as Done</value>
   </data>
+  <data name="Markeddone" xml:space="preserve">
+    <value>Marked as done!</value>
+  </data>
+  <data name="Markednotdone" xml:space="preserve">
+    <value>Marked as not done!</value>
+  </data>
   <data name="New_User" xml:space="preserve">
     <value>New User</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
   </data>
   <data name="Notfound" xml:space="preserve">
     <value>No Attachment found. If attachment is already added, click save.</value>
@@ -216,8 +249,23 @@
   <data name="PinPriority" xml:space="preserve">
     <value>Pin For Priority</value>
   </data>
+  <data name="Pinstatus" xml:space="preserve">
+    <value>Failed to update task pin status:</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="RegistrationSuccsess" xml:space="preserve">
+    <value>Registration successful! You can now log in.</value>
+  </data>
+  <data name="Repeat" xml:space="preserve">
+    <value>Repeat Everyday Untill Due:</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="Saveevent" xml:space="preserve">
     <value>Save Event</value>
@@ -225,8 +273,20 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Selectdate" xml:space="preserve">
+    <value>Select Date:</value>
+  </data>
   <data name="SelectImage" xml:space="preserve">
     <value>Select an image</value>
+  </data>
+  <data name="Selecttask" xml:space="preserve">
+    <value>Please select a task for the reminder.</value>
+  </data>
+  <data name="Selecttime" xml:space="preserve">
+    <value>Select Time:</value>
+  </data>
+  <data name="Setreminder" xml:space="preserve">
+    <value>Set Reminder</value>
   </data>
   <data name="Signin" xml:space="preserve">
     <value>Sign in</value>
@@ -252,6 +312,12 @@
   <data name="TaskDescription" xml:space="preserve">
     <value>TaskDescription</value>
   </data>
+  <data name="Tasknotselected" xml:space="preserve">
+    <value>No Task Selected</value>
+  </data>
+  <data name="Tasktitle" xml:space="preserve">
+    <value>Enter the Task Title</value>
+  </data>
   <data name="Taskupdated" xml:space="preserve">
     <value>Task updated!</value>
   </data>
@@ -264,8 +330,17 @@
   <data name="UploadAttachmnet" xml:space="preserve">
     <value>Upload Attachment</value>
   </data>
+  <data name="Userexist" xml:space="preserve">
+    <value>User already exists.</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UsernotExist" xml:space="preserve">
+    <value>User does not exist. Unable to update.</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>User Information Updated Successfully.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

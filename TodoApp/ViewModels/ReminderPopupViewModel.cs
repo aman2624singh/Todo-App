@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +40,24 @@ namespace TodoApp.ViewModels
             
         }
 
-        public void Initialize()
+        public void LoadReminder()
         {
-            SelectedDate = DateTime.Today;
-            SelectedTime = DateTime.Now.TimeOfDay;
-            IsDailyReminderEnabled = false;
-            IsReminderEnabled = true;
+            var existingReminder = _reminderService.GetReminderByTaskId(CurrentTaskId);
+
+            if (existingReminder is not null)
+            {
+                SelectedDate = existingReminder.ReminderDate.Date;
+                SelectedTime = existingReminder.ReminderDate.TimeOfDay;
+                IsDailyReminderEnabled = existingReminder.IsDailyReminder;
+                IsReminderEnabled = true;
+            }
+            else
+            {
+                SelectedDate = DateTime.Today;
+                SelectedTime = DateTime.Now.TimeOfDay;
+                IsDailyReminderEnabled = false;
+                IsReminderEnabled = false;
+            }
 
         }
 
@@ -53,14 +66,27 @@ namespace TodoApp.ViewModels
         {
             if (IsReminderEnabled)
             {
-                _reminderService.SetReminder(new Reminder
+                var reminderDate = SelectedDate.Date + SelectedTime;
+                if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                {
+                    reminderDate = DateTime.Now;
+                }
+                var reminder = new Reminder
                 {
                     TaskId = CurrentTaskId,
-                    TaskName= CurrentTaskName,
-                    ReminderDate = SelectedDate.Add(SelectedTime),
+                    TaskName = CurrentTaskName,
+                    ReminderDate = reminderDate,
                     IsDailyReminder = IsDailyReminderEnabled
-                });
+                };
+
+                _reminderService.SetReminder(reminder);
             }
+            else
+            {
+                _reminderService.CancelReminder(CurrentTaskId);
+                _reminderService.DeleteReminderDetails(CurrentTaskId);
+            }
+
             ClosePopup();
         }
 
@@ -73,8 +99,10 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private void ClosePopup()
         {
-            // Logic to close the popup
-            // This can be a service that hides the popup
+            if (MopupService.Instance.PopupStack.Count > 0)
+            {
+                MopupService.Instance.PopAsync();
+            }
         }
     }
 }

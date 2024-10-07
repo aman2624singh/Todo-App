@@ -5,21 +5,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TodoApp.Views"
     Shell.NavBarIsVisible="True"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="TodoApp">
-    <Shell.Resources>
-        <ResourceDictionary>
-            <!-- Define colors and styles -->
-            <Color x:Key="BackButtonColor">#FF0000</Color>
-            <!-- Example color -->
-        </ResourceDictionary>
-    </Shell.Resources>
 
+
+    <Shell.FlyoutHeader>
+        <StackLayout Padding="20" Orientation="Horizontal">
+            <Image
+                HeightRequest="40"
+                WidthRequest="40"
+                Source="user.png">
+            </Image>
+            <Label
+                Text="Welocme"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontAttributes="Bold"
+                FontSize="20">
+            </Label>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+    <Shell.FlyoutContent>
+        <StackLayout Padding="20">
+            <Button 
+                Margin="5"
+                Text="Logout" 
+                Command="{Binding LogoutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutContent>
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
     <ShellContent
+        ContentTemplate="{DataTemplate local:AdminDashBoard}"
+        Route="AdminDashBoard" />
+    <ShellContent
         ContentTemplate="{DataTemplate local:Dashboard}"
         Route="DashboardPage" />
+
+
 
 </Shell>

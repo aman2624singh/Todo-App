@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using TodoApp.Models;
 using TodoApp.Resources.Strings;
@@ -43,7 +44,6 @@ namespace TodoApp.ViewModels
         [ObservableProperty]
         public int currentTaskItemId;
 
-        public ObservableCollection<TaskItem> UserTasks { get; set; } = new ObservableCollection<TaskItem>();
         private ObservableCollection<string> PhotoFilePaths { get; set; } = new ObservableCollection<string>();
 
         [ObservableProperty]
@@ -68,7 +68,7 @@ namespace TodoApp.ViewModels
         private async Task LoadTaskAndPhotos(int taskId)
         {
             var existingTask = await _taskService.GetTaskByIdAsync(taskId);
-            if (existingTask != null)
+            if (existingTask is not null)
             {
                 await LoadPhotosFromDatabase(taskId);
             }
@@ -114,7 +114,7 @@ namespace TodoApp.ViewModels
             else 
             {
                 var existingTask = await _taskService.GetTaskByIdAsync(CurrentTaskItemId);
-                if (existingTask != null)
+                if (existingTask is not null)
                 {
                     existingTask.Title = this.Title;
                     existingTask.DueDate = this.DueDate;
@@ -156,7 +156,7 @@ namespace TodoApp.ViewModels
             string uploadPhotoOption = AppstringResources.UploadAttachmnet;
             var action = await Application.Current.MainPage.DisplayActionSheet(
                 null,
-                "Cancel",
+                AppstringResources.Cancel,
                 null,
                 takePhotoOption,
                 uploadPhotoOption
@@ -339,23 +339,53 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private async Task ViewPhoto(Photo photo)
         {
-            if (photo == null)
+            if (photo is null)
                 return;
+
             try
             {
                 if (!File.Exists(photo.FilePath))
                 {
-                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.Photopath, AppstringResources.OK);
+                    await Application.Current.MainPage.DisplayAlert(
+                        AppstringResources.Error,
+                        AppstringResources.Photopath,
+                        AppstringResources.OK
+                    );
                     return;
                 }
-                var fileUri = new Uri(photo.FilePath, UriKind.Absolute);
-                await Launcher.OpenAsync(fileUri);
+
+               
+#if ANDROID || IOS
+               
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(photo.FilePath)
+                });
+#elif WINDOWS
+                // For Windows, use Process.Start with shell execution
+                Process.Start(new ProcessStartInfo
+        {
+            FileName = photo.FilePath,
+            UseShellExecute = true
+        });
+#else
+        await Application.Current.MainPage.DisplayAlert(
+            AppstringResources.Error, 
+            "File opening is not supported on this platform.", 
+            AppstringResources.OK
+        );
+#endif
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.Message, AppstringResources.OK);
+                await Application.Current.MainPage.DisplayAlert(
+                    AppstringResources.Error,
+                    ex.Message,
+                    AppstringResources.OK
+                );
             }
         }
+
 
         [RelayCommand]
         private async Task GoBack()

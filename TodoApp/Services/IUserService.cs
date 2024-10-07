@@ -12,8 +12,14 @@ namespace TodoApp.Services
         Task<int> AddUserAsync(User user);
         Task<User> GetUserAsync(string username, string password);
         Task<int> UpdateUserAsync(User user);
-        Task<int> DeleteUserAsync(User user);
+        Task<int> DeleteUserAsync(int userId);
+
+        Task<User> GetUserByIdAsync(int userId);
+        Task<IEnumerable<User>> GetAllUsersAsync();
 
         Task<User> AuthenticateUserAsync(string username, string password);
+
+        void Logout();
+        bool IsUserAuthenticated { get; }
     }
 }

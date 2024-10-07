@@ -28,14 +28,13 @@
                     Padding="20"
                     BackgroundColor="{StaticResource Trasnparent}"
                     Spacing="15">
-                <!-- App Logo -->
                 <Image 
                     Source="{OnIdiom Phone=registration,Desktop=checklist.png}" 
                     HorizontalOptions="Center" 
                     HeightRequest="120"
                     Margin="0,20,0,10"/>
 
-                <!-- Registration Title -->
+
                 <Label 
                     Text="{x:Static resx:AppstringResources.Account}"
                     FontSize="24"
@@ -43,7 +42,6 @@
                     HorizontalOptions="Center"
                     TextColor="{StaticResource Black}"/>
 
-                <!-- User Name Entry -->
                 <Border 
                     Padding="5"
                     BackgroundColor="{StaticResource White}">
@@ -73,7 +71,6 @@
                     </Border.StrokeShape>
                 </Border>
 
-                <!-- Email Entry -->
                 <Border 
                     Padding="5"
                     BackgroundColor="{StaticResource White}">

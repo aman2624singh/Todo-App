@@ -16,8 +16,6 @@ namespace TodoApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<TaskItem> pinnedItems;
 
-
-
         public PriorityVIewModel()
         {
             PinnedItems = new ObservableCollection<TaskItem>();

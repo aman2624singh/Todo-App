@@ -2,6 +2,7 @@
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
              xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups"
              BackgroundColor="{StaticResource popupbackground}"   
              x:Class="TodoApp.PopupPages.RemainderPopup ">
@@ -17,33 +18,81 @@
                     EasingOut="SinIn"  
     HasBackgroundAnimation="True"/>
     </mopups:PopupPage.Animation>
-    <Grid>
-        <StackLayout Padding="20" BackgroundColor="White" Spacing="15">
-            <!-- Title -->
-            <Label Text="Set Reminder" FontSize="24" HorizontalOptions="Center" />
+    <Grid 
+        MaximumHeightRequest="400"
+        MaximumWidthRequest="300"
+        VerticalOptions="FillAndExpand" 
+        HorizontalOptions="FillAndExpand">
+        <Frame 
+        Padding="10" 
+        CornerRadius="10" 
+        HasShadow="True" 
+        BackgroundColor="{StaticResource Gray100}">
+            <StackLayout 
+                Padding="20" 
+                BackgroundColor="{StaticResource White}" 
+                Spacing="15">
+                <Label 
+                    Text="{x:Static resx:AppstringResources.Setreminder}" 
+                    FontSize="24" 
+                    HorizontalOptions="Center" />
 
-            <!-- Date Picker -->
-            <Label Text="Select Date:" />
-            <DatePicker Date="{Binding SelectedDate}" />
+                <Grid 
+                    ColumnDefinitions="*,Auto" 
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                    <Label 
+                        Text="{x:Static resx:AppstringResources.Selectdate}" 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        VerticalOptions="Center" />
+                    <DatePicker
+                        Date="{Binding SelectedDate}" 
+                        Grid.Row="0" 
+                        Grid.Column="1" />
 
-            <!-- Time Picker -->
-            <Label Text="Select Time:" />
-            <TimePicker Time="{Binding SelectedTime}" />
+                    <Label 
+                        Text="{x:Static resx:AppstringResources.Selecttime}"
+                        Grid.Row="1" 
+                        Grid.Column="0" 
+                        VerticalOptions="Center" />
+                    <TimePicker 
+                        Time="{Binding SelectedTime}"
+                        Grid.Row="1"
+                        Grid.Column="1" />
 
-            <!-- Daily Reminder -->
-            <Label Text="Repeat Every Day Until Due:" />
-            <Switch IsToggled="{Binding IsDailyReminderEnabled}" />
+                    <Label 
+                        Text="{x:Static resx:AppstringResources.Repeat}" 
+                        Grid.Row="2" 
+                        Grid.Column="0" 
+                        VerticalOptions="Center" />
+                    <Switch 
+                        IsToggled="{Binding IsDailyReminderEnabled}"
+                        Grid.Row="2" 
+                        Grid.Column="1" />
 
-            <!-- Enable/Disable Reminder -->
-            <Label Text="Enable Reminder:" />
-            <Switch IsToggled="{Binding IsReminderEnabled}" />
+                    <Label 
+                        Text="{x:Static resx:AppstringResources.EnableReminder}"
+                        Grid.Row="3" 
+                        Grid.Column="0" 
+                        VerticalOptions="Center" />
+                    <Switch 
+                        IsToggled="{Binding IsReminderEnabled}" 
+                        Grid.Row="3" 
+                        Grid.Column="1" />
+                </Grid>
 
-            <!-- Buttons -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Save" Command="{Binding SaveReminderCommand}" />
-                <Button Text="Cancel" Command="{Binding CancelReminderCommand}" />
+                <StackLayout 
+                    Orientation="Horizontal" 
+                    HorizontalOptions="CenterAndExpand" 
+                    Spacing="20">
+                    <Button 
+                        Text="{x:Static resx:AppstringResources.Save}" 
+                        Command="{Binding SaveReminderCommand}" />
+                    <Button 
+                        Text="{x:Static resx:AppstringResources.Cancel}" 
+                        Command="{Binding CancelReminderCommand}" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </Frame>
     </Grid>
-
 </mopups:PopupPage>

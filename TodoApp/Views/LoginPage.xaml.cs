@@ -14,6 +14,8 @@ public partial class LoginPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        Shell.SetFlyoutBehavior(this, FlyoutBehavior.Disabled);
+        Shell.SetFlyoutItemIsVisible(this, false);
         _viewModel.InitializeLoginDetails();
     }
 

@@ -3,6 +3,9 @@ using FluentValidation;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
+using Plugin.LocalNotification;
+using Microsoft.Maui.LifecycleEvents;
+using The49.Maui.BottomSheet;
 using TodoApp.Controls;
 using TodoApp.Models;
 using TodoApp.PopupPages;
@@ -19,6 +22,9 @@ namespace TodoApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseBottomSheet()
+                .UseLocalNotification()
+                .UseMauiCommunityToolkit()
                 .ConfigureMopups()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
@@ -31,6 +37,8 @@ namespace TodoApp
 
                 }).UseMauiCompatibility();
 
+
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
@@ -41,16 +49,16 @@ namespace TodoApp
             builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
             builder.Services.AddTransient<IValidator<User>, UserValidator>();
             builder.Services.AddTransient<IUserSessionService, UserSessionService>();
+            builder.Services.AddTransient<IAdminAuthenticationService, AdminAuthenticationService>();
             builder.Services.AddTransient<IReminderService, ReminderService>();
             //views
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegistrationPage>();
-            builder.Services.AddTransient<Useraccount>();
             builder.Services.AddTransient<Dashboard>();
             builder.Services.AddTransient<TaskcreationPage>();
-            builder.Services.AddTransient<EventPopup>();
             builder.Services.AddTransient<RemainderPopup>();
             builder.Services.AddTransient<Priority>();
+            builder.Services.AddTransient<AdminDashBoard>();
 
 
 
@@ -59,9 +67,13 @@ namespace TodoApp
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<DashboardViewModel>();
             builder.Services.AddTransient<TaskCreationViewModel>();
-            builder.Services.AddTransient<EventPopupViewModel>();
             builder.Services.AddTransient<ReminderPopupViewModel>();
             builder.Services.AddTransient<PriorityVIewModel>();
+            builder.Services.AddTransient<EventBottomSheetViewModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<AdminDashBoardViewModel>();
+
+
 
             return builder.Build();
         }

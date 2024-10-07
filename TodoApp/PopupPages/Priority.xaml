@@ -2,6 +2,7 @@
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
              xmlns:mopupsanim="clr-namespace:Mopups.Animations;assembly=Mopups"
              BackgroundColor="{StaticResource popupbackground}"   
              x:Class="TodoApp.PopupPages.Priority ">
@@ -22,33 +23,37 @@
         WidthRequest="300"
         HeightRequest="400"
           HorizontalOptions="CenterAndExpand">
-        <Frame BackgroundColor="White"
-           CornerRadius="10"
-           HasShadow="True"
-           Margin="0,20,0,0">
+        <Frame 
+            BackgroundColor="{StaticResource White}"
+            CornerRadius="10"
+            HasShadow="True"
+            Margin="0,20,0,0">
 
             <StackLayout>
-                <Label Text="Priority List"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Margin="0,10"/>
+                <Label 
+                    Text="Priority List"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Margin="0,10"/>
 
                 <CollectionView
-                ItemsSource="{Binding PinnedItems}"
-                SelectionMode="None">
+                    ItemsSource="{Binding PinnedItems}"
+                    SelectionMode="None">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="10"
-                               BackgroundColor="{StaticResource Gray100}"
-                               CornerRadius="10">
+                            <Frame 
+                                Padding="10"
+                                BackgroundColor="{StaticResource Gray100}"
+                                CornerRadius="10">
                                 <StackLayout>
-                                    <Label Text="{Binding Title}"
-                                       FontSize="18"
-                                       FontAttributes="Bold"/>
+                                    <Label 
+                                        Text="{Binding Title}"
+                                        FontSize="18"
+                                        FontAttributes="Bold"/>
                                     <Label Text="{Binding DueDate, StringFormat='{0:MMM dd}'}"
                                        FontSize="14"/>
                                 </StackLayout>
@@ -57,7 +62,8 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Button Text="Close"
+                <Button 
+                    Text="{x:Static resx:AppstringResources.Close}"
                     Command="{Binding ClosePopupCommand}"
                     Margin="0,20"/>
             </StackLayout>

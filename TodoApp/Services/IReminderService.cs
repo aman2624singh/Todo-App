@@ -13,5 +13,9 @@ namespace TodoApp.Services
         void SetReminder(Reminder reminder);
         void ShowReminderPopup(ReminderPopupViewModel viewModel);
         void CancelReminder(int taskId);
+        Reminder GetReminderByTaskId(int taskId);
+
+        void DeleteReminderDetails(int taskId);
+
     }
 }

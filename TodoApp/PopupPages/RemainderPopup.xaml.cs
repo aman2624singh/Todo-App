@@ -16,8 +16,8 @@ namespace TodoApp.PopupPages;
 
        protected override void OnAppearing()
        {
+        
         base.OnAppearing();
-        _viewModel.Initialize();
 
        }
     protected bool OnBackButtonPressed()
