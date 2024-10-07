@@ -15,8 +15,8 @@ namespace TodoApp.Models
         public int Id { get; set; }
         public string Title
         {
-            get => title;
-            set => SetProperty(ref title, value);
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
         public DateTime DueDate { get; set; }
         public bool Done { get; set; }
@@ -33,10 +33,10 @@ namespace TodoApp.Models
             get => _isPriority;
             set => SetProperty(ref _isPriority, value);
         }
-        public int UserId { get; set; } // Foreign key to User table
+        public int UserId { get; set; } 
 
         private bool _isSelected;
         private bool _isPriority;
-        private string title;
+        private string _title;
     }
 }

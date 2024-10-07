@@ -49,15 +49,16 @@ namespace TodoApp
             builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
             builder.Services.AddTransient<IValidator<User>, UserValidator>();
             builder.Services.AddTransient<IUserSessionService, UserSessionService>();
+            builder.Services.AddTransient<IAdminAuthenticationService, AdminAuthenticationService>();
             builder.Services.AddTransient<IReminderService, ReminderService>();
             //views
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegistrationPage>();
-            builder.Services.AddTransient<Useraccount>();
             builder.Services.AddTransient<Dashboard>();
             builder.Services.AddTransient<TaskcreationPage>();
             builder.Services.AddTransient<RemainderPopup>();
             builder.Services.AddTransient<Priority>();
+            builder.Services.AddTransient<AdminDashBoard>();
 
 
 
@@ -69,7 +70,8 @@ namespace TodoApp
             builder.Services.AddTransient<ReminderPopupViewModel>();
             builder.Services.AddTransient<PriorityVIewModel>();
             builder.Services.AddTransient<EventBottomSheetViewModel>();
-                 builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<AdminDashBoardViewModel>();
 
 
 

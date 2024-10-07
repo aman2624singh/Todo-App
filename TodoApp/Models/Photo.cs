@@ -27,7 +27,8 @@ namespace TodoApp.Models
             set => SetProperty(ref _filePath, value);
         }
        
-        public int TaskItemId { get; set; } // Foreign key to TaskItem table
+        public int TaskItemId { get; set; } 
+
         private string _filePath;
         private string _fileName;
     }

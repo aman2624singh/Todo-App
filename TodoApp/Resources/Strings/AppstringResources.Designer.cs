@@ -79,6 +79,24 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Event.
+        /// </summary>
+        internal static string AddEvent {
+            get {
+                return ResourceManager.GetString("AddEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hi!! admin.
+        /// </summary>
+        internal static string admin {
+            get {
+                return ResourceManager.GetString("admin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already have an Account?.
         /// </summary>
         internal static string Alreadyaccount {
@@ -111,6 +129,15 @@ namespace TodoApp.Resources.Strings {
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         
@@ -169,11 +196,29 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        internal static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Reminder:.
+        /// </summary>
+        internal static string EnableReminder {
+            get {
+                return ResourceManager.GetString("EnableReminder", resourceCulture);
             }
         }
         
@@ -228,6 +273,15 @@ namespace TodoApp.Resources.Strings {
         internal static string Error_Username {
             get {
                 return ResourceManager.GetString("Error_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred. Please try again..
+        /// </summary>
+        internal static string ErrorOccured {
+            get {
+                return ResourceManager.GetString("ErrorOccured", resourceCulture);
             }
         }
         
@@ -295,6 +349,24 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Marked as done!.
+        /// </summary>
+        internal static string Markeddone {
+            get {
+                return ResourceManager.GetString("Markeddone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marked as not done!.
+        /// </summary>
+        internal static string Markednotdone {
+            get {
+                return ResourceManager.GetString("Markednotdone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New User.
         /// </summary>
         internal static string New_User {
@@ -309,6 +381,15 @@ namespace TodoApp.Resources.Strings {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        internal static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
             }
         }
         
@@ -385,11 +466,47 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Priority.
+        /// </summary>
+        internal static string Priority {
+            get {
+                return ResourceManager.GetString("Priority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         internal static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration successful! You can now log in..
+        /// </summary>
+        internal static string RegistrationSuccsess {
+            get {
+                return ResourceManager.GetString("RegistrationSuccsess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat Everyday Untill Due:.
+        /// </summary>
+        internal static string Repeat {
+            get {
+                return ResourceManager.GetString("Repeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -412,6 +529,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Date:.
+        /// </summary>
+        internal static string Selectdate {
+            get {
+                return ResourceManager.GetString("Selectdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select an image.
         /// </summary>
         internal static string SelectImage {
@@ -426,6 +552,24 @@ namespace TodoApp.Resources.Strings {
         internal static string Selecttask {
             get {
                 return ResourceManager.GetString("Selecttask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Time:.
+        /// </summary>
+        internal static string Selecttime {
+            get {
+                return ResourceManager.GetString("Selecttime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Reminder.
+        /// </summary>
+        internal static string Setreminder {
+            get {
+                return ResourceManager.GetString("Setreminder", resourceCulture);
             }
         }
         
@@ -511,6 +655,15 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the Task Title.
+        /// </summary>
+        internal static string Tasktitle {
+            get {
+                return ResourceManager.GetString("Tasktitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task updated!.
         /// </summary>
         internal static string Taskupdated {
@@ -547,11 +700,38 @@ namespace TodoApp.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User already exists..
+        /// </summary>
+        internal static string Userexist {
+            get {
+                return ResourceManager.GetString("Userexist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User does not exist. Unable to update..
+        /// </summary>
+        internal static string UsernotExist {
+            get {
+                return ResourceManager.GetString("UsernotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Information Updated Successfully..
+        /// </summary>
+        internal static string UserUpdated {
+            get {
+                return ResourceManager.GetString("UserUpdated", resourceCulture);
             }
         }
         

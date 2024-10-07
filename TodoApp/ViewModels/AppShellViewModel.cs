@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -14,31 +15,25 @@ namespace TodoApp.ViewModels
     {
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
+        private readonly IUserSessionService _userSessionService;
         private readonly Shell _shell;
-        public AppShellViewModel(IUserService userService, INavigationService navigationService)
+        public AppShellViewModel(IUserService userService, INavigationService navigationService, IUserSessionService userSessionService)
         {
             _userService = userService;
             _navigationService = navigationService;
-
+            _userSessionService = userSessionService;
         }
 
 
         [RelayCommand]
         private async Task Logout()
         {
-     
             _userService.Logout();
+            _userSessionService.SetIsAdmin(false);
             Shell.Current.FlyoutIsPresented = false;
+             await _navigationService.NavigateToAsync("//LoginPage");
             
-            await _navigationService.NavigateToAsync("//LoginPage");
         }
 
-        //[RelayCommand]
-        //private async Task SendLogs()
-        //{
-        //    // Logic to send logs
-        //    await _logService.SendLogsAsync();
-        //    await Application.Current.MainPage.DisplayAlert("Logs Sent", "Your logs have been sent successfully.", "OK");
-        //}
     }
 }

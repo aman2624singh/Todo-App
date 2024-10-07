@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:TodoApp.Views"
     xmlns:model="clr-namespace:TodoApp.Models"
     xmlns:resx="clr-namespace:TodoApp.Resources.Strings"
-    Shell.BackgroundColor="{StaticResource Gray100}" 
+    Shell.BackgroundColor="{StaticResource Gray100}"  
     Shell.FlyoutBehavior="Flyout"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:views="clr-namespace:TodoApp.Views"
@@ -56,7 +56,6 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-
                 <Label               
                     Grid.Column="1" 
                     HorizontalOptions="Start"
@@ -68,15 +67,13 @@
                     FontSize="16"
                     Margin="0,0,0,0" 
                     VerticalOptions="Center"/>
-
             </Grid>
         </Grid>
     </Shell.TitleView>
     <Grid>
         <Image
             Aspect="AspectFill"
-            Source="back2">
-            
+            Source="back2">           
         </Image>
         <Grid
             BackgroundColor="{ OnIdiom Phone=Transparent,Desktop=lightblue}">
@@ -130,6 +127,7 @@
                         Source="ascending.png">
                     </ImageButton>
                     <ImageButton 
+                        ToolTipProperties.Text="Tap to Sort"
                         IsVisible="{OnIdiom Desktop=true,Phone=false}"
                         Grid.Row="0" 
                         Grid.Column="1" 
@@ -181,7 +179,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <Border 
-                                BackgroundColor="{OnIdiom Phone=white,Desktop=white}"
+                                BackgroundColor="{OnIdiom Phone=white ,Desktop=white}"
                                 Padding="5,0,0,0" 
                                 Margin="5">
                                 <Border.GestureRecognizers>
@@ -241,11 +239,12 @@
 
                                             <ImageButton 
                                                 Source="pin.png" 
+                                                ToolTipProperties.Text="Tap to Unprioritize"
                                                 Grid.Row="0"
                                                 IsEnabled="{OnIdiom Phone=true,Desktop=false}"                                                
                                                 Grid.Column="2"
                                                 IsVisible="{Binding IsPriority, Converter={StaticResource PlatformVisibilityConverter}}"
-                                                Margin="5,5,0,0"
+                                                Margin="5,15,0,0"
                                                 VerticalOptions="Center"
                                                 Aspect="AspectFit" 
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.TogglePinStatusCommand}"
@@ -255,6 +254,7 @@
 
                                         <ImageButton 
                                             Grid.Row="0"
+                                            ToolTipProperties.Text="Tap to Delete Task"
                                             IsEnabled="{OnIdiom Phone=true,Desktop=false}"
                                             IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                             Grid.Column="3"
@@ -262,15 +262,16 @@
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.DeleteTaskCommand}"
                                             CommandParameter="{Binding .}"
                                             WidthRequest="20"
-                                            Margin="7,5,0,0"
+                                            Margin="7,15,0,0"
                                             HeightRequest="20" />
 
                                         <ImageButton 
                                             Grid.Row="0"
+                                            ToolTipProperties.Text="Tap to set Reminder"
                                             IsEnabled="{OnIdiom Phone=true,Desktop=false}"
                                             IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                             Grid.Column="4"
-                                            Margin="9,5,0,0"                          
+                                            Margin="9,15,0,0"                          
                                             HeightRequest="20"
                                             Source="bell.png"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.ReminderTaskCommand}"
@@ -278,9 +279,10 @@
                                             WidthRequest="20" />
                                     </HorizontalStackLayout>
 
-                                    <ImageButton                                       
+                                    <ImageButton         
+                                        ToolTipProperties.Text="Tap to Add Events"
                                         IsEnabled="{OnIdiom Phone=true,Desktop=false}"
-                                        Source="{OnIdiom Desktop=plus.png,Phone=plus}"
+                                        Source="{OnIdiom Phone=addevent}"
                                         Grid.Row="1"
                                         IsVisible="{OnIdiom Phone=true,Desktop=false}"
                                         Grid.Column="{OnIdiom Phone=4}"
@@ -289,8 +291,8 @@
                                         VerticalOptions="{OnIdiom Phone=Center,Desktop=Start}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.ShowEventPopupCommand}"
                                         CommandParameter="{Binding .}"
-                                        HeightRequest="{OnIdiom Phone=50}"
-                                        WidthRequest="{OnIdiom Phone=50}" />
+                                        HeightRequest="{OnIdiom Phone=30}"
+                                        WidthRequest="{OnIdiom Phone=30}" />
 
                                     <Label
                                         Grid.ColumnSpan="2" 
@@ -432,7 +434,7 @@
                     VerticalOptions="FillAndExpand">
 
                     <Entry
-                        Placeholder="Enter task title"
+                        Placeholder="{x:Static resx:AppstringResources.Tasktitle}"
                         VerticalTextAlignment="Center"
                         Text="{Binding TaskTitle, Mode=TwoWay}"
                         PlaceholderColor="{StaticResource Gray300}"
@@ -457,8 +459,6 @@
                 BackgroundColor="White"
                 IsVisible="{Binding IsSidePanelVisible}" 
                 Padding="5">
-
-                <!-- Task Title -->
                 <Entry 
                     HeightRequest="30"
                     Text="{Binding CurrentTaskName}" 
@@ -468,7 +468,6 @@
                     HorizontalOptions="FillAndExpand"
                     HorizontalTextAlignment="Center" />
 
-                <!-- Event Entry with Add Button -->
                 <StackLayout 
                     Orientation="Horizontal"
                     Spacing="5" 
@@ -476,7 +475,7 @@
                     VerticalOptions="Center" 
                     Margin="3,5,3,0">
                     <Entry 
-                        Placeholder="Add Event" 
+                        Placeholder="{x:Static resx:AppstringResources.AddEvent}" 
                         Text="{Binding EventName}" 
                         HorizontalOptions="FillAndExpand" />
                     <ImageButton 
@@ -542,7 +541,7 @@
 
                 <StackLayout Margin="3,5,3,0">
                     <Editor 
-                        Placeholder="Notes" 
+                        Placeholder="{x:Static resx:AppstringResources.Notes}" 
                         Text="{Binding Notes}" 
                         HeightRequest="70" />
                     <DatePicker 
@@ -555,12 +554,15 @@
                     Spacing="5"
                     VerticalOptions="Center" 
                     Margin="3,5,3,0">
-                    <Label Text="Done" VerticalOptions="Center" FontSize="15"/>
+                    <Label
+                        Text="{x:Static resx:AppstringResources.Done}" 
+                        VerticalOptions="Center" 
+                        FontSize="15"/>
                     <Switch 
                         IsToggled="{Binding IsDone}" 
                         VerticalOptions="Center" />
                     <Label 
-                        Text="Priority"
+                        Text="{x:Static resx:AppstringResources.Priority}"
                         VerticalOptions="Center" 
                         FontSize="15" 
                         Margin="0,0,0,0"/>
@@ -656,14 +658,11 @@
                     </Frame>
                 </StackLayout>
 
-                <!-- Reminder Section -->
                 <StackLayout Margin="5,10,3,0">
-                    <!-- Set Reminder Label -->
                     <Label 
                         Text="Set Reminder" 
                         FontSize="15" />
 
-                    <!-- DatePicker with Enable Reminder Switch -->
                     <Grid ColumnDefinitions=".8*, *" Margin="5">
                         <DatePicker 
                             Grid.Column="0"
@@ -714,18 +713,18 @@
                         Command="{Binding DeleteTaskCommand}"
                         WidthRequest="20" 
                         HeightRequest="20" 
-                        BackgroundColor="Transparent" />
+                        BackgroundColor="{StaticResource Trasnparent}" />
                 </StackLayout>
             </StackLayout>
 
-
         </Grid>
         <Frame 
-            HorizontalOptions="EndAndExpand"
+            HorizontalOptions="{OnIdiom Phone=FillAndExpand,Desktop=StartAndExpand}"
             Padding="0" 
+            VerticalOptions="EndAndExpand"
             HasShadow="False" 
-            BackgroundColor="Transparent" 
-            BorderColor="Transparent"
+            BackgroundColor="{StaticResource Trasnparent}" 
+            BorderColor="{StaticResource Trasnparent}"
             Margin="0,0,0,10">
 
             <StackLayout
@@ -735,6 +734,16 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="End"
                 Padding="10">
+
+                <ImageButton 
+                    Source="arrow.png"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    BackgroundColor="{StaticResource Trasnparent}"
+                    Command="{Binding BackCommand}"
+                    IsVisible="{Binding IsAdmin}"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Center" />
 
                 <ImageButton
                     IsVisible="{OnIdiom Desktop=false,Phone=true}"

@@ -31,7 +31,6 @@ namespace TodoApp.Models
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Date of birth is required.")]
-        public DateTime DateOfBirth { get; set; }
         public bool IsAdmin { get; set; }
     }
 }

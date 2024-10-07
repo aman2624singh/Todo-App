@@ -30,6 +30,16 @@
               Looks up a localized string similar to Add Attachment.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.AddEvent">
+            <summary>
+              Looks up a localized string similar to Add Event.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.admin">
+            <summary>
+              Looks up a localized string similar to Hi!! admin.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Alreadyaccount">
             <summary>
               Looks up a localized string similar to Already have an Account?.
@@ -40,9 +50,19 @@
               Looks up a localized string similar to Attachment.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Button_Apply">
+            <summary>
+              Looks up a localized string similar to Apply.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Cancel">
             <summary>
               Looks up a localized string similar to Cancel.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Close">
+            <summary>
+              Looks up a localized string similar to Close.
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Date">
@@ -60,6 +80,11 @@
               Looks up a localized string similar to Delete Attachment.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Deletetask">
+            <summary>
+              Looks up a localized string similar to Delete Task.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Description">
             <summary>
               Looks up a localized string similar to Notes.
@@ -70,9 +95,19 @@
               Looks up a localized string similar to Add Event Details.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Done">
+            <summary>
+              Looks up a localized string similar to Done.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Email">
             <summary>
               Looks up a localized string similar to Email.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.EnableReminder">
+            <summary>
+              Looks up a localized string similar to Enable Reminder:.
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.EntereventDescription">
@@ -105,6 +140,11 @@
               Looks up a localized string similar to Enter Correct Username.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.ErrorOccured">
+            <summary>
+              Looks up a localized string similar to An error occurred. Please try again..
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.EventDescription">
             <summary>
               Looks up a localized string similar to Event Description.
@@ -125,6 +165,11 @@
               Looks up a localized string similar to Ok.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Label_Sort">
+            <summary>
+              Looks up a localized string similar to Sort Task.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Login">
             <summary>
               Looks up a localized string similar to Login.
@@ -135,6 +180,16 @@
               Looks up a localized string similar to Mark as Done.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Markeddone">
+            <summary>
+              Looks up a localized string similar to Marked as done!.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Markednotdone">
+            <summary>
+              Looks up a localized string similar to Marked as not done!.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.New_User">
             <summary>
               Looks up a localized string similar to New User.
@@ -143,6 +198,11 @@
         <member name="P:TodoApp.Resources.Strings.AppstringResources.No">
             <summary>
               Looks up a localized string similar to No.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Notes">
+            <summary>
+              Looks up a localized string similar to Notes.
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Notfound">
@@ -170,14 +230,44 @@
               Looks up a localized string similar to Phone Number.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Photopath">
+            <summary>
+              Looks up a localized string similar to Failed to save photo.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.PinPriority">
             <summary>
               Looks up a localized string similar to Pin For Priority.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Pinstatus">
+            <summary>
+              Looks up a localized string similar to Failed to update task pin status:.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Priority">
+            <summary>
+              Looks up a localized string similar to Priority.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Register">
             <summary>
               Looks up a localized string similar to Register.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.RegistrationSuccsess">
+            <summary>
+              Looks up a localized string similar to Registration successful! You can now log in..
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Repeat">
+            <summary>
+              Looks up a localized string similar to Repeat Everyday Untill Due:.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Save">
+            <summary>
+              Looks up a localized string similar to Save.
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Saveevent">
@@ -190,9 +280,39 @@
               Looks up a localized string similar to Search.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Selectdate">
+            <summary>
+              Looks up a localized string similar to Select Date:.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.SelectImage">
+            <summary>
+              Looks up a localized string similar to Select an image.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Selecttask">
+            <summary>
+              Looks up a localized string similar to Please select a task for the reminder..
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Selecttime">
+            <summary>
+              Looks up a localized string similar to Select Time:.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Setreminder">
+            <summary>
+              Looks up a localized string similar to Set Reminder.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Signin">
             <summary>
               Looks up a localized string similar to Sign in.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.String1">
+            <summary>
+              Looks up a localized string similar to Select an image.
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Success">
@@ -225,6 +345,16 @@
               Looks up a localized string similar to TaskDescription.
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Tasknotselected">
+            <summary>
+              Looks up a localized string similar to No Task Selected.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Tasktitle">
+            <summary>
+              Looks up a localized string similar to Enter the Task Title.
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Taskupdated">
             <summary>
               Looks up a localized string similar to Task updated!.
@@ -240,15 +370,71 @@
               Looks up a localized string similar to Task Title and Description are required..
             </summary>
         </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.UploadAttachmnet">
+            <summary>
+              Looks up a localized string similar to Upload Attachment.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.Userexist">
+            <summary>
+              Looks up a localized string similar to User already exists..
+            </summary>
+        </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Username">
             <summary>
               Looks up a localized string similar to Username.
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.UsernotExist">
+            <summary>
+              Looks up a localized string similar to User does not exist. Unable to update..
+            </summary>
+        </member>
+        <member name="P:TodoApp.Resources.Strings.AppstringResources.UserUpdated">
+            <summary>
+              Looks up a localized string similar to User Information Updated Successfully..
             </summary>
         </member>
         <member name="P:TodoApp.Resources.Strings.AppstringResources.Yes">
             <summary>
               Looks up a localized string similar to Yes.
             </summary>
+        </member>
+        <member name="T:TodoApp.ViewModels.AdminDashBoardViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TodoApp.ViewModels.AdminDashBoardViewModel.Username">
+            <inheritdoc cref="F:TodoApp.ViewModels.AdminDashBoardViewModel.username"/>
+        </member>
+        <member name="F:TodoApp.ViewModels.AdminDashBoardViewModel.deleteUserCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.AdminDashBoardViewModel.DeleteUserCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.AdminDashBoardViewModel.DeleteUserCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.AdminDashBoardViewModel.DeleteUser(TodoApp.Models.User)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.AdminDashBoardViewModel.editUserCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.AdminDashBoardViewModel.EditUserCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.AdminDashBoardViewModel.EditUserCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.AdminDashBoardViewModel.EditUser(TodoApp.Models.User)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.AdminDashBoardViewModel.taskTappedCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.AdminDashBoardViewModel.TaskTappedCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.AdminDashBoardViewModel.TaskTappedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.AdminDashBoardViewModel.TaskTapped(TodoApp.Models.User)"/>.</summary>
+        </member>
+        <member name="T:TodoApp.ViewModels.AppShellViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="F:TodoApp.ViewModels.AppShellViewModel.logoutCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.AppShellViewModel.LogoutCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.AppShellViewModel.LogoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.AppShellViewModel.Logout"/>.</summary>
         </member>
         <member name="T:TodoApp.ViewModels.DashboardViewModel">
             <inheritdoc/>
@@ -262,6 +448,90 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsAdmin">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isAdmin"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.SelectedDate">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.selectedDate"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.SelectedTime">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.selectedTime"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsDailyReminderEnabled">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isDailyReminderEnabled"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsReminderEnabled">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isReminderEnabled"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.EventDate">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.eventDate"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.HasAttachments">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.hasAttachments"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.CurrentuserId">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.currentuserId"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.DueDate">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.dueDate"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.Done">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.done"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsPriority">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isPriority"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.Notes">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.notes"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.HasEvents">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.hasEvents"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.Attachment">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.attachment"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.CurrentTaskName">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.currentTaskName"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.TaskTitle">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.taskTitle"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.OnsidepandelVisible">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.onsidepandelVisible"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsUserOptionsVisible">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isUserOptionsVisible"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.EventName">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.eventName"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.CurrentTaskItemId">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.currentTaskItemId"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsDate">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isDate"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsDone">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isDone"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsCancel">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isCancel"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.OriginalItems">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.originalItems"/>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.SelectedSortOption">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.selectedSortOption"/>
         </member>
         <member name="P:TodoApp.ViewModels.DashboardViewModel.Items">
             <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.items"/>
@@ -269,32 +539,20 @@
         <member name="P:TodoApp.ViewModels.DashboardViewModel.PinnedItems">
             <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.pinnedItems"/>
         </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.Isempty">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isempty"/>
+        </member>
         <member name="P:TodoApp.ViewModels.DashboardViewModel.IsListEmpty">
             <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isListEmpty"/>
         </member>
         <member name="P:TodoApp.ViewModels.DashboardViewModel.IsPinnedListEmpty">
             <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isPinnedListEmpty"/>
         </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsRefreshing">
-            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isRefreshing"/>
-        </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.Isempty">
-            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isempty"/>
-        </member>
         <member name="P:TodoApp.ViewModels.DashboardViewModel.Username">
             <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.username"/>
         </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsPriority">
-            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isPriority"/>
-        </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.IsPickerVisible">
-            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.isPickerVisible"/>
-        </member>
-        <member name="F:TodoApp.ViewModels.DashboardViewModel.toggleSidePanelCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanelCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanelCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanel"/>.</summary>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.AttachedPhotos">
+            <inheritdoc cref="F:TodoApp.ViewModels.DashboardViewModel.attachedPhotos"/>
         </member>
         <member name="F:TodoApp.ViewModels.DashboardViewModel.taskAddedCommand">
             <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.TaskAddedCommand"/>.</summary>
@@ -308,29 +566,17 @@
         <member name="P:TodoApp.ViewModels.DashboardViewModel.TaskTappedCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.TaskTapped(TodoApp.Models.TaskItem)"/>.</summary>
         </member>
-        <member name="F:TodoApp.ViewModels.DashboardViewModel.showPickerCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ShowPickerCommand"/>.</summary>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.reminderTaskCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ReminderTaskCommand"/>.</summary>
         </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.ShowPickerCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ShowPicker"/>.</summary>
-        </member>
-        <member name="F:TodoApp.ViewModels.DashboardViewModel.refreshTasksCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.RefreshTasksCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.RefreshTasksCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.RefreshTasksAsync"/>.</summary>
-        </member>
-        <member name="F:TodoApp.ViewModels.DashboardViewModel.reminderCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ReminderCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.ReminderCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.Reminder"/>.</summary>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ReminderTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ReminderTask(TodoApp.Models.TaskItem)"/>.</summary>
         </member>
         <member name="F:TodoApp.ViewModels.DashboardViewModel.showEventPopupCommand">
             <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ShowEventPopupCommand"/>.</summary>
         </member>
         <member name="P:TodoApp.ViewModels.DashboardViewModel.ShowEventPopupCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ShowEventPopup(TodoApp.Models.TaskItem)"/>.</summary>
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ShowEventPopup(TodoApp.Models.TaskItem)"/>.</summary>
         </member>
         <member name="F:TodoApp.ViewModels.DashboardViewModel.deleteTaskCommand">
             <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.DeleteTaskCommand"/>.</summary>
@@ -344,67 +590,116 @@
         <member name="P:TodoApp.ViewModels.DashboardViewModel.TogglePinStatusCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.TogglePinStatus(TodoApp.Models.TaskItem)"/>.</summary>
         </member>
-        <member name="F:TodoApp.ViewModels.DashboardViewModel.priorityListCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.PriorityListCommand"/>.</summary>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.applySortCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ApplySortCommand"/>.</summary>
         </member>
-        <member name="P:TodoApp.ViewModels.DashboardViewModel.PriorityListCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.PriorityList"/>.</summary>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ApplySortCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ApplySort(The49.Maui.BottomSheet.BottomSheet)"/>.</summary>
         </member>
-        <member name="T:TodoApp.ViewModels.EventPopupViewModel">
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.showsorteventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ShowsorteventCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ShowsorteventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.Showsortevent"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.showUserOptionsCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ShowUserOptionsCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ShowUserOptionsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ShowUserOptions"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.desktopTaskCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.DesktopTaskCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.DesktopTaskCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.DesktopTask"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.savetaskclickedCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.SavetaskclickedCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.SavetaskclickedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.Savetaskclicked"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.addEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.AddEventCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.AddEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.AddEvent"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.toggleSidePanelCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanelCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanelCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ToggleSidePanel(TodoApp.Models.TaskItem)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.galleryClickedCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.GalleryClickedCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.GalleryClickedCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.GalleryClicked"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.deletePhotoCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.DeletePhotoCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.DeletePhotoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.DeletePhoto(TodoApp.Models.Photo)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.doneEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.DoneEventCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.DoneEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.DoneEventAsync(TodoApp.Models.TaskEvent)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.deleteEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.DeleteEventCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.DeleteEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.DeleteEventAsync(TodoApp.Models.TaskEvent)"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.backCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.BackCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.BackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.Back"/>.</summary>
+        </member>
+        <member name="F:TodoApp.ViewModels.DashboardViewModel.viewPhotoCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.DashboardViewModel.ViewPhotoCommand"/>.</summary>
+        </member>
+        <member name="P:TodoApp.ViewModels.DashboardViewModel.ViewPhotoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.DashboardViewModel.ViewPhoto(TodoApp.Models.Photo)"/>.</summary>
+        </member>
+        <member name="T:TodoApp.ViewModels.EventBottomSheetViewModel">
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
-            <inheritdoc/>
-            <inheritdoc/>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.EventName">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.eventName"/>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.EventName">
+            <inheritdoc cref="F:TodoApp.ViewModels.EventBottomSheetViewModel.eventName"/>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.EventDescription">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.eventDescription"/>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.EventDate">
+            <inheritdoc cref="F:TodoApp.ViewModels.EventBottomSheetViewModel.eventDate"/>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.SelectedDate">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.selectedDate"/>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.CurrentTaskId">
+            <inheritdoc cref="F:TodoApp.ViewModels.EventBottomSheetViewModel.currentTaskId"/>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.TaskEvents">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.taskEvents"/>
+        <member name="F:TodoApp.ViewModels.EventBottomSheetViewModel.addEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventBottomSheetViewModel.AddEventCommand"/>.</summary>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.TaskItemId">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.taskItemId"/>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.AddEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventBottomSheetViewModel.AddEventAsync(The49.Maui.BottomSheet.BottomSheet)"/>.</summary>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.SelectedEvent">
-            <inheritdoc cref="F:TodoApp.ViewModels.EventPopupViewModel.selectedEvent"/>
+        <member name="F:TodoApp.ViewModels.EventBottomSheetViewModel.doneEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventBottomSheetViewModel.DoneEventCommand"/>.</summary>
         </member>
-        <member name="F:TodoApp.ViewModels.EventPopupViewModel.saveEventCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventPopupViewModel.SaveEventCommand"/>.</summary>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.DoneEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventBottomSheetViewModel.DoneEventAsync(TodoApp.Models.TaskEvent)"/>.</summary>
         </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.SaveEventCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventPopupViewModel.SaveEvent"/>.</summary>
+        <member name="F:TodoApp.ViewModels.EventBottomSheetViewModel.deleteEventCommand">
+            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventBottomSheetViewModel.DeleteEventCommand"/>.</summary>
         </member>
-        <member name="F:TodoApp.ViewModels.EventPopupViewModel.editEventCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventPopupViewModel.EditEventCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.EditEventCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventPopupViewModel.EditEvent"/>.</summary>
-        </member>
-        <member name="F:TodoApp.ViewModels.EventPopupViewModel.deleteEventCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventPopupViewModel.DeleteEventCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.DeleteEventCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventPopupViewModel.DeleteEvent"/>.</summary>
-        </member>
-        <member name="F:TodoApp.ViewModels.EventPopupViewModel.setReminderCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventPopupViewModel.SetReminderCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.SetReminderCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventPopupViewModel.SetReminder(TodoApp.Models.TaskEvent)"/>.</summary>
-        </member>
-        <member name="F:TodoApp.ViewModels.EventPopupViewModel.closePopupCommand">
-            <summary>The backing field for <see cref="P:TodoApp.ViewModels.EventPopupViewModel.ClosePopupCommand"/>.</summary>
-        </member>
-        <member name="P:TodoApp.ViewModels.EventPopupViewModel.ClosePopupCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventPopupViewModel.ClosePopup"/>.</summary>
+        <member name="P:TodoApp.ViewModels.EventBottomSheetViewModel.DeleteEventCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:TodoApp.ViewModels.EventBottomSheetViewModel.DeleteEventAsync(TodoApp.Models.TaskEvent)"/>.</summary>
         </member>
         <member name="T:TodoApp.ViewModels.LoginViewModel">
             <inheritdoc/>
@@ -459,6 +754,9 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+        </member>
+        <member name="P:TodoApp.ViewModels.RegisterViewModel.CurrentUserId">
+            <inheritdoc cref="F:TodoApp.ViewModels.RegisterViewModel.currentUserId"/>
         </member>
         <member name="P:TodoApp.ViewModels.RegisterViewModel.SelectedGender">
             <inheritdoc cref="F:TodoApp.ViewModels.RegisterViewModel._selectedGender"/>
@@ -736,11 +1034,92 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Username">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Username" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAdmin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAdmin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsDailyReminderEnabled">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsDailyReminderEnabled" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsReminderEnabled">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsReminderEnabled" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasAttachments">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasAttachments" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentuserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentuserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DueDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DueDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Done">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Done" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPriority">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPriority" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Notes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Notes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasEvents">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasEvents" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Attachment">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Attachment" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TaskTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TaskTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.OnsidepandelVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "OnsidepandelVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsUserOptionsVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsUserOptionsVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskItemId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskItemId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsDone">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsDone" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCancel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCancel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.OriginalItems">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "OriginalItems" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedSortOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedSortOption" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Items">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Items" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PinnedItems">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PinnedItems" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Isempty">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Isempty" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsListEmpty">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsListEmpty" generated properties.</summary>
@@ -748,38 +1127,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPinnedListEmpty">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPinnedListEmpty" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AttachedPhotos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AttachedPhotos" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Isempty">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Isempty" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Username">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Username" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPriority">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPriority" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsPickerVisible">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsPickerVisible" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventName">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventName" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EventDescription">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EventDescription" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedDate">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TaskEvents">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TaskEvents" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TaskItemId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TaskItemId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedEvent">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedEvent" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskId" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoginErrorVisible">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoginErrorVisible" generated properties.</summary>
@@ -792,6 +1144,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.LoginErrorMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "LoginErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentUserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentUserId" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedGender">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedGender" generated properties.</summary>
@@ -814,47 +1169,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RegisterMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RegisterMessage" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedTime">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedTime" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsDailyReminderEnabled">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsDailyReminderEnabled" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsReminderEnabled">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsReminderEnabled" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskName">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskName" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRunning">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRunning" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Title" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DueDate">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DueDate" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Done">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Done" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Notes">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Notes" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Attachment">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Attachment" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentuserId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentuserId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentTaskItemId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentTaskItemId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AttachedPhotos">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AttachedPhotos" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -862,11 +1181,92 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Username">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Username" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAdmin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAdmin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsDailyReminderEnabled">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsDailyReminderEnabled" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsReminderEnabled">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsReminderEnabled" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasAttachments">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasAttachments" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentuserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentuserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DueDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DueDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Done">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Done" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPriority">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPriority" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Notes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Notes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasEvents">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasEvents" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Attachment">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Attachment" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TaskTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TaskTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.OnsidepandelVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "OnsidepandelVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsUserOptionsVisible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsUserOptionsVisible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskItemId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskItemId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsDone">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsDone" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCancel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCancel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.OriginalItems">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "OriginalItems" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedSortOption">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedSortOption" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Items">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Items" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PinnedItems">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PinnedItems" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Isempty">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Isempty" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsListEmpty">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsListEmpty" generated properties.</summary>
@@ -874,38 +1274,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPinnedListEmpty">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPinnedListEmpty" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AttachedPhotos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AttachedPhotos" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Isempty">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Isempty" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Username">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Username" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPriority">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPriority" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsPickerVisible">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsPickerVisible" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventName">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventName" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EventDescription">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EventDescription" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedDate">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedDate" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TaskEvents">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TaskEvents" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TaskItemId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TaskItemId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedEvent">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedEvent" generated properties.</summary>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskId" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoginErrorVisible">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoginErrorVisible" generated properties.</summary>
@@ -918,6 +1291,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.LoginErrorMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "LoginErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentUserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentUserId" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedGender">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedGender" generated properties.</summary>
@@ -940,47 +1316,11 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RegisterMessage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RegisterMessage" generated properties.</summary>
         </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedTime">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedTime" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsDailyReminderEnabled">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsDailyReminderEnabled" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsReminderEnabled">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsReminderEnabled" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskName">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskName" generated properties.</summary>
-        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRunning">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRunning" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Title">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Title" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DueDate">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DueDate" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Done">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Done" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Notes">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Notes" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Attachment">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Attachment" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentuserId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentuserId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentTaskItemId">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentTaskItemId" generated properties.</summary>
-        </member>
-        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AttachedPhotos">
-            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AttachedPhotos" generated properties.</summary>
         </member>
     </members>
 </doc>

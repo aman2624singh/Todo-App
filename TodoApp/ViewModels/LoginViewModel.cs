@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
+using Mopups.Services;
 using TodoApp.Constant;
 using TodoApp.Models;
 using TodoApp.Resources.Strings;
@@ -11,15 +13,19 @@ namespace TodoApp.ViewModels
     public partial class LoginViewModel:ObservableObject
     {
         private readonly IUserService _userService;
+        private readonly IAdminAuthenticationService _adminAuthenticationService;
         private readonly INavigationService _navigationService;
         private readonly IUserSessionService _userSessionService;
- 
+        private readonly ILogger<LoginViewModel> _logger;
 
-        public LoginViewModel(IUserService userService, INavigationService navigationService, IUserSessionService userSessionService)
+
+        public LoginViewModel(IUserService userService, ILogger<LoginViewModel> logger, INavigationService navigationService, IUserSessionService userSessionService, IAdminAuthenticationService adminAuthenticationService)
         {
+            _adminAuthenticationService = adminAuthenticationService;
             _userService = userService;
             _navigationService = navigationService;
             _userSessionService = userSessionService;
+            _logger = logger;
 
         }
 
@@ -91,14 +97,22 @@ namespace TodoApp.ViewModels
                 if (!HasValidInput())
                 {
                     return;
-                }                
+                }
 
+                if (_adminAuthenticationService.IsAdmin(Username, Password))
+                {
+                    _logger.LogInformation("Adin logged in");
+                    _userSessionService.SetIsAdmin(true);
+                    await Shell.Current.GoToAsync("//AdminDashBoard");
+                    return;
+                }
                 var user = await _userService.AuthenticateUserAsync(Username, Password);
 
-                if (user != null)
+                if (user is not null)
                 {
                     _userSessionService.SetUserId(user.Id);
                     _userSessionService.SetUserName(user.UserName);
+                    _userSessionService.SetIsAdmin(false);
                     await Shell.Current.GoToAsync("//DashboardPage", true);
                 }
                 else
@@ -109,9 +123,8 @@ namespace TodoApp.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Login Error", ex.Message, "OK");
-                LoginErrorMessage = AppstringResources.Error_login;
-                IsLoginErrorVisible = true;
+                _logger.LogError(ex, string.Empty);
+                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error_login, ex.Message, AppstringResources.OK);
             }
             finally
             {
@@ -120,12 +133,19 @@ namespace TodoApp.ViewModels
         }
 
 
-
         [RelayCommand]
         private async Task CreateAccount()
         {
-          await _navigationService.NavigateWithoutRootAsync(nameof(RegistrationPage));
+            try
+            {
+                await _navigationService.NavigateWithoutRootAsync(nameof(RegistrationPage));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, string.Empty);
+            }
         }
+
 
         private bool HasValidInput()
         {
@@ -158,9 +178,8 @@ namespace TodoApp.ViewModels
             PasswordVisibilityIcon = IsPassword ? Icons.EyeHideIcon : Icons.EyeIcon;
         }
 
-        private string _username="Xyz123";
-        private string _password="test@123" ;
-        private readonly string _adminUsername = "admin"; 
-        private readonly string _adminPassword = "password";
+        private string _username="admin";
+        private string _password="admin123" ;
+
     }
 }

@@ -11,6 +11,11 @@
 
     <Shell.FlyoutHeader>
         <StackLayout Padding="20" Orientation="Horizontal">
+            <Image
+                HeightRequest="40"
+                WidthRequest="40"
+                Source="user.png">
+            </Image>
             <Label
                 Text="Welocme"
                 HorizontalOptions="Center"
@@ -24,10 +29,6 @@
         <StackLayout Padding="20">
             <Button 
                 Margin="5"
-                Text="Send Logs" 
-                Command="{Binding SendLogsCommand}" />
-            <Button 
-                Margin="5"
                 Text="Logout" 
                 Command="{Binding LogoutCommand}" />
         </StackLayout>
@@ -36,7 +37,12 @@
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
     <ShellContent
+        ContentTemplate="{DataTemplate local:AdminDashBoard}"
+        Route="AdminDashBoard" />
+    <ShellContent
         ContentTemplate="{DataTemplate local:Dashboard}"
         Route="DashboardPage" />
+
+
 
 </Shell>

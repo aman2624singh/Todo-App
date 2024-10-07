@@ -9,7 +9,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.NavBarIsVisible="True"
     Shell.FlyoutBehavior="Disabled"
-    Shell.BackgroundColor="LightGrey"
+    Shell.BackgroundColor="{StaticResource Gray100}"
     xmlns:controls="clr-namespace:TodoApp.Controls"
     xmlns:converter="clr-namespace:TodoApp.Converters">
 
@@ -33,7 +33,7 @@
                 </Label>
                 <ImageButton
                     Grid.Column="3"
-                    Source="download.png" 
+                    Source="save.png" 
                     Margin="0,0,20,0"
                     HorizontalOptions="End"
                     Command="{Binding SavedClickedCommand}"
@@ -203,8 +203,8 @@
                                                     VerticalOptions="Center">
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer 
-                                                                Command="{Binding BindingContext.ViewPhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
-                                                                CommandParameter="{Binding .}" />
+                                                             Command="{Binding BindingContext.ViewPhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                               CommandParameter="{Binding .}" />
                                                     </Image.GestureRecognizers>
                                                 </Image>
                                                 <Label
@@ -214,6 +214,11 @@
                                                     HorizontalOptions="StartAndExpand"
                                                     FontAttributes="Bold"
                                                     Text="{Binding FileName}">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer 
+                                                            Command="{Binding BindingContext.ViewPhotoCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                            CommandParameter="{Binding .}" />  
+                                                    </Label.GestureRecognizers>
                                                 </Label>
                                                 <ImageButton 
                                                     Source="cross.png"

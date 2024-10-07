@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using The49.Maui.BottomSheet;
 using TodoApp.Models;
+using TodoApp.Resources.Strings;
 using TodoApp.Services;
 
 namespace TodoApp.ViewModels
@@ -74,13 +76,13 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private async Task DoneEventAsync(TaskEvent eventItem)
         {
-            if (eventItem != null)
+            if (eventItem is not null)
             {
                 eventItem.IsDone = !eventItem.IsDone;
 
                 await _eventService.UpdateEventAsync(eventItem);
 
-                var statusMessage = eventItem.IsDone ? "Marked as done!" : "Marked as not done!";
+                var statusMessage = eventItem.IsDone ? AppstringResources.Markeddone : AppstringResources.Markednotdone;
                 await Toast.Make(statusMessage, ToastDuration.Short).Show();
             }
         }
@@ -88,7 +90,7 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private async Task DeleteEventAsync(TaskEvent eventItem)
         {
-            if (eventItem != null)
+            if (eventItem is not null)
             {
                 await _eventService.DeleteEventAsync(eventItem);
                 Events.Remove(eventItem);

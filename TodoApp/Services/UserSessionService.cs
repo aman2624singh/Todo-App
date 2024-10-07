@@ -10,6 +10,7 @@ namespace TodoApp.Services
     {
         private const string UserIdKey = "LoggedInUserId";
         private const string Username = "LoggedInUsername";
+        private const string IsAdminKey = "IsAdmin";
 
         public int GetUserId()
         {
@@ -34,6 +35,16 @@ namespace TodoApp.Services
         public void SetUserName(string userName)
         {
             Preferences.Set(Username, userName);
+        }
+
+        public void SetIsAdmin(bool isAdmin)
+        {
+            Preferences.Set(IsAdminKey, isAdmin);
+        }
+
+        public bool IsAdmin()
+        {
+            return Preferences.Get(IsAdminKey, defaultValue: false);
         }
     }
 

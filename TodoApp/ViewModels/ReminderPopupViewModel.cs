@@ -44,7 +44,7 @@ namespace TodoApp.ViewModels
         {
             var existingReminder = _reminderService.GetReminderByTaskId(CurrentTaskId);
 
-            if (existingReminder != null)
+            if (existingReminder is not null)
             {
                 SelectedDate = existingReminder.ReminderDate.Date;
                 SelectedTime = existingReminder.ReminderDate.TimeOfDay;

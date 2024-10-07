@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using Mopups.Services;
 using Newtonsoft.Json;
 using System;
@@ -26,8 +27,7 @@ namespace TodoApp.ViewModels
 {
     public partial class DashboardViewModel : ObservableObject
     {
-        private bool _isSidePanelVisible;
-        private GridLength _sidePanelWidth;
+      
         public bool IsSidePanelVisible
         {
             get => _isSidePanelVisible;
@@ -43,6 +43,10 @@ namespace TodoApp.ViewModels
             get => _sidePanelWidth;
             set => SetProperty(ref _sidePanelWidth, value);
         }
+
+        [ObservableProperty]
+
+        private bool isAdmin;
 
         [ObservableProperty]
         private DateTime selectedDate;
@@ -156,8 +160,9 @@ namespace TodoApp.ViewModels
         private ObservableCollection<Photo> attachedPhotos = new ObservableCollection<Photo>();
 
 
-        public DashboardViewModel(IUserService userService, IPhotoService photoService, INavigationService navigationService,IReminderService reminderService, IEventService eventService, ITaskService taskService, IUserSessionService userSessionService)
+        public DashboardViewModel(IUserService userService, ILogger<DashboardViewModel> logger, IPhotoService photoService, INavigationService navigationService,IReminderService reminderService, IEventService eventService, ITaskService taskService, IUserSessionService userSessionService)
         {
+            _logger = logger;
             _userService = userService;
             _navigationService = navigationService;
             _taskService = taskService;
@@ -173,6 +178,7 @@ namespace TodoApp.ViewModels
         {
            await LoadItems();
             CurrentuserId = _userSessionService.GetUserId();
+            IsAdmin = _userSessionService.IsAdmin();
         }
 
         [RelayCommand]
@@ -215,6 +221,7 @@ namespace TodoApp.ViewModels
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, string.Empty);
                 await App.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.ToString(), AppstringResources.OK);
             }
         }
@@ -263,7 +270,6 @@ namespace TodoApp.ViewModels
                 ToggleSidePanel(task);
                 CurrentTaskItemId = task.Id;
 
-
             }                  
         }
 
@@ -280,7 +286,7 @@ namespace TodoApp.ViewModels
             };
             reminderPopupViewModel.LoadReminder();
 
-            _reminderService.ShowReminderPopup(reminderPopupViewModel);
+           _reminderService.ShowReminderPopup(reminderPopupViewModel);
         }
 
 
@@ -297,7 +303,7 @@ namespace TodoApp.ViewModels
             catch (Exception ex)
             {
 
-               
+                _logger.LogError(ex, string.Empty);
             }
         }
 
@@ -345,7 +351,7 @@ namespace TodoApp.ViewModels
             {
                 bool userConfirmed = await App.Current.MainPage.DisplayAlert(
                    AppstringResources.Deletetask,
-                   $"Are you sure you want to delete the task: {currentTaskName}?",
+                   $"Are you sure you want to delete the task: {CurrentTaskName}?",
                    AppstringResources.Yes,
                    AppstringResources.No
                );
@@ -362,11 +368,12 @@ namespace TodoApp.ViewModels
                         IsSidePanelVisible = false;
 
                         System.Threading.CancellationTokenSource cancellationTokenSource = new System.Threading.CancellationTokenSource();
-                        var toast = Toast.Make($"{currentTaskName} Deleted 🗑", ToastDuration.Short, 16);
+                        var toast = Toast.Make($"{CurrentTaskName} Deleted 🗑", ToastDuration.Short, 16);
                         await toast.Show(cancellationTokenSource.Token);
                     }
                     catch (Exception ex)
                     {
+                        _logger.LogError(ex, string.Empty);
                         await App.Current.MainPage.DisplayAlert(AppstringResources.Error, ex.ToString(), AppstringResources.OK);
                     }
                 }
@@ -389,6 +396,7 @@ namespace TodoApp.ViewModels
             }
             else
             {
+                await Toast.Make($"Task '{task.Title}' removed from priority.",ToastDuration.Short).Show();
                 PinnedItems.Remove(task);
             }
 
@@ -398,7 +406,7 @@ namespace TodoApp.ViewModels
             }
             catch (Exception ex)
             {
-               // await App.Current.MainPage.DisplayAlert(AppstringResources.Error, "Failed to update task pin status: " + ex.Message, AppstringResources.OK);
+                _logger.LogError(ex, string.Empty);
             }
 
             IsPriority = PinnedItems.Any();
@@ -499,68 +507,30 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         private async Task Savetaskclicked()
         {
-            if (string.IsNullOrWhiteSpace(this.CurrentTaskName) || string.IsNullOrWhiteSpace(this.Notes))
+            try
             {
-                await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.TitleandDescriptionerror, AppstringResources.OK);
-                return;
-            }
-
-            if (CurrentTaskItemId == 0)
-            {
-                var newTask = new TaskItem
+                if (string.IsNullOrWhiteSpace(CurrentTaskName) || string.IsNullOrWhiteSpace(Notes))
                 {
-                    Title = this.CurrentTaskName,
-                    DueDate = this.DueDate,
-                    Done = this.Done,
-                    IsPriority = this.IsPriority,
-                    Notes = this.Notes,
-                    UserId = CurrentuserId,
-                    HasAttachment = this.Attachment != null && this.Attachment.Length > 0
-                };
+                    await Application.Current.MainPage.DisplayAlert(AppstringResources.Error, AppstringResources.TitleandDescriptionerror, AppstringResources.OK);
+                    return;
+                }
 
-                int taskId = await _taskService.AddTaskAsync(newTask);
-                CurrentTaskItemId = taskId;
-                await SavePhotosToDatabase(taskId);
-                if (IsReminderEnabled)
+                if (CurrentTaskItemId == 0) 
                 {
-                    var reminderDate = SelectedDate.Date + SelectedTime;
-                    if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                    var newTask = new TaskItem
                     {
-                        reminderDate = DateTime.Now;
-                    }
-
-                    var reminder = new Reminder
-                    {
-                        TaskId = CurrentTaskItemId,
-                        TaskName = CurrentTaskName,
-                        ReminderDate = reminderDate,
-                        IsDailyReminder = IsDailyReminderEnabled
+                        Title = CurrentTaskName,
+                        DueDate = DueDate,
+                        Done = Done,
+                        IsPriority = IsPriority,
+                        Notes = Notes,
+                        UserId = CurrentuserId,
+                        HasAttachment = Attachment != null && Attachment.Length > 0
                     };
 
-                    _reminderService.SetReminder(reminder);
-                }
-                else
-                {
-                    _reminderService.CancelReminder(CurrentTaskItemId);
-                    _reminderService.DeleteReminderDetails(CurrentTaskItemId);
-                }
-
-                await Toast.Make(AppstringResources.Taskcreated).Show();
-            }
-            else
-            {
-                var existingTask = await _taskService.GetTaskByIdAsync(CurrentTaskItemId);
-                if (existingTask != null)
-                {
-                    existingTask.Title = this.CurrentTaskName;
-                    existingTask.DueDate = this.DueDate;
-                    existingTask.Done = this.IsDone;
-                    existingTask.IsPriority = this.IsPriority;
-                    existingTask.Notes = this.Notes;
-                    existingTask.HasAttachment = this.Attachment != null && this.Attachment.Length > 0;
-
-                    await _taskService.UpdateTaskAsync(existingTask);
-                    await SavePhotosToDatabase(CurrentTaskItemId);
+                    int taskId = await _taskService.AddTaskAsync(newTask);
+                    CurrentTaskItemId = taskId;
+                    await SavePhotosToDatabase(taskId);
 
                     if (IsReminderEnabled)
                     {
@@ -569,6 +539,7 @@ namespace TodoApp.ViewModels
                         {
                             reminderDate = DateTime.Now;
                         }
+
                         var reminder = new Reminder
                         {
                             TaskId = CurrentTaskItemId,
@@ -585,14 +556,60 @@ namespace TodoApp.ViewModels
                         _reminderService.DeleteReminderDetails(CurrentTaskItemId);
                     }
 
-                    await Toast.Make(AppstringResources.Taskupdated).Show();
+                    await Toast.Make(AppstringResources.Taskcreated).Show();
+                }
+                else
+                {
+                    var existingTask = await _taskService.GetTaskByIdAsync(CurrentTaskItemId);
+                    if (existingTask is not null)
+                    {
+                        existingTask.Title = CurrentTaskName;
+                        existingTask.DueDate = DueDate;
+                        existingTask.Done = IsDone;
+                        existingTask.IsPriority = IsPriority;
+                        existingTask.Notes = Notes;
+                        existingTask.HasAttachment = Attachment is not null && Attachment.Length > 0;
+
+                        await _taskService.UpdateTaskAsync(existingTask);
+                        await SavePhotosToDatabase(CurrentTaskItemId);
+
+                        if (IsReminderEnabled)
+                        {
+                            var reminderDate = SelectedDate.Date + SelectedTime;
+                            if (!IsDailyReminderEnabled && SelectedDate == DateTime.Today && SelectedTime == DateTime.Now.TimeOfDay)
+                            {
+                                reminderDate = DateTime.Now;
+                            }
+                            var reminder = new Reminder
+                            {
+                                TaskId = CurrentTaskItemId,
+                                TaskName = CurrentTaskName,
+                                ReminderDate = reminderDate,
+                                IsDailyReminder = IsDailyReminderEnabled
+                            };
+
+                            _reminderService.SetReminder(reminder);
+                        }
+                        else
+                        {
+                            _reminderService.CancelReminder(CurrentTaskItemId);
+                            _reminderService.DeleteReminderDetails(CurrentTaskItemId);
+                        }
+
+                        await Toast.Make(AppstringResources.Taskupdated).Show();
+                    }
                 }
 
+                Items = new ObservableCollection<TaskItem>(Items);
+                await LoadItems();
+                IsSidePanelVisible = false;
             }
-            Items = new ObservableCollection<TaskItem>(Items);
-            await  LoadItems();
-            IsSidePanelVisible = false;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, string.Empty);
+            }
         }
+
 
         [RelayCommand]
         private async Task AddEvent()
@@ -645,7 +662,7 @@ namespace TodoApp.ViewModels
         private async Task LoadTaskDetails(int taskId)
         {
             var task = await _taskService.GetTaskByIdAsync(taskId);
-            if (task != null)
+            if (task is not null)
             {
                 CurrentTaskName = task.Title;
                 DueDate = task.DueDate;
@@ -679,7 +696,7 @@ namespace TodoApp.ViewModels
             string uploadPhotoOption = AppstringResources.UploadAttachmnet;
             var action = await Application.Current.MainPage.DisplayActionSheet(
                 null,
-                "Cancel",
+                AppstringResources.Cancel,
                 null,
                 takePhotoOption,
                 uploadPhotoOption
@@ -822,7 +839,7 @@ namespace TodoApp.ViewModels
         private async Task LoadTaskAndPhotos(int taskId)
         {
             var existingTask = await _taskService.GetTaskByIdAsync(taskId);
-            if (existingTask != null)
+            if (existingTask is not null)
             {
                 await LoadPhotosFromDatabase(taskId);
             }
@@ -841,7 +858,7 @@ namespace TodoApp.ViewModels
         {
             var existingReminder = _reminderService.GetReminderByTaskId(CurrentTaskItemId);
 
-            if (existingReminder != null)
+            if (existingReminder is not null)
             {
                 SelectedDate = existingReminder.ReminderDate.Date;
                 SelectedTime = existingReminder.ReminderDate.TimeOfDay;
@@ -861,13 +878,13 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         public async Task DoneEventAsync(TaskEvent eventItem)
         {
-            if (eventItem != null)
+            if (eventItem is not null)
             {
                 eventItem.IsDone = !eventItem.IsDone;
 
                 await _eventService.UpdateEventAsync(eventItem);
 
-                var statusMessage = eventItem.IsDone ? "Marked as done!" : "Marked as not done!";
+                var statusMessage = eventItem.IsDone ? AppstringResources.Markeddone : AppstringResources.Markednotdone;
                 await Toast.Make(statusMessage, ToastDuration.Short).Show();
             }
         }
@@ -875,13 +892,75 @@ namespace TodoApp.ViewModels
         [RelayCommand]
         public async Task DeleteEventAsync(TaskEvent eventItem)
         {
-            if (eventItem != null)
+            if (eventItem is not null)
             {
                 await _eventService.DeleteEventAsync(eventItem);
                 Events.Remove(eventItem);
             }
         }
 
+        [RelayCommand]
+        public async Task Back()
+        {
+            try
+            {
+                await Shell.Current.GoToAsync("//AdminDashBoard");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, string.Empty);
+            }
+        }
+
+        [RelayCommand]
+        private async Task ViewPhoto(Photo photo)
+        {
+            if (photo is null)
+                return;
+
+            try
+            {
+                if (!File.Exists(photo.FilePath))
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                        AppstringResources.Error,
+                        AppstringResources.Photopath,
+                        AppstringResources.OK
+                    );
+                    return;
+                }
+
+
+#if ANDROID || IOS
+
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(photo.FilePath)
+                });
+#elif WINDOWS
+                // For Windows, use Process.Start with shell execution
+                Process.Start(new ProcessStartInfo
+        {
+            FileName = photo.FilePath,
+            UseShellExecute = true
+        });
+#else
+        await Application.Current.MainPage.DisplayAlert(
+            AppstringResources.Error, 
+            "File opening is not supported on this platform.", 
+            AppstringResources.OK
+        );
+#endif
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    AppstringResources.Error,
+                    ex.Message,
+                    AppstringResources.OK
+                );
+            }
+        }
 
         private readonly IUserService _userService;
         private readonly INavigationService _navigationService;
@@ -890,6 +969,10 @@ namespace TodoApp.ViewModels
         private readonly IEventService _eventService;
         private readonly IReminderService _reminderService;
         private readonly IPhotoService _photoService;
+        private readonly ILogger<DashboardViewModel> _logger;
+
+        private bool _isSidePanelVisible;
+        private GridLength _sidePanelWidth;
 
     }
 }

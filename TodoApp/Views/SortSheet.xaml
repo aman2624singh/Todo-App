@@ -15,6 +15,13 @@
     <StackLayout
         Margin="10"
        BackgroundColor="{StaticResource White}">
+        <Label
+            HorizontalOptions="Center"
+            FontSize="14"
+            TextColor="{StaticResource Black}"
+            FontAttributes="Bold"
+            Text="Sorting">
+        </Label>
 
         <RadioButton 
             Margin="5"
@@ -37,7 +44,7 @@
             IsChecked="{Binding SelectedSortOption, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:SortOption.None}}" 
             Content="Cancel" />
         <Grid
-            ColumnDefinitions="*, 2.5*">
+            ColumnDefinitions="*">
             <Button
                 Grid.Column="1"
                 Text="{x:Static resx:AppstringResources.Button_Apply}"
